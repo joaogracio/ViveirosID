@@ -6,9 +6,11 @@
 
 <h2>Index</h2>
 
+@if (Request.IsAuthenticated && User.IsInRole("Administrador")) {
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+}
 <table class="table">
     <tr>
         <th>
@@ -88,10 +90,13 @@
         <td>
             @Html.DisplayFor(modelItem => item.preço)
         </td>
+
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ArtigoID }) |
+            @if (Request.IsAuthenticated && User.IsInRole("Administrador")) {
+            @Html.ActionLink("Edit", "Edit", new { id = item.ArtigoID })} |
             @Html.ActionLink("Details", "Details", new { id=item.ArtigoID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ArtigoID }) |
+            @if (Request.IsAuthenticated && User.IsInRole("Administrador")) {
+            @Html.ActionLink("Delete", "Delete", new { id = item.ArtigoID })}|
             @Html.ActionLink("Adiciona", "Adiciona", new { id=item.ArtigoID})
         </td>
     </tr>

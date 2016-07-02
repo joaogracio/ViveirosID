@@ -15,11 +15,13 @@ namespace Viveiros.Controllers {
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Compras
+        [Authorize]
         public ActionResult Index() {
             return View(db.Compra.ToList());
         }
 
         // GET: Compras/Details/5
+        [Authorize]
         public ActionResult Details(int? id) {
             if (id == null) {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -32,6 +34,7 @@ namespace Viveiros.Controllers {
         }
 
         // GET: Compras/Create
+        [Authorize]
         public ActionResult Create() {
             return View();
         }
@@ -39,6 +42,7 @@ namespace Viveiros.Controllers {
         // POST: Compras/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize (Roles = "Administrador")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "CompraID,metodoentrega,metodopagamento,estado,data,precototal")] Compras compra) {
@@ -52,6 +56,7 @@ namespace Viveiros.Controllers {
         }
 
         // GET: Compras/Edit/5
+        [Authorize(Roles = "Administrador")]
         public ActionResult Edit(int? id) {
             if (id == null) {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -66,6 +71,7 @@ namespace Viveiros.Controllers {
         // POST: Compras/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Administrador")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "CompraID,metodoentrega,metodopagamento,estado,data,precototal")] Compras compra) {
@@ -78,6 +84,7 @@ namespace Viveiros.Controllers {
         }
 
         // GET: Compras/Delete/5
+        [Authorize(Roles = "Administrador")]
         public ActionResult Delete(int? id) {
             if (id == null) {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -90,6 +97,7 @@ namespace Viveiros.Controllers {
         }
 
         // POST: Compras/Delete/5
+        [Authorize(Roles = "Administrador")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id) {

@@ -15,12 +15,15 @@ namespace ViveirosID.Controllers {
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Artigoes
+        [Authorize]
         public ActionResult Index() {
             var artigo = db.Artigo.Include(a => a.Categoria);
             return View(artigo.ToList());
         }
 
+        
         // GET: Artigoes/Details/5
+        [Authorize]
         public ActionResult Details(int? id) {
             if (id == null) {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -32,7 +35,9 @@ namespace ViveirosID.Controllers {
             return View(artigo);
         }
 
+        
         // GET: Artigoes/Create
+        [Authorize (Roles="Administrador")]
         public ActionResult Create() {
             ViewBag.CategoriaFK = new SelectList(db.Categoria, "CategoriaID", "tipo");
             return View();
@@ -41,6 +46,7 @@ namespace ViveirosID.Controllers {
         // POST: Artigoes/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize (Roles = "Administrador")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ArtigoID,nome,nometecncico,disponibilidade,descricao,plantacaoComeca,plantacaoAcaba,peso,crescimento,transplantacaoComeca,transplantacaoAcaba,Luz,Rega,floracaoComeca,floracaoAcaba,CategoriaFK")] Artigos artigo) {
@@ -55,6 +61,7 @@ namespace ViveirosID.Controllers {
         }
 
         // GET: Artigoes/Edit/5
+        [Authorize (Roles = "Administrador")]
         public ActionResult Edit(int? id) {
             if (id == null) {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -70,6 +77,7 @@ namespace ViveirosID.Controllers {
         // POST: Artigoes/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize (Roles = "Administrador")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ArtigoID,nome,nometecnico,disponibilidade,descricao,plantacaoComeca,plantacaoAcaba,peso,crescimento,Luz,Rega,CategoriaFK")] Artigos artigo) {
@@ -83,6 +91,7 @@ namespace ViveirosID.Controllers {
         }
 
         // GET: Artigoes/Delete/5
+        [Authorize (Roles = "Administrador")]
         public ActionResult Delete(int? id) {
             if (id == null) {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -95,6 +104,7 @@ namespace ViveirosID.Controllers {
         }
 
         // POST: Artigoes/Delete/5
+        [Authorize (Roles = "Administrador")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id) {
@@ -111,7 +121,7 @@ namespace ViveirosID.Controllers {
             base.Dispose(disposing);
         }
 
-
+        [Authorize]
         public ActionResult Adiciona(int? id) {
 
             if (id == null) {

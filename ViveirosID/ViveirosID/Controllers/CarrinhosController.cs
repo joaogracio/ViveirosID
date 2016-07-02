@@ -15,6 +15,7 @@ namespace ViveirosID.Controllers {
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Carrinhoes
+        [Authorize]
         public ActionResult Index() {
             // determina o user ID do utilizador asp net numa string
             //
@@ -46,6 +47,7 @@ namespace ViveirosID.Controllers {
             return View(listaArtigosNoCarrinho);
         }
 
+        [Authorize]
         public ActionResult Pagar() {
 
             // determina o user ID do utilizador asp net numa string
@@ -134,6 +136,7 @@ namespace ViveirosID.Controllers {
         }
 
         // GET: Carrinhoes/Details/5
+        [Authorize]
         public ActionResult Details(int? id) {
             if (id == null) {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -146,6 +149,7 @@ namespace ViveirosID.Controllers {
         }
 
         // GET: Carrinhoes/Create
+        [Authorize (Roles="Administrador")]
         public ActionResult Create() {
             ViewBag.UtilizadorFK = new SelectList(db.Utilizador, "UtilizadorID", "nome");
             return View();
@@ -154,6 +158,7 @@ namespace ViveirosID.Controllers {
         // POST: Carrinhoes/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize (Roles = "Administrador")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "CarrinhoID,preçototal,ultimaAlteracao,peso,UtilizadorFK")] Carrinhos carrinho) {
@@ -168,6 +173,7 @@ namespace ViveirosID.Controllers {
         }
 
         // GET: Carrinhoes/Edit/5
+        [Authorize (Roles = "Administador")]
         public ActionResult Edit(int? id) {
             if (id == null) {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -183,6 +189,7 @@ namespace ViveirosID.Controllers {
         // POST: Carrinhoes/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize (Roles = "Administrador")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "CarrinhoID,preçototal,ultimaAlteracao,peso,UtilizadorFK")] Carrinhos carrinho) {
@@ -196,6 +203,7 @@ namespace ViveirosID.Controllers {
         }
 
         // GET: Carrinhoes/Delete/5
+        [Authorize (Roles = "Administrador")]
         public ActionResult Delete(int? id) {
             if (id == null) {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -208,6 +216,7 @@ namespace ViveirosID.Controllers {
         }
 
         // POST: Carrinhoes/Delete/5
+        [Authorize(Roles = "Administrador")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id) {

@@ -86,6 +86,10 @@ namespace ViveirosID
             }
             return manager;
         }
+
+        internal void AddtoRole(string id, string v) {
+            throw new NotImplementedException();
+        }
     }
 
     // Configure the application sign-in manager which is used in this application.

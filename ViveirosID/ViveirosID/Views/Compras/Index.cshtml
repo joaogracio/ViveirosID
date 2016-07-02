@@ -6,9 +6,11 @@
 
 <h2>Index</h2>
 
+@if (Request.IsAuthenticated && User.IsInRole("Administrador")) {
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+}
 <table class="table">
     <tr>
         <th>
@@ -47,9 +49,11 @@
             @Html.DisplayFor(modelItem => item.precototal)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.CompraID }) |
+            @if (Request.IsAuthenticated && User.IsInRole("Administrador")) {
+            @Html.ActionLink("Edit", "Edit", new { id = item.CompraID })} |
             @Html.ActionLink("Details", "Details", new { id=item.CompraID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.CompraID })
+            @if (Request.IsAuthenticated && User.IsInRole("Administrador")) {
+            @Html.ActionLink("Delete", "Delete", new { id = item.CompraID })}
         </td>
     </tr>
 }

@@ -14,6 +14,7 @@ using ViveirosID;
 using ViveirosID.Models;
 
 namespace ViveirosID.Controllers {
+
     [Authorize]
     public class AccountController : Controller {
 

@@ -1,0 +1,100 @@
+﻿@model IEnumerable<ViveirosID.Models.Artigos>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Categoria.tipo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.nome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.nometecnico)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.disponibilidade)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.descricao)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.plantacaoComeca)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.plantacaoAcaba)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.peso)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.crescimento)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Luz)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Rega)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.preço)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Categoria.tipo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.nome)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.nometecnico)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.disponibilidade)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.descricao)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.plantacaoComeca)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.plantacaoAcaba)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.peso)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.crescimento)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Luz)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Rega)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.preço)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ArtigoID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ArtigoID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ArtigoID }) |
+            @Html.ActionLink("Adiciona", "Adiciona", new { id=item.ArtigoID})
+        </td>
+    </tr>
+}
+
+</table>

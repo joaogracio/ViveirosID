@@ -2,11 +2,8 @@
 @{
     ViewBag.Title = "Register";
 }
-
 <h2>@ViewBag.Title.</h2>
-
-@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-{
+@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" })) {
     @Html.AntiForgeryToken()
     <h4>Create a new account.</h4>
     <hr />
@@ -17,6 +14,85 @@
             @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
         </div>
     </div>
+
+    <div class="form-group">
+        @Html.Label("Nome", htmlAttributes: new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.Editor("nome", new { @class = "form-control" })
+        </div>
+        @*@Html.ValidationMessage("nome", "")*@
+    </div>
+
+    <div class="form-group">
+        @Html.Label("Apelido", htmlAttributes: new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.Editor("apelido", new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.Label("Data de Nascimento", htmlAttributes: new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.Editor("datadenascimento", new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.Label("NIF", htmlAttributes: new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.Editor("NIF", new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.Label("Morada", htmlAttributes: new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.Editor("morada", new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.Label("Local", htmlAttributes: new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.Editor("local", new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.Label("Codigo Postal", htmlAttributes: new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.Editor("codigoposta", new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.Label("Cidade", htmlAttributes: new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.Editor("cidade", new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.Label("Distrito", htmlAttributes: new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.Editor("distrito", new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.Label("Pais", htmlAttributes: new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.Editor("pais", new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.Label("Telefone", htmlAttributes: new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.Editor("telefone", new { @class = "form-control" })
+        </div>
+    </div>
+
     <div class="form-group">
         @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
@@ -35,7 +111,6 @@
         </div>
     </div>
 }
-
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }

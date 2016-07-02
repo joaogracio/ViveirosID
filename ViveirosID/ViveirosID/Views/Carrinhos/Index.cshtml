@@ -1,0 +1,75 @@
+﻿@model IQueryable<Viveiros.Models.ListaArtigosCarrinhoViewModel>
+@*   @model IEnumerable<Viveiros.Models.Artigo>     *@
+
+@{
+    ViewBag.Title = "Index";
+
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Pagar e Enviar", "Pagar")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().ArtigoID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().nome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().quantidade)
+        </th>
+        @*<th>
+                @Html.DisplayNameFor(model => model.disponibilidade)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.descricao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.plantacaoComeca)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.plantacaoAcaba)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.peso)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.crescimento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Luz)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rega)
+            </th>
+            <th>
+                quantidade
+            </th>*@
+        <th></th>
+    </tr>
+
+
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ArtigoID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.quantidade)
+            </td>
+            <td>
+                @Html.ActionLink("Remover do carrinho", "Delete", new { id = item.ArtigoID })
+            </td>
+        </tr>
+    }
+
+
+
+</table>

@@ -168,14 +168,33 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ArtigosController.cs" />
+    <Compile Include="Controllers\CarrinhosController.cs" />
+    <Compile Include="Controllers\CategoriasController.cs" />
+    <Compile Include="Controllers\ComprasController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201607021318460_Initial.cs" />
+    <Compile Include="Migrations\201607021318460_Initial.Designer.cs">
+      <DependentUpon>201607021318460_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Artigos.cs" />
+    <Compile Include="Models\CarrinhoArtigo.cs" />
+    <Compile Include="Models\Carrinhos.cs" />
+    <Compile Include="Models\Categorias.cs" />
+    <Compile Include="Models\CompraArtigo.cs" />
+    <Compile Include="Models\Compras.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\Imagens.cs" />
+    <Compile Include="Models\ListaArtigosCarrinhoViewModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\UtilizadorCompra.cs" />
+    <Compile Include="Models\Utilizadores.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -234,6 +253,26 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Artigos\Create.cshtml" />
+    <Content Include="Views\Artigos\Delete.cshtml" />
+    <Content Include="Views\Artigos\Details.cshtml" />
+    <Content Include="Views\Artigos\Edit.cshtml" />
+    <Content Include="Views\Artigos\Index.cshtml" />
+    <Content Include="Views\Compras\Create.cshtml" />
+    <Content Include="Views\Compras\Delete.cshtml" />
+    <Content Include="Views\Compras\Details.cshtml" />
+    <Content Include="Views\Compras\Edit.cshtml" />
+    <Content Include="Views\Compras\Index.cshtml" />
+    <Content Include="Views\Carrinhos\Create.cshtml" />
+    <Content Include="Views\Carrinhos\Delete.cshtml" />
+    <Content Include="Views\Carrinhos\Details.cshtml" />
+    <Content Include="Views\Carrinhos\Edit.cshtml" />
+    <Content Include="Views\Carrinhos\Index.cshtml" />
+    <Content Include="Views\Categorias\Create.cshtml" />
+    <Content Include="Views\Categorias\Delete.cshtml" />
+    <Content Include="Views\Categorias\Details.cshtml" />
+    <Content Include="Views\Categorias\Edit.cshtml" />
+    <Content Include="Views\Categorias\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -245,6 +284,11 @@
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201607021318460_Initial.resx">
+      <DependentUpon>201607021318460_Initial.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

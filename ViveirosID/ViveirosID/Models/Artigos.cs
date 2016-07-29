@@ -56,7 +56,7 @@ namespace ViveirosID.Models {
         public string Rega { get; set; }
 
 
-        public double preço { get; set; }
+        public float preço { get; set; }
 
 
         // Para cada artigo existe uma Categoria

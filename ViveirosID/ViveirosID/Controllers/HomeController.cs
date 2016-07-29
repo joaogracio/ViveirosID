@@ -11,13 +11,13 @@ namespace ViveirosID.Controllers {
         }
 
         public ActionResult About() {
-            ViewBag.Message = "Your application description page.";
+            ViewBag.Message = "Como chegamos até aqui.";
 
             return View();
         }
 
         public ActionResult Contact() {
-            ViewBag.Message = "Your contact page.";
+            ViewBag.Message = "Como entrar em contacto com nosco.";
 
             return View();
         }

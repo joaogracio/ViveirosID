@@ -41,6 +41,7 @@ namespace ViveirosID.Models {
         public virtual DbSet<Imagens> Imagem { get; set; }
         public virtual DbSet<Categorias> Categoria { get; set; }
 
+        public System.Data.Entity.DbSet<ViveirosID.Models.ContentViewModel> ContentViewModels { get; set; }
     }
 
     //class UtilizadorMap : EntityTypeConfiguration<Utilizador> {

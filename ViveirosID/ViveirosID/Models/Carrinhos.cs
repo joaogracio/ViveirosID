@@ -18,7 +18,7 @@ namespace ViveirosID.Models {
         [Key]
         public int CarrinhoID { get; set; }
 
-        public double preçototal { get; set; }
+        public float preçototal { get; set; }
 
         public DateTime ultimaAlteracao { get; set; }
 

@@ -315,7 +315,7 @@ body {
   font-size: 14px;
   line-height: 1.428571429;
   color: #333333;
-  background-color: #ffffff;
+  background-color: #008000;
 }
 
 input,
@@ -402,6 +402,7 @@ hr {
 
 p {
   margin: 0 0 10px;
+  color: sienna
 }
 
 .lead {
@@ -516,12 +517,14 @@ h1,
 
 h2,
 .h2 {
+  color: tomato;
   font-size: 30px;
 }
 
 h3,
 .h3 {
   font-size: 24px;
+  color: orangered;
 }
 
 h4,
@@ -860,6 +863,8 @@ pre code {
   min-height: 1px;
   padding-right: 15px;
   padding-left: 15px;
+  background-color: thistle;
+  opacity: 0.85;
 }
 
 .col-xs-1,
@@ -2049,9 +2054,9 @@ fieldset[disabled] .btn {
 }
 
 .btn-default {
-  color: #333333;
-  background-color: #ffffff;
-  border-color: #cccccc;
+  color: wheat;
+  background-color: indigo;
+  border-color: rebeccapurple;
 }
 
 .btn-default:hover,
@@ -2090,9 +2095,9 @@ fieldset[disabled] .btn-default.active {
 }
 
 .btn-primary {
-  color: #ffffff;
-  background-color: #428bca;
-  border-color: #357ebd;
+  color: wheat;
+  background-color: indigo;
+  border-color: rebeccapurple;
 }
 
 .btn-primary:hover,
@@ -4501,12 +4506,12 @@ textarea.input-group-sm > .input-group-btn > .btn {
 }
 
 .navbar-inverse {
-  background-color: #222222;
-  border-color: #080808;
+  background-color: indigo;
+  border-color: rebeccapurple;
 }
 
 .navbar-inverse .navbar-brand {
-  color: #999999;
+  color: brown;
 }
 
 .navbar-inverse .navbar-brand:hover,
@@ -4520,7 +4525,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
 }
 
 .navbar-inverse .navbar-nav > li > a {
-  color: #999999;
+  color: wheat;
 }
 
 .navbar-inverse .navbar-nav > li > a:hover,
@@ -4544,21 +4549,21 @@ textarea.input-group-sm > .input-group-btn > .btn {
 }
 
 .navbar-inverse .navbar-toggle {
-  border-color: #333333;
+  border-color: rebeccapurple;
 }
 
 .navbar-inverse .navbar-toggle:hover,
 .navbar-inverse .navbar-toggle:focus {
-  background-color: #333333;
+  background-color: transparent;
 }
 
 .navbar-inverse .navbar-toggle .icon-bar {
-  background-color: #ffffff;
+  background-color: wheat;
 }
 
 .navbar-inverse .navbar-collapse,
 .navbar-inverse .navbar-form {
-  border-color: #101010;
+  border-color: wheat;
 }
 
 .navbar-inverse .navbar-nav > .open > a,
@@ -4943,6 +4948,7 @@ a.list-group-item.active > .badge,
 }
 
 .jumbotron p {
+  color: sienna;
   line-height: 1.4;
 }
 
@@ -4954,12 +4960,15 @@ a.list-group-item.active > .badge,
   .jumbotron {
     padding-top: 48px;
     padding-bottom: 48px;
+    background-color: thistle;
+    opacity: 0.85
   }
   .container .jumbotron {
     padding-right: 60px;
     padding-left: 60px;
   }
   .jumbotron h1 {
+    color: orangered;
     font-size: 63px;
   }
 }

@@ -15,9 +15,17 @@ namespace ViveirosID.Controllers {
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Artigoes
-        [Authorize]
         public ActionResult Index() {
-            var artigo = db.Artigo.Include(a => a.Categoria);
+
+             var artigo = (from umArtigo in db.Artigo
+                       where umArtigo.disponibilidade == true
+                       select umArtigo).Include(a => a.Categoria);
+
+            if (User.Identity.IsAuthenticated == true && User.IsInRole("Administrador")) {
+
+               artigo = db.Artigo.Include(a => a.Categoria);
+            }
+           
             return View(artigo.ToList());
         }
 

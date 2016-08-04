@@ -15,18 +15,107 @@ namespace ViveirosID.Controllers {
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Artigoes
-        public ActionResult Index() {
+        public ActionResult Index(string ordem, string filtro) {
 
-             var artigo = (from umArtigo in db.Artigo
-                       where umArtigo.disponibilidade == true
-                       select umArtigo).Include(a => a.Categoria);
+            var artigo = (from umArtigo in db.Artigo
+                          select umArtigo).Include(a => a.Categoria);
 
-            if (User.Identity.IsAuthenticated == true && User.IsInRole("Administrador")) {
+            switch (filtro) {
 
-               artigo = db.Artigo.Include(a => a.Categoria);
+                case "tipo":
+                    if (ordem == "ascendente") {
+                        artigo = artigo.OrderBy(a => a.Categoria.tipo);
+                    } else if (ordem == "descendente") {
+                        artigo = artigo.OrderByDescending(a => a.Categoria.tipo);
+                    }
+                    break;
+
+                case "nome":
+                    if (ordem == "ascendente") {
+                        artigo = artigo.OrderBy(a => a.nome);
+                    } else if (ordem == "descendente") {
+                        artigo = artigo.OrderByDescending(a => a.nome);
+                    }
+                    break;
+
+                case "nome tecnico":
+                    artigo = artigo.OrderByDescending(a => a.nometecnico);
+                    break;
+
+                case "disponibilidade":
+                    if (ordem == "ascendente") {
+                        artigo = artigo.OrderBy(a => a.disponibilidade);
+                    } else if (ordem == "descendente") {
+                        artigo = artigo.OrderByDescending(a => a.disponibilidade);
+                    }
+                    break;
+
+                case "descricao":
+                    artigo = artigo.OrderByDescending(a => a.descricao);
+                    break;
+
+                case "plantacao comeca":
+                    var março = artigo.Where(a => a.plantacaoComeca == "Março");
+                    var abril = artigo.Where(a => a.plantacaoComeca == "Abril");
+                                                                                                    
+                    artigo = março;
+                    break;
+
+                case "plantacao acaba":
+                    artigo = artigo.OrderByDescending(a => a.plantacaoAcaba);
+                    break;
+
+                case "peso":
+                    if (ordem == "ascendente") {
+                        artigo = artigo.OrderBy(a => a.peso);
+                    } else if (ordem == "descendente") {
+                        artigo = artigo.OrderByDescending(a => a.peso);
+                    }
+                    break;
+
+                case "crescimento":
+                    artigo = artigo.OrderByDescending(a => a.crescimento);
+                    break;
+
+                case "luz":
+                    artigo = artigo.OrderByDescending(a => a.Luz);
+                    break;
+
+                case "rega":
+                    artigo = artigo.OrderByDescending(a => a.Rega);
+                    break;
+
+                case "preço":
+                    if (ordem == "ascendente") {
+                        artigo = artigo.OrderBy(a => a.preço);
+                    } else if (ordem == "descendente") {
+                        artigo = artigo.OrderByDescending(a => a.preço);
+                    }
+                    break;
             }
+
+            /*var artigo = (from umArtigo in db.Artigo
+                       where umArtigo.disponibilidade == true
+                       select umArtigo).Include(a => a.Categoria);*/
+
+            /*if (User.Identity.IsAuthenticated == true && User.IsInRole("Administrador")) {
+
+            }*/
            
             return View(artigo.ToList());
+        }
+
+        [HttpPost]
+        public ActionResult Index() {
+
+            var artigo = (from umArtigo in db.Artigo
+                          select umArtigo).Include(a => a.Categoria);
+
+            // Get Post Params Here
+            var var1 = Request["Ordem"];
+
+            return View(artigo.ToList());
+        
         }
 
         

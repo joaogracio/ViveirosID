@@ -6,48 +6,85 @@
 
 <h2>Index</h2>
 
-@if (Request.IsAuthenticated && User.IsInRole("Administrador")) {
+@if (Request.IsAuthenticated) {
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
 }
+@*<p>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <button>Calculate</button>
+            Descendente:   @Html.RadioButton("Ordem", "Descendente", new { ordem = "true" })
+            Ascendente:    @Html.RadioButton("Ordem", "Ascendente", new { ordem = "false" })   
+        </div>
+    }
+</p>*@
+
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Categoria.tipo)
+            tipo
+            <a href="@Url.Action("Index", new { filtro = "tipo", ordem = "descendente"})"><span class="glyphicon glyphicon-plus-sign"></span></a>
+            <a href="@Url.Action("Index", new { filtro = "tipo", ordem = "ascendente"})"><span class="glyphicon glyphicon-minus-sign"></span></a>
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.nome)
+            nome
+            <a href="@Url.Action("Index", new { filtro = "nome", ordem = "descendente"})"><span class="glyphicon glyphicon-plus-sign"></span></a>
+            <a href="@Url.Action("Index", new { filtro = "nome", ordem = "ascendente"})"><span class="glyphicon glyphicon-minus-sign"></span></a>
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.nometecnico)
+            nome tecnico
+            <a href="@Url.Action("Index", new { filtro = "nome tecnico", ordem = "descendente"})"><span class="glyphicon glyphicon-plus-sign"></span></a>
+            <a href="@Url.Action("Index", new { filtro = "nome tecnico", ordem = "ascendente"})"><span class="glyphicon glyphicon-minus-sign"></span></a>
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.disponibilidade)
+            disponibilidade
+            <a href="@Url.Action("Index", new { filtro = "disponibilidade", ordem = "descendente"})"><span class="glyphicon glyphicon-plus-sign"></span></a>
+            <a href="@Url.Action("Index", new { filtro = "disponibilidade", ordem = "ascendente"})"><span class="glyphicon glyphicon-minus-sign"></span></a>
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.descricao)
+            descricao
+            <a href="@Url.Action("Index", new { filtro = "descricao", ordem = "descendente"})"><span class="glyphicon glyphicon-plus-sign"></span></a>
+            <a href="@Url.Action("Index", new { filtro = "descricao", ordem = "ascendente"})"><span class="glyphicon glyphicon-minus-sign"></span></a>
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.plantacaoComeca)
+            plantacao comeca
+            <a href="@Url.Action("Index", new { filtro = "plantacao comeca", ordem = "descendente"})"><span class="glyphicon glyphicon-plus-sign"></span></a>
+            <a href="@Url.Action("Index", new { filtro = "plantacao comeca", ordem = "ascendente"})"><span class="glyphicon glyphicon-minus-sign"></span></a>
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.plantacaoAcaba)
+            plantacao acaba
+            <a href="@Url.Action("Index", new { filtro = "plantacao acaba", ordem = "descendente"})"><span class="glyphicon glyphicon-plus-sign"></span></a>
+            <a href="@Url.Action("Index", new { filtro = "plantacao acaba", ordem = "ascendente"})"><span class="glyphicon glyphicon-minus-sign"></span></a>
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.peso)
+            peso
+            <a href="@Url.Action("Index", new { filtro = "peso", ordem = "descendente"})"><span class="glyphicon glyphicon-plus-sign"></span></a>
+            <a href="@Url.Action("Index", new { filtro = "peso", ordem = "ascendente"})"><span class="glyphicon glyphicon-minus-sign"></span></a>
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.crescimento)
+            crescimento
+            <a href="@Url.Action("Index", new { filtro = "crescimento", ordem = "descendente"})"><span class="glyphicon glyphicon-plus-sign"></span></a>
+            <a href="@Url.Action("Index", new { filtro = "crescimento", ordem = "ascendente"})"><span class="glyphicon glyphicon-minus-sign"></span></a>
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Luz)
+            luz
+            <a href="@Url.Action("Index", new { filtro = "luz", ordem = "descendente"})"><span class="glyphicon glyphicon-plus-sign"></span></a>
+            <a href="@Url.Action("Index", new { filtro = "luz", ordem = "ascendente"})"><span class="glyphicon glyphicon-minus-sign"></span></a>
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Rega)
+            rega
+            <a href="@Url.Action("Index", new { filtro = "rega", ordem = "descendente"})"><span class="glyphicon glyphicon-plus-sign"></span></a>
+            <a href="@Url.Action("Index", new { filtro = "rega", ordem = "ascendente"})"><span class="glyphicon glyphicon-minus-sign"></span></a>
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.preço)
+            preço
+            <a href="@Url.Action("Index", new { filtro = "preço", ordem = "descendente"})"><span class="glyphicon glyphicon-plus-sign"></span></a>
+            <a href="@Url.Action("Index", new { filtro = "preço", ordem = "ascendente"})"><span class="glyphicon glyphicon-minus-sign"></span></a>
         </th>
         <th></th>
     </tr>

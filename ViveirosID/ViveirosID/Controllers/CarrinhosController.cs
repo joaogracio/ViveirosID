@@ -91,6 +91,10 @@ namespace ViveirosID.Controllers {
             //
             int compraID = compra.CompraID;
 
+            // Declara o precototal (temporario)
+            //
+            int precototal = 0;
+            
             foreach (Artigos artigo in lista_carrinho_artigos) {
 
                 // Esclarece o ArtigoID para evitar usos artigo.ArtigoID
@@ -117,6 +121,11 @@ namespace ViveirosID.Controllers {
                 // Tranfere a quantidade de carrinho_artigo para compra_artigo
                 //
                 compra_artigo.quantidade = carrinho_artigo.quantidade;
+
+                // Actualiza o valor da precototal (temporario) e o valor precototal final
+                //
+                precototal = (int) compra_artigo.preço * compra_artigo.quantidade;
+                compra.precototal += precototal;
                 db.SaveChanges();
 
                 // Elimina a referencia a carrinho_artigo para a presente carID e artID

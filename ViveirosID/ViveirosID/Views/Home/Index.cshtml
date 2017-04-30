@@ -1,10 +1,12 @@
-﻿@{
+﻿@model IEnumerable<ViveirosID.Models.Artigos>
+
+@{
     ViewBag.Title = "Viveiros Zêzere";
 }
     <!-- Jumbotron Header -->
     <header class="jumbotron hero-spacer">
-        <h1>A Warm Welcome!</h1>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa, ipsam, eligendi, in quo sunt possimus non incidunt odit vero aliquid similique quaerat nam nobis illo aspernatur vitae fugiat numquam repellat.</p>
+        <h1>Viveiros Zêzere</h1>
+        <p>A Viveiros Zêzere apresenta agora este site para se representar a si mesma na internet. Divulgar os seus produtos e cativar novos clientes.</p>
         <p>
             <a class="btn btn-primary btn-large">Call to action!</a>
         </p>
@@ -18,54 +20,26 @@
     </div>
     <!-- /.row -->
 <!-- /.row -->
+
+@foreach (var item in Model)
+{
+    var nome = "/Images/" + item.nome + " 1.jpeg";
+    var href_add = "http://localhost:64855/Artigos/Details/" + item.ArtigoID;
+    var href_det = "http://localhost:64855/Artigos/Details/" + item.ArtigoID;
+
         <div class="col-md-3 col-sm-6 hero-feature">
             <div class="thumbnail">
-                <img src="http://placehold.it/800x500" alt="">
+                <img src="@nome" alt="@item.nome">
                 <div class="caption">
-                    <h3>Feature Label</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                    <h3>@Html.DisplayFor(modelItem => item.nome)</h3>
+                    <p>@Html.DisplayFor(modelItem => item.descricao)</p>
                     <p>
-                        <a href="#" class="btn btn-primary">Buy Now!</a> <a href="#" class="btn btn-default">More Info</a>
+                        <a href="@href_add" class="btn btn-primary">Adicionar!</a> <a href="@href_det" class="btn btn-default">Detalhes</a>
                     </p>
                 </div>
             </div>
         </div>
-        <div class="col-md-3 col-sm-6 hero-feature">
-            <div class="thumbnail">
-                <img src="http://placehold.it/800x500" alt="">
-                <div class="caption">
-                    <h3>Feature Label</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                    <p>
-                        <a href="#" class="btn btn-primary">Buy Now!</a> <a href="#" class="btn btn-default">More Info</a>
-                    </p>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3 col-sm-6 hero-feature">
-            <div class="thumbnail">
-                <img src="http://placehold.it/800x500" alt="">
-                <div class="caption">
-                    <h3>Feature Label</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                    <p>
-                        <a href="#" class="btn btn-primary">Buy Now!</a> <a href="#" class="btn btn-default">More Info</a>
-                    </p>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3 col-sm-6 hero-feature">
-            <div class="thumbnail">
-            <img src="http://placehold.it/800x500" alt="">
-                <div class="caption">
-                    <h3>Feature Label</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                    <p>
-                        <a href="#" class="btn btn-primary">Buy Now!</a> <a href="#" class="btn btn-default">More Info</a>
-                    </p>
-            </div>
-        </div>
-</div>
+}
 
 
     

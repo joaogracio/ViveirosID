@@ -12,6 +12,7 @@ using Viveiros.Models;
 using System.Text.RegularExpressions;
 using ViveirosID;
 using ViveirosID.Models;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace ViveirosID.Controllers {
 
@@ -216,8 +217,11 @@ namespace ViveirosID.Controllers {
                     var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
                     var result = await UserManager.CreateAsync(user, model.Password);
                     if (result.Succeeded) {
+
+                        var roleresult = UserManager.AddToRole(user.Id, "Cliente");
+
                         await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
-               
+
                         // Cria um novo Utilizador associado ao AspNetUser atraves do AspNetUser ID (string)
                         //
                         Utilizadores utilizador = new Utilizadores();

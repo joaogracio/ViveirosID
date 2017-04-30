@@ -1,7 +1,8 @@
-﻿@model ViveirosID.Models.Artigos
+﻿@model ViveirosID.Models.ProdutoDetalhesViewModel
 
 @{
     ViewBag.Title = "Details";
+    ViewBag.ATal = Model.Imagens.Where(a => a.descricao == "A Tal");
 }
 
 <h2>Details</h2>
@@ -11,104 +12,229 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Categoria.tipo)
+            @Html.DisplayNameFor(model => model.Artigo.Categoria.tipo)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Categoria.tipo)
+            @Html.DisplayFor(model => model.Artigo.Categoria.tipo)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.nome)
+            @Html.DisplayNameFor(model => model.Artigo.nome)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.nome)
+            @Html.DisplayFor(model => model.Artigo.nome)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.nometecnico)
+            @Html.DisplayNameFor(model => model.Artigo.nometecnico)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.nometecnico)
+            @Html.DisplayFor(model => model.Artigo.nometecnico)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.disponibilidade)
+            @Html.DisplayNameFor(model => model.Artigo.disponibilidade)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.disponibilidade)
+            @Html.DisplayFor(model => model.Artigo.disponibilidade)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.descricao)
+            @Html.DisplayNameFor(model => model.Artigo.descricao)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.descricao)
+            @Html.DisplayFor(model => model.Artigo.descricao)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.plantacaoComeca)
+            @Html.DisplayNameFor(model => model.Artigo.plantacaoComeca)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.plantacaoComeca)
+            @Html.DisplayFor(model => model.Artigo.plantacaoComeca)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.plantacaoAcaba)
+            @Html.DisplayNameFor(model => model.Artigo.plantacaoAcaba)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.plantacaoAcaba)
+            @Html.DisplayFor(model => model.Artigo.plantacaoAcaba)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.peso)
+            @Html.DisplayNameFor(model => model.Artigo.peso)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.peso)
+            @Html.DisplayFor(model => model.Artigo.peso)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.crescimento)
+            @Html.DisplayNameFor(model => model.Artigo.crescimento)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.crescimento)
+            @Html.DisplayFor(model => model.Artigo.crescimento)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Luz)
+            @Html.DisplayNameFor(model => model.Artigo.luz)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Luz)
+            @Html.DisplayFor(model => model.Artigo.luz)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Rega)
+            @Html.DisplayNameFor(model => model.Artigo.rega)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Rega)
+            @Html.DisplayFor(model => model.Artigo.rega)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.preço)
+            @Html.DisplayNameFor(model => model.Artigo.preço)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.preço)
+            @Html.DisplayFor(model => model.Artigo.preço)
         </dd>
 
     </dl>
 </div>
+
+@*
+<div class="row">
+    @foreach (var artigo in Model.Artigos) {
+        <div class="col-md-4">
+            <h4>@Html.DisplayFor(modelItem => artigo.nome)</h4>
+            
+            <p>@Html.DisplayFor(modelItem => artigo.descricao)</p>
+            <p>@Html.ActionLink("Ver Detalhes", "Details(" + artigo.ArtigoID + ")")</p>
+        </div>
+    }
+</div>
+*@
+
+                <!-- First product box start here-->
+@foreach (var artigo in Model.Artigos) {
+
+<div class="prod-info-main prod-wrap clearfix">
+    
+    <div class="row">
+        
+        <div class="col-md-5 col-sm-12 col-xs-12">
+            
+            <div class="product-image">
+                
+
+                @{ 
+                    ViewBag.lol = "LOL";
+                    //ViewBag.temp = "file:///" + artigo.ListaDeImagens.Where(a => a.descricao == "A Tal").FirstOrDefault().directorio.ToString();
+                    ViewBag.temp = "/Images/Cebola Morada Amposta 1.jpeg";
+                    var x = "x";
+                }
+
+                <img src="@Url.Content(@ViewBag.temp)"  />
+
+                <span class="tag2 hot">
+
+                    SPECIAL
+
+                </span>
+
+            </div>
+
+        </div>
+        
+        <div class="col-md-7 col-sm-12 col-xs-12">
+
+            <div class="product-deatil">
+
+                <h5 class="name">
+
+                    <a href="#">
+
+                        Product Code/Name here
+
+                    </a>
+
+                    <a href="#">
+
+                        <span>Product Category</span>
+
+                    </a>
+
+                </h5>
+
+                <p class="price-container">
+
+                    <span>$199</span>
+
+                </p>
+
+                <span class="tag1"></span>
+
+            </div>
+
+            <div class="description">
+
+                <p>A Short product description here </p>
+
+            </div>
+
+            <div class="product-info smart-form">
+
+                <div class="row">
+
+                    <div class="col-md-12">
+
+                        <a href="#" class="btn btn-danger">Add to cart</a>
+
+                        <a href="javascript:void(0);" class="btn btn-info">More info</a>
+
+                    </div>
+
+                    <div class="col-md-12">
+
+                        <div class="rating">
+                            Rating:
+
+                            <label for="stars-rating-5"><i class="fa fa-star text-danger"></i></label>
+
+                            <label for="stars-rating-4"><i class="fa fa-star text-danger"></i></label>
+
+                            <label for="stars-rating-3"><i class="fa fa-star text-danger"></i></label>
+
+                            <label for="stars-rating-2"><i class="fa fa-star text-warning"></i></label>
+
+                            <label for="stars-rating-1"><i class="fa fa-star text-warning"></i></label>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+}
+
+
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ArtigoID }) |
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Artigo.ArtigoID }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
+
+

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNet.Identity;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -120,7 +121,7 @@ namespace ViveirosID.Controllers {
 
                 case "crescimento":
 
-                    var itensiva = artigo.Where(a => a.crescimento == "Rápido");
+                    /*var itensiva = artigo.Where(a => a.crescimento == "Rápido");
                     var moderado = artigo.Where(a => a.crescimento == "Moderado");
                     var lento = artigo.Where(a => a.crescimento == "Lento");
 
@@ -129,11 +130,11 @@ namespace ViveirosID.Controllers {
                     } else if (ordem == "descendente") {
                         artigo = itensiva.Concat(moderado).Concat(lento);
                     }
-                    break;
+                    break;*/
 
                 case "luz":
 
-                    var sol = artigo.Where(a => a.Luz == "Sol");
+                    /*var sol = artigo.Where(a => a.Luz == "Sol");
                     var meiasombra = artigo.Where(a => a.Luz == "Meia-Sombra");
                     var sombra = artigo.Where(a => a.Luz == "Sombra");
 
@@ -142,11 +143,11 @@ namespace ViveirosID.Controllers {
                     } else if (ordem == "descendente") {
                         artigo = sol.Concat(meiasombra).Concat(sombra);
                     }
-                    break;
+                    break;*/
 
                 case "rega":
 
-                    var itensivaA = artigo.Where(a => a.Rega == "Intensiva");
+                    /*var itensivaA = artigo.Where(a => a.Rega == "Intensiva");
                     var regular = artigo.Where(a => a.Rega == "Regular");
                     var reduzida = artigo.Where(a => a.Rega == "Reduzida");
 
@@ -155,7 +156,7 @@ namespace ViveirosID.Controllers {
                     } else if (ordem == "descendente") {
                         artigo = itensivaA.Concat(regular).Concat(reduzida);
                     }
-                    break;
+                    break;*/
 
                 case "preço":
                     if (ordem == "ascendente") {
@@ -183,6 +184,12 @@ namespace ViveirosID.Controllers {
             var artigo = (from umArtigo in db.Artigo
                           select umArtigo).Include(a => a.Categoria);
 
+            var imagem = (from umArtigo in artigo
+                          from umaImagem in db.Imagem
+                          where umArtigo.ArtigoID == umaImagem.ArtigoFK &&
+                                umaImagem.descricao == "A Tal"
+                          select umaImagem).FirstOrDefault().descricao;
+
             // Get Post Params Here
             var var1 = Request["Ordem"];
 
@@ -209,204 +216,130 @@ namespace ViveirosID.Controllers {
 
             ViewBag.ultimo_peso = artigo.OrderByDescending(a => a.peso).FirstOrDefault().peso;
 
-            // Recolhe as três palavras de escolha de Crescimento
-            // Rápido, Moderado, Lento
+            // Recolhe o valor mais alto de crescimento e o mais baixo
             //
-            ViewBag.crescimento = new string[3] { "Lento", "Moderado", "Rapido" };
+            ViewBag.primeiro_crescimento = artigo.OrderBy(a => a.crescimento).FirstOrDefault().crescimento;
 
-            // Recolhe as três palavras relacionadas com a Luz 
-            // Sol, Meia-Sombra, Sombra
-            //
-            ViewBag.luz = new string[3] { "Sombra", "Meia-Sombra", "Sol" };
+            ViewBag.ultimo_crescimento = artigo.OrderByDescending(a => a.crescimento).FirstOrDefault().crescimento;
 
-            // Recolhe as três palavras relacionadas com a Rega
-            // Intensiva, Regula, Reduzida
+            // Recolhe o valor mais alto de luz e o mais baixo
             //
-            ViewBag.rega = new string[3] { "Reduzida", "Regular", "Intensiva" };
+            ViewBag.primeira_luz = artigo.OrderBy(a => a.luz).FirstOrDefault().luz;
+
+            ViewBag.ultima_luz = artigo.OrderByDescending(a => a.luz).FirstOrDefault().luz;
+
+            // Recolhe o valor mais alto de rega e o mais baixo
+            //
+            ViewBag.primeira_rega = artigo.OrderBy(a => a.rega).FirstOrDefault().rega;
+
+            ViewBag.ultima_rega = artigo.OrderByDescending(a => a.rega).FirstOrDefault().rega;
 
             return View(artigo.ToList());
         }
 
         [HttpPost]
-        public ActionResult Pesquisa(string nome, string peso, string preço, string crescimento, string luz, string rega, string ordem) {
-            
-            // Faz uma listagem "usual" de todos os artigos 
-            // listagem esta que vai depois ser filtrada e apresentada
-            //
-            /*var artigo = (from umArtigo in db.Artigo
-                          select umArtigo).Include(a => a.Categoria);*/
-
-            // Separa a string peso => "de 2 gramas até 8 gramas" pelo caracter ' '
-            //
-            var separa_por_espaço_arr = peso.Split(' ');
-
-            // Regista dois inteiros relativos ao limite inferior e superior do preço em gramas
-            //
-            var primeiro_peso = Int32.Parse(separa_por_espaço_arr[1]);
-
-            var segundo_peso = Int32.Parse(separa_por_espaço_arr[4]);
-
-
-            // Separa a string preço => "de €2 até €8" pelo caracter €
-            // de forma a recolher os numeros referentes aos preços
-            // o resultados deste split é o seguinte: ["de "]["2 até "]["8"]
-            //
-            var separa_por_euro_arr = preço.Split('€');
-
-            // Separa a string ["2 até "] pelo caracter ' ' de forma a isolar o numero
-            //
-            var primeiro_valor_arr = separa_por_euro_arr[1].Split(' ');
-
-            // Converte a string que contem o primeiro preço para int
-            //
-            var primeiro_preço = float.Parse(primeiro_valor_arr[0]);
-
-            // Convert a string que contem o segundo preço para int
-            //
-            var segundo_preço = float.Parse(separa_por_euro_arr[2]);
-
-            // Separa a string relativa ao crescimento "de Lento até Rapido"
-            // Recolhe o primeiro e ultimo valor para crescimento
-            //
-            var separa_crescimento = crescimento.Split(' ');
-
-            var primeiro_crescimento = separa_crescimento[1];
-
-            var ultimo_crescimento = separa_crescimento[3];
-
-            // Separa a string relativa ao luz "de Sombra até Sol"
-            // Recolhe o primeiro e ultimo valor para crescimento
-            //
-            var separa_luz = luz.Split(' ');
-
-            var primeira_luz = separa_luz[1];
-
-            var ultima_luz = separa_luz[3];
-
-            // Separa a string relativa ao rega "de Reduzida até Intensiva"
-            // Recolhe o primeiro e ultimo valor para rega
-            //
-            var separa_rega = rega.Split(' ');
-
-            var primeira_rega = separa_rega[1];
-
-            var ultima_rega = separa_rega[3];
-
-
-            // SIMULAÇAO DA AQUISIÇÃO DE DADOS DE TODOS OS TIPOS DE crescimento, rega, luz
-            var str_crescimento = new string[3]{ "Lento", "Moderado", "Rapido" };
-            var str_luz = new string[3] { "Sombra", "Meia-Sombra", "Sol" };
-            var str_rega = new string[3] { "Reduzida", "Regular", "Intensiva" };
-            // SIMULAÇAO DA AQUISIÇÃO DE DADOS DE TODOS OS TIPOS DE crescimento, rega, luz
-
-            var primeiro_crescimento_pos = 0;
-
-            var ultimo_crescimento_pos = 0;
-
-            var primeira_luz_pos = 0;
-
-            var ultima_luz_pos = 0;
-
-            var primeira_rega_pos = 0;
-
-            var ultima_rega_pos = 0;
-
-            // Encontra a posição da primeiro_crescimento e ultimo_crescimento
-            // para atribuir o valor da posição correpondente do array str_crescimento
-            // em primeiro_crescimento_pos e ultimo_crescimento_pos
-            //
-            for (var i = 0; i <= str_crescimento.Length - 1; i++) {
-                if (str_crescimento[i].Equals(primeiro_crescimento)) {
-                    primeiro_crescimento_pos = i;
-                }
-                if (str_crescimento[i].Equals(ultimo_crescimento)) {
-                    ultimo_crescimento_pos = i;
-                }
-            }
-
-            // Encontra a posição da primeira_rega e ultima_rega
-            // para atribuir o valor dessas posições correspondentes ao str_rega
-            // em primeira_rega_pos e ultima_rega_pos
-            //
-            for (var i = 0; i <= str_rega.Length - 1; i++) {
-                if (str_rega[i].Equals(primeira_rega)) {
-                    primeira_rega_pos = i;
-                }
-                if (str_rega[i].Equals(ultima_rega)) {
-                    ultima_rega_pos = i;
-                }
-            }
-
-            // Encontra a posição da primeira_luz e ultima_luz
-            // para atribuir o valor dessas posições correspondentes ao str_luz
-            // em primeira_luz_pos e ultima_luz_pos
-            //
-            for (var i = 0; i <= str_luz.Length - 1; i++) {
-                if (str_luz[i].Equals(primeira_luz)) {
-                    primeira_luz_pos = i;
-                }
-                if (str_luz[i].Equals(ultima_luz)) {
-                    ultima_luz_pos = i;
-                }
-            }
-
-            // IMPLEMENTAÇÃO DE TODOS OS FILTROS E CRIAÇÃO DE VIEWBAGS PARA ENVIAR COM OS LIMITOS DOS FILTROS PARA A VIEW
+        public ActionResult Pesquisa(string nome, string peso, string preço, string crescimento, string luz, string rega) {
 
             // Faz uma selecao de todos os artigos
             // para usar de forma auxilar
             //
-            var todo_artigo = (from umArtigo in db.Artigo
-                               select umArtigo);
-
+            
             var artigo = (from umArtigo in db.Artigo
-                          where umArtigo.crescimento == "Maluco"
                           select umArtigo);
 
-            // ISTO PODIA SER FEITO COM RECURSO A NUMEROS PARA LUZ, REGA, CRESCIMENTO MAS EU FUI TEIMOSO 
-            // E CONTINUEI O PROCESSO ASSIM
-
-            // Faz a filtragem por luz
+            // Verifica e captura os valores para primeira_luz e ultima_luz
             //
-            for (var i = primeira_luz_pos; i <= ultima_luz_pos; i++) {
-                var str_pos = str_luz[i];
-                artigo = artigo.Concat(todo_artigo.Where(a => a.Luz.Equals(str_pos)));
-                /*try {
-                    var nome_str = artigo_not_null.FirstOrDefault().nome;
-                    artigo = artigo_not_null;
-                } catch (System.NullReferenceException ex) {
-                    
-                }*/
+            var separa_rega = new string[50];
+            var primeira_rega = 0.0;
+            var ultima_rega = 0.0;
+            if (rega != "" && rega.Count(x => x == ' ') == 1) {
+                separa_rega = rega.Split(' ');
+                var rega1 = float.Parse(separa_rega[0]);
+                var rega2 = float.Parse(separa_rega[1]);
+                if (rega1 <= (artigo.OrderByDescending(a => a.rega).FirstOrDefault().rega) && rega2 >= (artigo.OrderBy(a => a.rega).FirstOrDefault().rega)) {
+                    primeira_rega = rega1;
+                    ultima_rega = rega2;
+                } else {
+                    primeira_rega = (artigo.OrderByDescending(a => a.rega).FirstOrDefault().rega);
+                    ultima_rega = (artigo.OrderBy(a => a.rega).FirstOrDefault().rega);
+                }
             }
 
-            // Faz a filtragem por rega
+            // Verifica e captura os valores para primeiro_crescimento e ultimo_crescimento
             //
-            for (var i = primeira_rega_pos; i <= ultima_rega_pos; i++) {
-                var str_pos = str_rega[i];
-                artigo = artigo.Concat(todo_artigo.Where(a => a.Rega.Equals(str_pos)));
-                /*try {
-                    var nome_str = artigo_not_null.FirstOrDefault().nome;
-                    artigo = artigo_not_null;
-                } catch (System.NullReferenceException ex) {
-
-                }*/
+            var separa_luz = new string[50];
+            var primeira_luz = 0.0;
+            var ultima_luz = 0.0;
+            if (luz != "" && luz.Count(x => x == ' ') == 1) {
+                separa_luz = luz.Split(' ');
+                var luz1 = float.Parse(separa_luz[0]);
+                var luz2 = float.Parse(separa_luz[1]);
+                if (luz1 <= (artigo.OrderByDescending(a => a.luz).FirstOrDefault().luz) && luz2 >= (artigo.OrderBy(a => a.luz).FirstOrDefault().luz)) {
+                    primeira_luz = luz1;
+                    ultima_luz = luz2;
+                } else {
+                    primeira_luz = (artigo.OrderByDescending(a => a.luz).FirstOrDefault().luz);
+                    ultima_luz = (artigo.OrderBy(a => a.luz).FirstOrDefault().luz);
+                }
             }
 
-            // Faz a filtragem por crescimento
+            // Verifica e captura os valores para primeiro_crescimento e ultimo_crescimento
             //
-            for (var i = primeiro_crescimento_pos; i <= ultimo_crescimento_pos; i++) {
-                var str_pos = str_luz[i];
-                artigo = artigo.Concat(todo_artigo.Where(a => a.crescimento.Equals(str_pos)));
-                /*try {
-                    var nome_str = artigo_not_null.FirstOrDefault().nome;
-                    artigo = artigo_not_null;
-                } catch (System.NullReferenceException ex) {
+            var separa_crescimento = new string[50];
+            var primeiro_crescimento = 0.0;
+            var ultimo_crescimento = 0.0;
+            if (crescimento != "" && crescimento.Count(x => x == ' ') == 1) {
+                separa_crescimento = crescimento.Split(' ');
+                var crescimento1 = float.Parse(separa_crescimento[0]);
+                var crescimento2 = float.Parse(separa_crescimento[1]);
+                if (crescimento1 <= (artigo.OrderByDescending(a => a.crescimento).FirstOrDefault().crescimento) && crescimento2 >= (artigo.OrderBy(a => a.crescimento).FirstOrDefault().crescimento)) {
+                    primeiro_crescimento = crescimento1;
+                    ultimo_crescimento = crescimento2;
+                } else {
+                    primeiro_crescimento = (artigo.OrderByDescending(a => a.crescimento).FirstOrDefault().crescimento);
+                    ultimo_crescimento = (artigo.OrderBy(a => a.crescimento).FirstOrDefault().crescimento);
+                }
+            }
 
-                }*/
+            // Verifica e captura os valores para primeiro_preço e ultimo_preço
+            //
+            var separa_preço = new string[50];
+            var primeiro_preço = 0.0;
+            var ultimo_preço = 0.0;
+            if (preço != "" && preço.Count(x => x == ' ') == 1) {
+                separa_preço = preço.Split(' ');
+                var preço1 = float.Parse(separa_preço[0]);
+                var preço2 = float.Parse(separa_preço[1]);
+                if (preço1 <= (artigo.OrderByDescending(a => a.preço).FirstOrDefault().preço) && preço2 >= (artigo.OrderBy(a => a.preço).FirstOrDefault().preço)) {
+                    primeiro_preço = preço1;
+                    ultimo_preço = preço2;
+                } else {
+                    primeiro_preço = (artigo.OrderByDescending(a => a.preço).FirstOrDefault().preço);
+                    ultimo_preço = (artigo.OrderBy(a => a.preço).FirstOrDefault().preço);
+                }
+            }
+
+            // Verifica e captura os valores para primeiro_peso e ultimo_peso
+            //
+            var separa_peso = new string[50];
+            var primeiro_peso = 0.0;
+            var ultimo_peso = 0.0;
+            if (peso != "" && peso.Count(x => x == ' ') == 1) {
+                separa_peso = peso.Split(' ');
+                var peso1 = float.Parse(separa_peso[0]);
+                var peso2 = float.Parse(separa_peso[1]);
+                if (peso1 <= (artigo.OrderByDescending(a => a.peso).FirstOrDefault().peso) && peso2 >= (artigo.OrderBy(a => a.peso).FirstOrDefault().peso)) {
+                    primeiro_peso = peso1;
+                    ultimo_peso = peso2;
+                } else {
+                    primeiro_peso = (artigo.OrderByDescending(a => a.peso).FirstOrDefault().peso);
+                    ultimo_peso = (artigo.OrderBy(a => a.peso).FirstOrDefault().peso);
+                }
             }
 
             // Faz uma pesquisa da palavra a encontrar pesquisa em cada um dos artigos se existe uma correspondencia para nome
             //
-            if (nome != null) {
+            if (nome != "") {
                 artigo = artigo.Where(a => a.nome.Contains(nome) || a.nometecnico.Contains(nome) || a.descricao.Contains(nome));
                 /*artigo = artigo.Concat(artigo.Where(a => a.nometecnico.Contains(nome)));
                 artigo = artigo.Concat(artigo.Where(a => a.descricao.Contains(nome)));*/
@@ -416,44 +349,57 @@ namespace ViveirosID.Controllers {
             // Implementa dois filtros para peso
             //
             artigo = artigo.Where(a => a.peso >= primeiro_peso);
-            artigo = artigo.Where(a => a.peso <= segundo_peso);
+            artigo = artigo.Where(a => a.peso <= ultimo_peso);
 
             // Implementa dois filtros para preço
+            //
             artigo = artigo.Where(a => a.preço >= primeiro_preço);
-            artigo = artigo.Where(a => a.preço <= segundo_preço);
+            artigo = artigo.Where(a => a.preço <= ultimo_preço);
 
-            /*if (ordem == "descendente") {
-                artigo = artigo.OrderByDescending(a => a.nome);
-            } else if (ordem == "ascendente") {
-                artigo = artigo.OrderBy(a => a.nome);
-            }*/
+            // Implementa dois filtros para crescimento
+            //
+            artigo = artigo.Where(a => a.crescimento >= primeiro_crescimento);
+            artigo = artigo.Where(a => a.crescimento <= ultimo_crescimento);
+
+            // Implementa dois filtros para rega
+            //
+            artigo = artigo.Where(a => a.rega >= primeira_rega);
+            artigo = artigo.Where(a => a.crescimento <= ultima_rega);
+
+            // Implementa dois filtros para luz
+            //
+            artigo = artigo.Where(a => a.luz >= primeira_luz);
+            artigo = artigo.Where(a => a.luz <= ultima_luz);
 
             // Recolhe o valor mais alto de preço e o mais baixo
             //
-            ViewBag.primeiro_preço = todo_artigo.OrderBy(a => a.preço).FirstOrDefault().preço;
+            ViewBag.primeiro_preço = artigo.OrderBy(a => a.preço).FirstOrDefault().preço;
 
-            ViewBag.ultimo_preço = todo_artigo.OrderByDescending(a => a.preço).FirstOrDefault().preço;
+            ViewBag.ultimo_preço = artigo.OrderByDescending(a => a.preço).FirstOrDefault().preço;
 
             // Recolhe o valor mais alto de peso e o mais baixo
             //
-            ViewBag.primeiro_peso = todo_artigo.OrderBy(a => a.peso).FirstOrDefault().peso;
+            ViewBag.primeiro_peso = artigo.OrderBy(a => a.peso).FirstOrDefault().peso;
 
-            ViewBag.ultimo_peso = todo_artigo.OrderByDescending(a => a.peso).FirstOrDefault().peso;
+            ViewBag.ultimo_peso = artigo.OrderByDescending(a => a.peso).FirstOrDefault().peso;
 
-            // Recolhe as três palavras de escolha de Crescimento
-            // Rápido, Moderado, Lento
+            // Recolhe o valor de crescimento mais baixo e o mais elevado
             //
-            ViewBag.crescimento = new string[3] { "Lento", "Moderado", "Rapido" };
+            ViewBag.primeiro_crescimento = artigo.OrderBy(a => a.crescimento).FirstOrDefault().crescimento;
 
-            // Recolhe as três palavras relacionadas com a Luz 
-            // Sol, Meia-Sombra, Sombra
-            //
-            ViewBag.luz = new string[3] { "Sombra", "Meia-Sombra", "Sol"};
+            ViewBag.ultimo_crescimento = artigo.OrderByDescending(a => a.crescimento).FirstOrDefault().crescimento;
 
-            // Recolhe as três palavras relacionadas com a Rega
-            // Intensiva, Regula, Reduzida
+            // Recolhe o valor de luz mais baixo e mais elevado
             //
-            ViewBag.rega = new string[3] { "Reduzida", "Regular", "Intensiva" };
+            ViewBag.primeira_luz = artigo.OrderBy(a => a.luz).FirstOrDefault().luz;
+
+            ViewBag.ultima_luz = artigo.OrderByDescending(a => a.luz).FirstOrDefault().luz;
+
+            // Recolhe o valor de rega mais baixo e o mais elevado
+            //
+            ViewBag.primeira_rega = artigo.OrderBy(a => a.rega).FirstOrDefault().rega;
+
+            ViewBag.ultima_rega = artigo.OrderByDescending(a => a.rega).FirstOrDefault().rega;
 
             return View(artigo.ToList());
         }
@@ -461,17 +407,136 @@ namespace ViveirosID.Controllers {
         // GET: Artigoes/Details/5
         [Authorize]
         public ActionResult Details(int? id) {
+
             if (id == null) {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
+            // Encontra o artigo acerca do qual se procuram os detalhes
+            //
             Artigos artigo = db.Artigo.Find(id);
             if (artigo == null) {
                 return HttpNotFound();
             }
-            return View(artigo);
+
+            // Conhecer todos os utilizadores da Base de Dados
+            //
+            var utilizadores = (from umUtilizador in db.Utilizador
+                                select umUtilizador);
+
+            // Filtrar apenas aqueles que são clientes
+            //
+            var aspnetusers = (from umUtilizador in db.Utilizador
+                               from umAspNetUser in db.Users
+                               from umRoleID in umAspNetUser.Roles.Where(a => a.RoleId == "3")
+                               where umUtilizador.IDaspuser == umAspNetUser.Id && umRoleID.UserId == umAspNetUser.Id
+                               select umUtilizador);
+
+            // Filtrar todas os UtilizadorCompra que estao associados a utlizadores do RoleID = 3
+            //
+            var utilizadorCompra = (from umUtilizadorCompra in db.Utilizador_Compra
+                                    from umAspNetUser in aspnetusers
+                                    where umUtilizadorCompra.UtilizadorFK == umAspNetUser.UtilizadorID
+                                    select umUtilizadorCompra);
+
+            // Filtrar apenas as compras que sao de clientes
+            //
+            var comprasDeClientes = (from umaCompra in db.Compra
+                                     from umUtilizadorCompra in utilizadorCompra
+                                     where umaCompra.CompraID == umUtilizadorCompra.CompraFK
+                                     select umaCompra);
+
+            // Faz a lista de artigos que estao a ser fortemente comprados quando
+            // o "artigo" foi comprado
+            var compra_artigo = (from umaCompra_Artigo in db.Compra_Artigos
+                                 where umaCompra_Artigo.ArtigoFK == id
+                                 select umaCompra_Artigo);
+
+            comprasDeClientes = (from umaCompra in comprasDeClientes
+                                 from umaCompraArtigo in compra_artigo
+                                 where umaCompra.CompraID == umaCompraArtigo.CompraFK
+                                 select umaCompra);
+
+            // Remove todas as compras onde apenas aparece o artigo de ID = id
+            // essas compras nao tem interesse nao indicam um comportamento
+            // padrao dos clientes
+            //
+            comprasDeClientes = comprasDeClientes.Where(a => a.ListadeArtigos.Count > 1);
+
+            // seleciona todos os artigos disponiveis
+            //
+            var todos_artigos = (from umArtigo in db.Artigo
+                                 select umArtigo);
+
+            // Prepara uma lista nula de artigos para adicionar os 
+            // artigos a apresentar
+            //
+            var artigos_apresentar = (from umArtigo in db.Artigo
+                                      where umArtigo.descricao == "maluco"
+                                      select umArtigo);
+
+            // Prepara uma lista nula de CompraArtigos para listar todas 
+            // as comprasArtigo onde o nosso artigo de ID = id aparece referenciado
+            //
+            var compra_artigos = (from umaCompraArtigos in db.Compra_Artigos
+                                  where umaCompraArtigos.preço == -1
+                                  select umaCompraArtigos);
+
+            var compra_artigos_list = new List<CompraArtigo>();
+
+            //var xpto = new List<CompraArtigo>() as IQueryable<CompraArtigo>;
+
+            // Compra a compra, listadeArtigos a listadeArtigos
+            // coloca todos os compraArtigo em compra_artigos
+            // para a seguir mediante as quantidades escolher
+            // quais devem ser sugeridos
+            //
+            foreach (Compras elm in comprasDeClientes) {
+                foreach (CompraArtigo var in elm.ListadeArtigos) {
+                    CompraArtigo compra_artigo_temp = new CompraArtigo();
+                    compra_artigo_temp.ArtigoFK = var.ArtigoFK;
+                    compra_artigo_temp.CompraFK = var.CompraFK;
+                    compra_artigo_temp.ID = var.ID;
+                    compra_artigo_temp.IVA = var.IVA;
+                    compra_artigo_temp.preço = var.preço;
+                    compra_artigo_temp.quantidade = var.quantidade;
+
+                    compra_artigos_list.Add(compra_artigo_temp);
+                }
+            }
+
+            // Seleciona as CompraArtigo cujo ArtigoFK seja diferente do id
+            // não são desejadas entradas para o produto para o qual são procurados os detalhes
+            // apenas os mais procurados associados a este
+            //
+            compra_artigos =  compra_artigos_list.Where(a => a.ArtigoFK != 1).OrderByDescending(b => b.quantidade).Take(3).AsQueryable<CompraArtigo>();
+
+            foreach (CompraArtigo elm in compra_artigos) {
+                var artigo_temp = (from umArtigo in db.Artigo
+                                   where umArtigo.ArtigoID == elm.ArtigoFK
+                                   select umArtigo);
+                artigos_apresentar = artigos_apresentar.Concat(artigo_temp);
+            }
+
+            /*var imagem = (from umArtigo in artigos_apresentar
+                          from umaImagem in db.Imagem
+                          where umArtigo.ArtigoID == umaImagem.ArtigoFK &&
+                                umaImagem.descricao == "A Tal"
+                          select umaImagem).FirstOrDefault().descricao;*/
+
+            var imagem = (from umArtigo in artigos_apresentar
+                          from umaImagem in db.Imagem
+                          where umArtigo.ArtigoID == umaImagem.ArtigoFK 
+                          select umaImagem);
+
+            var model = new ProdutoDetalhesViewModel();
+            model.Artigo = artigo;
+            model.Artigos = artigos_apresentar.ToList() as ICollection<Artigos>;
+            model.Imagens = imagem.ToList() as ICollection<Imagens>;
+
+            return View(model);
         }
 
-        
         // GET: Artigoes/Create
         [Authorize (Roles="Administrador")]
         public ActionResult Create() {
@@ -485,7 +550,7 @@ namespace ViveirosID.Controllers {
         [Authorize (Roles = "Administrador")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ArtigoID,nome,nometecncico,disponibilidade,descricao,plantacaoComeca,plantacaoAcaba,peso,crescimento,transplantacaoComeca,transplantacaoAcaba,Luz,Rega,floracaoComeca,floracaoAcaba,CategoriaFK")] Artigos artigo) {
+        public ActionResult Create([Bind(Include = "ArtigoID,nome,nometecnico,disponibilidade,descricao,plantacaoComeca,plantacaoAcaba,peso,crescimento,preço,Luz,Rega,CategoriaFK")] Artigos artigo) {
             if (ModelState.IsValid) {
                 db.Artigo.Add(artigo);
                 db.SaveChanges();
@@ -583,7 +648,7 @@ namespace ViveirosID.Controllers {
             // determina o ID do carrinho associado ao utilizador da bd Viveiros
             //
             int carID = (from umUtilizador in db.Utilizador
-                         where umUtilizador.CarrinhoFK == userID
+                         where umUtilizador.UtilizadorID == userID
                          select umUtilizador.CarrinhoFK).FirstOrDefault();
 
             // pesquisa se existe uma correspondencia para carrinho_artigos para o artigo de ID == id
@@ -612,6 +677,63 @@ namespace ViveirosID.Controllers {
             }
 
             return RedirectToAction("Index");
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        [Authorize]
+        public ActionResult Mais_Procurados() {
+
+            // determina o user ID do utilizador asp net numa string
+            //
+            string userAspNetID = User.Identity.GetUserId();
+
+            // determina o ID do utilizador parte da base de dados Viveiros num inteiro
+            //
+            int userID = (from umUtilizador in db.Utilizador
+                          where umUtilizador.IDaspuser == userAspNetID
+                          select umUtilizador.UtilizadorID).FirstOrDefault();
+
+            var utilizador_compra = (from umUtilizador_Compra in db.Utilizador_Compra
+                                     where umUtilizador_Compra.UtilizadorFK == userID
+                                     select umUtilizador_Compra);
+
+            // Fazer uma lista de todos os elementos da tabela CompraArtigos
+            // 
+            var artigo_comprado = (from umaCompra in db.Compra
+                                   from umUtilizadorCompra in db.Utilizador_Compra
+                                   from umaCompraArtigo in db.Compra_Artigos
+                                   where umaCompra.CompraID == umUtilizadorCompra.CompraFK && umUtilizadorCompra.UtilizadorFK == userID
+                                   select umaCompraArtigo);
+
+            var artigo = (from umArtigo in db.Artigo
+                          where umArtigo.nome == "maluco"
+                          select umArtigo);
+
+            var artigo_mais_quantidade = artigo_comprado.GroupBy(a => a.ArtigoFK)
+                                            .Select(a => new { ArtigoFK = a.Key, quantidade = a.Sum(b => b.quantidade) });
+
+            artigo_mais_quantidade = artigo_mais_quantidade.OrderByDescending(a => a.quantidade);
+
+            artigo_mais_quantidade = artigo_mais_quantidade.Take(5);
+
+            //.Select(a => new {Amount = a.Sum(b => b.ArticleAmount),Name=a.ArticleName})
+
+            // Coloca numa lista os cinco artigos mais comprados
+            //
+            foreach (var elm in artigo_mais_quantidade) {
+                var artigo_temp = (from umArtigo in db.Artigo
+                                   where umArtigo.ArtigoID == elm.ArtigoFK
+                                   select umArtigo);
+                artigo = artigo.Concat(artigo_temp);
+            }
+
+
+            artigo = artigo.GroupBy(a => a.ArtigoID).Select(y => y.FirstOrDefault()).Take(5);
+
+            return View(artigo.ToList());
         }
     }
 }

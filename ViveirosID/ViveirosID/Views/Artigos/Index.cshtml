@@ -14,6 +14,7 @@
 @*<p>
 
     @using (Html.BeginForm()) {
+
         @Html.AntiForgeryToken()
 
         <div class="form-horizontal">
@@ -86,6 +87,9 @@
             <a href="@Url.Action("Index", new { filtro = "preço", ordem = "descendente"})"><span class="glyphicon glyphicon-plus-sign"></span></a>
             <a href="@Url.Action("Index", new { filtro = "preço", ordem = "ascendente"})"><span class="glyphicon glyphicon-minus-sign"></span></a>
         </th>
+        <th>
+            imagem
+        </th>
         <th></th>
     </tr>
 
@@ -119,14 +123,18 @@
             @Html.DisplayFor(modelItem => item.crescimento)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Luz)
+            @Html.DisplayFor(modelItem => item.luz)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Rega)
+            @Html.DisplayFor(modelItem => item.rega)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.preço)
         </td>
+        <td>
+            <img src="@Html." />
+        </td>
+
 
         <td>
             @if (Request.IsAuthenticated && User.IsInRole("Administrador")) {

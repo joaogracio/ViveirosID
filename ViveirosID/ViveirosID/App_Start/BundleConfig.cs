@@ -21,6 +21,9 @@ namespace ViveirosID {
                       "~/Scripts/respond.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
+                      "~/Content/heroic-features.css",
+                      "~/Content/shop-homepage.css",
+                      "~/Content/shop-item.css",
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
         }

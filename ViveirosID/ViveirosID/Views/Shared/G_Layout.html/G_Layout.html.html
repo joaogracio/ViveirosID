@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="Google Web Designer 1.6.1.0726">
+  <meta name="template" content="Banner 3.0.0">
+  <meta name="environment" content="gwd-doubleclick">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="gwdpage_style.css" rel="stylesheet" data-version="8" data-exports-type="gwd-page">
+  <link href="gwdpagedeck_style.css" rel="stylesheet" data-version="8" data-exports-type="gwd-pagedeck">
+  <link href="gwddoubleclick_style.css" rel="stylesheet" data-version="10" data-exports-type="gwd-doubleclick">
+  <link href="bootstrap.js" rel="stylesheet">
+  <link href="bootstrap.min.js" rel="stylesheet">
+  <link href="jquery.validate.js" rel="stylesheet">
+  <link href="jquery.validate.min.js" rel="stylesheet">
+  <link href="jquery.validate.unobtrusive.js" rel="stylesheet">
+  <link href="jquery.validate.unobtrusive.min.js" rel="stylesheet">
+  <link href="jquery.validate-vsdoc.js" rel="stylesheet">
+  <link href="jquery-1.12.4.intellisense.js" rel="stylesheet">
+  <link href="jquery-1.12.4.js" rel="stylesheet">
+  <link href="jquery-1.12.4.min.js" rel="stylesheet">
+  <link href="jquery-ui.js" rel="stylesheet">
+  <link href="mine.js" rel="stylesheet">
+  <link href="modernizr-2.6.2.js" rel="stylesheet">
+  <link href="respond.js" rel="stylesheet">
+  <link href="respond.min.js" rel="stylesheet">
+  <script type="text/javascript">
+    $(function() {
+
+      var input = $("#file").value;
+      if (input.files && input.files[0]) {
+
+        var reader = new FileReader();
+        reader.onload = function(e) {
+          $('#imgpreview').css('visibility', 'visible');
+          $('#imgpreview').attr('src', e.target.result);
+        }
+        reader.readAsDataURL(input.files[0]);
+      }
+
+    });
+
+    $(document).ready(function() {
+
+      var primeiro_peso_jq = @ViewBag.primeiro_peso;
+      var ultimo_peso_jq = @ViewBag.ultimo_peso;
+      var primeiro_preço_jq = @ViewBag.primeiro_preço;
+      var ultimo_preço_jq = @ViewBag.ultimo_preço;
+      var primeira_rega_jq = @ViewBag.primeira_rega;
+      var ultima_rega_jq = @ViewBag.ultima_rega;
+      var primeira_luz_jq = @ViewBag.primeira_luz;
+      var ultima_luz_jq = @ViewBag.ultima_luz;
+      var primeiro_crescimento_jq = @ViewBag.primeiro_crescimento;
+      var ultimo_crescimento_jq = @ViewBag.ultimo_crescimento;
+
+      var luz_jq = ["Sombra-Total", "Sombra-Parcial", "Meia-Sombra", "Meio-Sol", "Sol"];
+
+      var crescimento_jq = ["Lento", "Moderado", "Normal", "Acelarado", "Rápido"];
+
+      var rega_jq = ["Seca", "Quase-Seca", "Humido", "Molhado", "Encharcado"];
+
+      // Função que deve disparar com um click no elemento "file"
+      //
+      $(function() {
+        alert("chouriço");
+        $("#file").click(function() {
+          var input = $("#file").value;
+          if (input.files && input.files[0]) {
+
+            var reader = new FileReader();
+            reader.onload = function(e) {
+              $('#imgpreview').css('visibility', 'visible');
+              $('#imgpreview').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+          }
+        });
+      });
+
+      // Slider para selecionar a quantidade de água necessária na rega
+      //
+      $("#slider-rega").slider({
+        range: true,
+        min: primeira_rega_jq,
+        max: ultima_rega_jq,
+        step: 1,
+        values: [primeira_rega_jq, ultima_rega_jq],
+        slide: function(event, ui) {
+          $("#rega-div").text("Terra de " + rega_jq[ui.values[0]] + " até " + rega_jq[ui.values[1]]);
+          $("#rega-in").val(ui.values[0] + " " + ui.values[1]);
+        }
+      });
+
+      // Função para atribuir um valor inicial ao valor a ser escolhido para quantidade de água necessária na rega
+      // Tanto na label como no input
+      //
+      $("#rega-div").text("Terra de " + rega_jq[$("#slider-rega").slider("values", 0)] +
+        " até " + rega_jq[$("#slider-rega").slider("values", 1)]);
+      $("#rega-in").val($("#slider-rega").slider("values", 0) + " " + $("#slider-rega").slider("values", 1));
+
+      // Slider para selecionar a gama de luzes a serem utilizadas
+      //
+      $("#slider-luz").slider({
+        range: true,
+        min: primeira_luz_jq,
+        max: ultima_luz_jq,
+        step: 1,
+        values: [primeira_luz_jq, ultima_luz_jq],
+        slide: function(event, ui) {
+          $("#luz-div").text("Luminosidade de " + luz_jq[ui.values[0]] + " até " + luz_jq[ui.values[1]]);
+          $("#luz-in").val(ui.values[0] + " " + ui.values[1]);
+        }
+      });
+
+      // Função para atribuir um valor inicial ao valor a ser escolhido para as gamas de luz
+      //
+      $("#luz-div").text("Luminusidade de " + luz_jq[$("#slider-luz").slider("values", 0)] +
+        " até " + luz_jq[$("#slider-luz").slider("values", 1)]);
+      $("#luz-in").val($("#slider-luz").slider("values", 0) + " " + $("#slider-luz").slider("values", 1));
+
+      // Slider para selecionar a gama de velocidades de crescimento a pesquisar
+      //
+      $("#slider-crescimento").slider({
+        range: true,
+        min: primeiro_crescimento_jq,
+        max: ultimo_crescimento_jq,
+        step: 1,
+        values: [primeiro_crescimento_jq, ultimo_crescimento_jq],
+        slide: function(event, ui) {
+          $("#crescimento-div").text("Crescimento de " + crescimento_jq[ui.values[0]] + " até " + crescimento_jq[ui.values[1]]);
+          $("#crescimento-in").val(ui.values[0] + " " + ui.values[1]);
+        }
+      });
+
+      // Função para atribuir um valor inicial ao valor a ser escolhido para velocidade de crescimento
+      //
+      $("#crescimento-div").text("Crescimento de " + crescimento_jq[$("#slider-crescimento").slider("values", 0)] +
+        " até " + crescimento_jq[$("#slider-crescimento").slider("values", 1)]);
+      $("#crescimento-in").val($("#slider-crescimento").slider("values", 0) + " " + $("#slider-luz").slider("values", 1));
+
+      // Slider para selecionar a gama de pesos a pesquisar
+      //
+      $("#slider-peso").slider({
+        range: true,
+        min: primeiro_peso_jq,
+        max: ultimo_peso_jq,
+        step: ((ultimo_peso_jq - primeiro_peso_jq) / 50),
+        values: [primeiro_peso_jq, ultimo_peso_jq],
+        slide: function(event, ui) {
+          $("#peso-div").text("Peso de " + ui.values[0] + " gramas até " + ui.values[1] + " gramas");
+          $("#peso-in").val(ui.values[0] + " " + ui.values[1]);
+        }
+      });
+
+      // Função para atribuir um valor inicial ao valor a ser escolhido para peso
+      //
+      $("#peso-div").text("Peso de " + $("#slider-peso").slider("values", 0) +
+        " gramas até " + $("#slider-peso").slider("values", 1) + " gramas");
+      $("#peso-in").val($("#slider-peso").slider("values", 0) + " " + $("#slider-peso").slider("values", 1));
+
+      // Slider para selecionar a gama de preços a pesquisar
+      //
+      $("#slider-preço").slider({
+        range: true,
+        min: primeiro_preço_jq,
+        max: ultimo_preço_jq,
+        step: ((ultimo_preço_jq - primeiro_preço_jq) / 50),
+        values: [primeiro_preço_jq, ultimo_preço_jq],
+        slide: function(event, ui) {
+          $("#preço-div").text("de €" + ui.values[0] + " até €" + ui.values[1]);
+          $("#peso-in").val(ui.values[0] + " " + ui.values[1]);
+        }
+      });
+
+      // Função para atribuir um valor inicial ao valor a ser escolhido para preço
+      //
+      $("#preço-div").text("de €" + $("#slider-preço").slider("values", 0) +
+        " até €" + $("#slider-preço").slider("values", 1));
+      $("#preço-in").val($("#slider-preço").slider("values", 0) + " " + $("#slider-preço").slider("values", 1));
+    });
+  </script>
+  <style type="text/css" id="gwd-lightbox-style">
+    .gwd-lightbox {
+      overflow: hidden;
+    }
+  </style>
+  <style type="text/css" id="gwd-text-style">
+    p {
+      margin: 0px;
+    }
+    h1 {
+      margin: 0px;
+    }
+    h2 {
+      margin: 0px;
+    }
+    h3 {
+      margin: 0px;
+    }
+  </style>
+  <style type="text/css">
+    html, body {
+      width: 100%;
+      height: 100%;
+      margin: 0px;
+    }
+    .gwd-page-container {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+    .gwd-page-content {
+      transform: perspective(1400px) matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+      transform-style: preserve-3d;
+      position: absolute;
+      background-color: transparent;
+    }
+    .gwd-page-wrapper {
+      position: absolute;
+      transform: translateZ(0px);
+      background-color: rgb(255, 255, 255);
+    }
+    .gwd-page-size {
+      width: 300px;
+      height: 250px;
+    }
+  </style><script data-source="googbase_min.js" data-version="3" data-exports-type="googbase" src="googbase_min.js"></script><script data-source="gwd_webcomponents_min.js" data-version="5" data-exports-type="gwd_webcomponents" src="gwd_webcomponents_min.js"></script>
+  <script
+  data-source="gwdpage_min.js" data-version="8" data-exports-type="gwd-page" src="gwdpage_min.js"></script><script data-source="gwdpagedeck_min.js" data-version="8" data-exports-type="gwd-pagedeck" src="gwdpagedeck_min.js"></script><script data-source="https://s0.2mdn.net/ads/studio/Enabler.js" data-exports-type="gwd-doubleclick" src="https://s0.2mdn.net/ads/studio/Enabler.js"></script>
+    <script
+    data-source="gwddoubleclick_min.js" data-version="10" data-exports-type="gwd-doubleclick" src="gwddoubleclick_min.js"></script>
+</head>
+
+<body>
+  <gwd-doubleclick id="gwd-ad" polite-load="">
+    <gwd-metric-configuration></gwd-metric-configuration>
+    <div is="gwd-pagedeck" class="gwd-page-container" id="pagedeck">
+      <div is="gwd-page" id="page1" class="gwd-page-wrapper gwd-page-size gwd-lightbox" data-gwd-width="300px" data-gwd-height="250px">
+        <div class="gwd-page-content gwd-page-size">
+          
+        </div>
+      </div>
+    </div>
+  </gwd-doubleclick>
+  <script type="text/javascript" id="gwd-init-code">
+    (function() {
+      var gwdAd = document.getElementById('gwd-ad');
+
+      /**
+       * Handles the DOMContentLoaded event. The DOMContentLoaded event is
+       * fired when the document has been completely loaded and parsed.
+       */
+      function handleDomContentLoaded(event) {
+
+      }
+
+      /**
+       * Handles the WebComponentsReady event. This event is fired when all
+       * custom elements have been registered and upgraded.
+       */
+      function handleWebComponentsReady(event) {
+        // Start the Ad lifecycle.
+        setTimeout(function() {
+          gwdAd.initAd();
+        }, 0);
+      }
+
+      /**
+       * Handles the event that is dispatched after the Ad has been
+       * initialized and before the default page of the Ad is shown.
+       */
+      function handleAdInitialized(event) {}
+
+      window.addEventListener('DOMContentLoaded',
+        handleDomContentLoaded, false);
+      window.addEventListener('WebComponentsReady',
+        handleWebComponentsReady, false);
+      window.addEventListener('adinitialized',
+        handleAdInitialized, false);
+    })();
+  </script>
+</body>
+
+</html>

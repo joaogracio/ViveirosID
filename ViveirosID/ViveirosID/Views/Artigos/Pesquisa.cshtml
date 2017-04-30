@@ -24,79 +24,42 @@
                         <!-- INPUT PARA PESO -->
                         <label for="peso">Peso:</label>
                         <div id="slider-peso" style="width:300px"></div>
-                        <input type="text" id="peso" name="peso" style="width:300px" readonly />
+                        <div id="peso-div"></div>
+                        <input type="text" id="peso-in" name="peso" style="width:300px; display:none" readonly />
                     </td>
                     <td style="width:400px">
                         <!-- INPUT PARA PREÇO -->
                         <label for="preço">Preço: </label>
                         <div id="slider-preço" style="width:300px"></div>
-                        <input type="text" id="preço" name="preço" style="width:300px" readonly />
+                        <div id="preço-div"></div>
+                        <input type="text" id="preço-in" name="preço" style="width:300px; display:none" readonly />
                     </td>
                 </tr>
                 <tr>
                     <td style="width:400px">
                         <!-- INPUT PARA CRESCIMENTO-->
-                        <label for="preço">Crescimento: </label>
+                        <label for="crescimento" >Crescimento: </label>
                         <div id="slider-crescimento" style="width:300px"></div>
-                        <input type="text" id="crescimento" name="crescimento" style="width:300px" readonly />
+                        <div id="crescimento-div"></div>
+                        <input type="text" id="crescimento-in" name="crescimento" style="width:300px; display:none" readonly />
                     </td>
                     <td style="width:400px">
                         <!-- INPUT PARA LUZ-->
-                        <label for="preço">Luz: </label>
+                        <label for="luz" >Luz: </label>
                         <div id="slider-luz" style="width:300px"></div>
-                        <input type="text" id="luz" name="luz" style="width:300px" readonly />
+                        <div id="luz-div"></div>
+                        <input type="text" id="luz-in" name="luz" style="width:300px; display:none" readonly />
                     </td>
                     <td style="width:400px">
                         <!-- INPUT PARA REGA-->
-                        <label for="preço">Rega: </label>
+                        <label for="rega">Rega: </label>
                         <div id="slider-rega" style="width:300px"></div>
-                        <input type="text" id="rega" name="rega" style="width:300px" readonly />
+                        <div id="rega-div" ></div>
+                        <input type="text" id="rega-in" name="rega" style="width:300px; display:none" readonly />
                     </td>
                 </tr>
             </table>
-
-            <!-- INPUT PARA PALAVRAS A PESQUISAR-->
-            <!--Pesquisar:     <input type="text" name="nome"><br>-->
-
-            @*<br />*@
-            <!-- INPUT PARA PESO -->
-            @*<label for="peso">Peso:</label>
-            <div id="slider-peso" style="width:300px"></div>
-            <input type="text" id="peso" name="peso" style="width:300px" readonly />*@
-
-            @*<br />*@
-            <!-- INPUT PARA PREÇO -->
-            @*<label for="preço">Preço: </label>
-            <div id="slider-preço" style="width:300px"></div>
-            <input type="text" id="preço" name="preço" style="width:300px" readonly />*@
-
-            @*<br />*@
-            <!-- INPUT PARA CRESCIMENTO-->
-            @*<label for="preço">Crescimento: </label>
-            <div id="slider-crescimento" style="width:300px"></div>
-            <input type="text" id="crescimento" name="crescimento" style="width:300px" readonly />*@
-
-            @*<br />*@
-            <!-- INPUT PARA LUZ-->
-            @*<label for="preço">Luz: </label>
-            <div id="slider-luz" style="width:300px"></div>
-            <input type="text" id="luz" name="luz" style="width:300px" readonly />*@
-            
-            @*<br />*@
-            <!-- INPUT PARA REGA-->
-            @*<label for="preço">Rega: </label>
-            <div id="slider-rega" style="width:300px"></div>
-            <input type="text" id="rega" name="rega" style="width:300px" readonly />*@
-            
-            
-            @*<br />*@
-            <!-- INPUT PARA ORDEM-->
-            @*Descendente:   @Html.RadioButton("Ordem", "Descendente", new { ordem = "true" })
-            <br />
-            Ascendente:    @Html.RadioButton("Ordem", "Ascendente", new { ordem = "false" })
-            <br />*@
-            
-
+           
             <button>Pesquisa</button>
         </div>
     }
@@ -172,10 +135,10 @@
                     @Html.DisplayFor(modelItem => item.crescimento)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Luz)
+                    @Html.DisplayFor(modelItem => item.luz)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Rega)
+                    @Html.DisplayFor(modelItem => item.rega)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.preço)

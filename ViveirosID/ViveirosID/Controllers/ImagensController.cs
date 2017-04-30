@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -50,45 +51,77 @@ namespace ViveirosID.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "nome,descricao,tipo,ArtigoFK")] Imagens imagens, HttpPostedFileBase file)
+        public ActionResult Create([Bind(Include = "descricao,ArtigoFK")] Imagens imagens, HttpPostedFileBase file)
         {
-            // Aqui vejo se o modelo é válido 
+            // Aqui vejo se o modelo é válido, se a imagem é nula se tem conteudo e esse conteudo e inferior a 4 MB se o conteudo da imagem é do tipo jpeg, png ou gif 
             //
-            if (ModelState.IsValid) 
+            if (ModelState.IsValid && file != null && file.ContentLength > 0 && file.ContentLength <= 4194304 && (file.ContentType == "image/jpeg" || file.ContentType == "image/png" || file.ContentType == "image/gif" && file.ContentType == "image/bmp")) 
             {
-                imagens.directorio = Path.Combine(Server.MapPath("~/Images"),Path.GetFileName(file.FileName));
+                // Se a imagem passou no filtro de cima significa que esta imagem é viavel
+                // A imagem vai agora ser guardada temporariamente sem o seu nome final
+                // por forma a ser guardada mais tarde com o nome definitivo
+                //
+
+                // Recolhe o nome do artigo sobre o qual se vai trabalhar
+                //
+                string artigo_nome = (from umArtigo in db.Artigo
+                                      where umArtigo.ArtigoID == imagens.ArtigoFK
+                                      select umArtigo).FirstOrDefault().nome;
+
+                // Pesquisas de todos os ficheiros começados pelo nome do artigo em questao
+                //
+                string[] directorias = Directory.GetFiles(@"D:\Joao\Informática\Tecnologias da Internet II\TI_II_2016\ViveirosID-160dbc5b4180e74e950fc41da2e461ffc6a251c1\ViveirosID\ViveirosID\Images", artigo_nome + "*");
+
+                var proxima_imagem = 1;
+
+                // Ve qual o numero a aplicar a imagem que vai ficar registada
+                //
+                if (directorias.Length > 0) {
+                    proxima_imagem = directorias.Length + 1;
+                }
+
+                var split_content_type = file.ContentType.Split('/');
+
+                var img_tipo = "." + split_content_type[1];
+
+                // Directorio que pretendo para guardar a imagem
+                //
+                string directorio = "D:\\Joao\\Informática\\Tecnologias da Internet II\\TI_II_2016\\ViveirosID-160dbc5b4180e74e950fc41da2e461ffc6a251c1\\ViveirosID\\ViveirosID\\Images\\" + (artigo_nome + " " + proxima_imagem + img_tipo);
+
+                try {
+                    file.SaveAs(directorio);
+                    ViewBag.Message = "File uploaded successfully";
+                } catch (Exception ex) {
+                    ViewBag.Message = "ERROR:" + ex.Message.ToString();
+                }
+
+                // Determina o tipo de imagem de que se trata
+                //
+                Image img = System.Drawing.Image.FromFile(directorio);
+                int largura = img.Width;
+                int altura = img.Height;
+
+                var tipo = "pequeno";
+
+                if (largura >= 800 && altura >= 600) {
+                    tipo = "medio";
+                } else if (largura >= 1024 && altura >= 768) {
+                    tipo = "grande";
+                }
+
+                imagens.nome = artigo_nome;
+                imagens.tipo = tipo;
+                imagens.directorio = directorio;
                 db.Imagem.Add(imagens);
                 db.SaveChanges();
             }
 
-            if (file != null && file.ContentLength > 0)
-                try {
-                    string path = Path.Combine(Server.MapPath("~/Images"),
-                                               Path.GetFileName(file.FileName));
-                    file.SaveAs(path);
-                    ViewBag.Message = "File uploaded successfully";
-                } catch (Exception ex) {
-                    ViewBag.Message = "ERROR:" + ex.Message.ToString();
-                } else {
-                ViewBag.Message = "You have not specified a file.";
-            }
 
-            ViewBag.ArtigoFK = new SelectList(db.Artigo.ToList(), "ArtigoID", "nome");
+            //ViewBag.ArtigoFK = new SelectList(db.Artigo.ToList(), "ArtigoID", "nome");
 
             ViewData["ArtigoFK"] = new SelectList(db.Artigo.ToList(), "ArtigoID", "nome");
 
             return View();
-            /*
-            if (ModelState.IsValid)
-            {
-                db.Imagem.Add(imagens);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            ViewBag.ArtigoFK = new SelectList(db.Artigo, "ArtigoID", "nome", imagens.ArtigoFK);
-            return View(imagens);
-            */
         }
 
         // GET: Imagens/Edit/5

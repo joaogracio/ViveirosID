@@ -24,7 +24,8 @@ namespace ViveirosID.Models {
             ErrorMessage = "Nome do seu artigo em Portugues. Insira apenas caracteres [A-Z] e [a-z]. Comece as palavras por letra maiuscula. A segunda palavra pode ser um [de], [do] ou [dos]. Use apenas um espaço em branco [ ] entre palavras.")]
         public string nome { get; set; }
 
-        [RegularExpression("([A-Z][a-z]{3,11})[ ]([a-z]{3,12})", ErrorMessage = "Nome cientifico da sua planta. Insira apenas caracteres [A-Z] e [a-z]. Coloque duas palavras. Comece primeira palavra por maiuscula e a segunda por minuscula.")]
+        [RegularExpression("([A-Z][a-z]{3,11})[ ]([a-z]{3,12})",
+            ErrorMessage = "Nome cientifico da sua planta. Insira apenas caracteres [A-Z] e [a-z]. Coloque duas palavras. Comece primeira palavra por maiuscula e a segunda por minuscula.")]
         public string nometecnico { get; set; }
 
         public Boolean disponibilidade { get; set; }
@@ -43,17 +44,17 @@ namespace ViveirosID.Models {
             ErrorMessage = "Peso do seu artigo em gramas. Coloque apenas numeros. No minimo 2 no máximo 9")]
         public float peso { get; set; }
 
-        [RegularExpression("([R][á][p][i][d][o])|([M][o][d][e][r][a][d][o])|([L][e][n][t][o])",
-            ErrorMessage = "Taxa de crescimento oo seu artigo. Coloque uma das seguintes três palavras: Rápido, Moderado ou Lento")]
-        public string crescimento { get; set; }
+        [RegularExpression("[1-5]",
+            ErrorMessage = "Taxa de crescimento oo seu artigo. Coloque um valor entre 1 e 5. Sendo 1 para um crescimento mais baixo e 5 para um crescimento mais elevado.")]
+        public float crescimento { get; set; }
 
-        [RegularExpression("([S][o][l])|([M][e][i][a][-][S][o][m][b][r][a])|([S][o][m][b][r][a])",
-            ErrorMessage = "Quantidade de Luz que o seu artigo deve receber. Coloque uma das seguintes três palavras: Sol, Meia-Sombra ou Sombra.")]
-        public string Luz { get; set; }
+        [RegularExpression("[1-5]",
+            ErrorMessage = "Quantidade de Luz que o seu artigo deve receber. Coloque um valor entre 1 e 5. Sendo 1 para uma exposição solar baixa e 5 para uma exposição solar mais elevada.")]
+        public float luz { get; set; }
 
-        [RegularExpression("([I][n][t][e][n][s][i][v][a])|([R][e][g][u][l][a][r])|([R][e][d][u][z][i][d][a])",
-            ErrorMessage = "Quantidade de água que o seu artigo merece. Coloque uma das seguintes três palavras: Intensiva, Regular e Reduzida.")]
-        public string Rega { get; set; }
+        [RegularExpression("[1-5]",
+            ErrorMessage = "Quantidade de água que o seu artigo merece. Coloque um valor entre 1 e 5. Sendo 1 para uma rega muito reduzida e 5 para uma rega abundante.")]
+        public float rega { get; set; }
 
 
         public float preço { get; set; }

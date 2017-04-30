@@ -1,0 +1,195 @@
+﻿@model IEnumerable<ViveirosID.Models.Artigos>
+
+@{
+    ViewBag.Title = "Pesquisa";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Pesquisa</h2>
+
+<p>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+
+            <table style="border:1px solid">
+                <tr>
+                    <td style="width:400px">
+                        <!-- INPUT PARA PALAVRAS A PESQUISAR-->
+                        Pesquisar:     <input type="text" name="nome"><br>
+                    </td>
+                    <td style="width:400px">
+                        <!-- INPUT PARA PESO -->
+                        <label for="peso">Peso:</label>
+                        <div id="slider-peso" style="width:300px"></div>
+                        <input type="text" id="peso" name="peso" style="width:300px" readonly />
+                    </td>
+                    <td style="width:400px">
+                        <!-- INPUT PARA PREÇO -->
+                        <label for="preço">Preço: </label>
+                        <div id="slider-preço" style="width:300px"></div>
+                        <input type="text" id="preço" name="preço" style="width:300px" readonly />
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width:400px">
+                        <!-- INPUT PARA CRESCIMENTO-->
+                        <label for="preço">Crescimento: </label>
+                        <div id="slider-crescimento" style="width:300px"></div>
+                        <input type="text" id="crescimento" name="crescimento" style="width:300px" readonly />
+                    </td>
+                    <td style="width:400px">
+                        <!-- INPUT PARA LUZ-->
+                        <label for="preço">Luz: </label>
+                        <div id="slider-luz" style="width:300px"></div>
+                        <input type="text" id="luz" name="luz" style="width:300px" readonly />
+                    </td>
+                    <td style="width:400px">
+                        <!-- INPUT PARA REGA-->
+                        <label for="preço">Rega: </label>
+                        <div id="slider-rega" style="width:300px"></div>
+                        <input type="text" id="rega" name="rega" style="width:300px" readonly />
+                    </td>
+                </tr>
+            </table>
+
+            <!-- INPUT PARA PALAVRAS A PESQUISAR-->
+            <!--Pesquisar:     <input type="text" name="nome"><br>-->
+
+            @*<br />*@
+            <!-- INPUT PARA PESO -->
+            @*<label for="peso">Peso:</label>
+            <div id="slider-peso" style="width:300px"></div>
+            <input type="text" id="peso" name="peso" style="width:300px" readonly />*@
+
+            @*<br />*@
+            <!-- INPUT PARA PREÇO -->
+            @*<label for="preço">Preço: </label>
+            <div id="slider-preço" style="width:300px"></div>
+            <input type="text" id="preço" name="preço" style="width:300px" readonly />*@
+
+            @*<br />*@
+            <!-- INPUT PARA CRESCIMENTO-->
+            @*<label for="preço">Crescimento: </label>
+            <div id="slider-crescimento" style="width:300px"></div>
+            <input type="text" id="crescimento" name="crescimento" style="width:300px" readonly />*@
+
+            @*<br />*@
+            <!-- INPUT PARA LUZ-->
+            @*<label for="preço">Luz: </label>
+            <div id="slider-luz" style="width:300px"></div>
+            <input type="text" id="luz" name="luz" style="width:300px" readonly />*@
+            
+            @*<br />*@
+            <!-- INPUT PARA REGA-->
+            @*<label for="preço">Rega: </label>
+            <div id="slider-rega" style="width:300px"></div>
+            <input type="text" id="rega" name="rega" style="width:300px" readonly />*@
+            
+            
+            @*<br />*@
+            <!-- INPUT PARA ORDEM-->
+            @*Descendente:   @Html.RadioButton("Ordem", "Descendente", new { ordem = "true" })
+            <br />
+            Ascendente:    @Html.RadioButton("Ordem", "Ascendente", new { ordem = "false" })
+            <br />*@
+            
+
+            <button>Pesquisa</button>
+        </div>
+    }
+
+    <table class="table">
+        <tr>
+            <th>
+                tipo
+            </th>
+            <th>
+                nome
+            </th>
+            <th>
+                nome tecnico
+            </th>
+            <th>
+                disponibilidade
+            </th>
+            <th>
+                descricao
+            </th>
+            <th>
+                plantacao comeca
+            </th>
+            <th>
+                plantacao acaba
+            </th>
+            <th>
+                peso
+            </th>
+            <th>
+                crescimento
+            </th>
+            <th>
+                luz
+            </th>
+            <th>
+                rega
+            </th>
+            <th>
+                preço
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Categoria.tipo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.nometecnico)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.disponibilidade)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.descricao)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.plantacaoComeca)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.plantacaoAcaba)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.peso)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.crescimento)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Luz)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Rega)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.preço)
+                </td>
+
+                <td>
+                    @if (Request.IsAuthenticated && User.IsInRole("Administrador")) {
+                        @Html.ActionLink("Edit", "Edit", new { id = item.ArtigoID })} |
+                    @Html.ActionLink("Details", "Details", new { id = item.ArtigoID }) |
+                    @if (Request.IsAuthenticated && User.IsInRole("Administrador")) {
+                        @Html.ActionLink("Delete", "Delete", new { id = item.ArtigoID })}|
+                    @Html.ActionLink("Adiciona", "Adiciona", new { id = item.ArtigoID })
+                </td>
+            </tr>
+        }
+
+    </table>

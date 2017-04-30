@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -17,7 +18,31 @@ namespace Viveiros.Controllers {
         // GET: Compras
         [Authorize]
         public ActionResult Index() {
-            return View(db.Compra.ToList());
+
+            // Retira o valor do ID do AspNetUser
+            //
+            var aspnetuser = User.Identity.GetUserId();
+
+            // Retira o valor do ID do Utilizador
+            //
+            var utilizador = (from umUtilizador in db.Utilizador
+                              where umUtilizador.IDaspuser == aspnetuser
+                              select umUtilizador).FirstOrDefault();
+
+            // Recolhe todas as UtilizadorCompra
+            //
+            var UtilizadorCompra = (from umUtilizadorCompra in db.Utilizador_Compra
+                                    where umUtilizadorCompra.UtilizadorFK == utilizador.UtilizadorID
+                                    select umUtilizadorCompra);
+
+            // Recolhe todas as Compras respectivas a este utilizador
+            //
+            var compras = (from umaCompra in db.Compra
+                           from umUtilizadorCompra in UtilizadorCompra
+                           where umaCompra.CompraID == umUtilizadorCompra.CompraFK
+                           select umaCompra);
+
+            return View(compras.ToList());
         }
 
         // GET: Compras/Details/5

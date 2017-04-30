@@ -3,11 +3,46 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using ViveirosID.Models;
 
 namespace ViveirosID.Controllers {
     public class HomeController : Controller {
+
+        private ApplicationDbContext db = new ApplicationDbContext();
         public ActionResult Index() {
-            return View();
+
+            //Fazer uma lista de todos os artigos que aparecem em compras
+            //
+            var artigos_comprados = (from umaCompra in db.Compra
+                                     from umaCompraArtigo in db.Compra_Artigos
+                                     where umaCompra.CompraID == umaCompraArtigo.CompraFK
+                                     select umaCompraArtigo);
+
+            //Cria uma lista de artigos nula
+            //
+            var artigos = (from umArtigo in db.Artigo
+                           where umArtigo.nome == ""
+                           select umArtigo);
+
+            var artigos_mais_quantidade = artigos_comprados.GroupBy(a => a.ArtigoFK)
+                                            .Select(a => new { ArtigoFK = a.Key, quantidade = a.Sum(b => b.quantidade) });
+
+            artigos_mais_quantidade = artigos_mais_quantidade.OrderByDescending(a => a.quantidade);
+
+            artigos_mais_quantidade = artigos_mais_quantidade.Take(4);
+
+            foreach (var elm in artigos_mais_quantidade)
+            {
+                var artigo_temp = (from umArtigo in db.Artigo
+                                   where umArtigo.ArtigoID == elm.ArtigoFK
+                                   select umArtigo);
+                artigos = artigos.Concat(artigo_temp);
+            }
+
+            //artigos = artigos.GroupBy(a => a.ArtigoID).Select(y => y.FirstOrDefault()).Take(4);
+            
+            return View(artigos.ToList());
+            
         }
 
         public ActionResult About() {

@@ -419,11 +419,6 @@ namespace ViveirosID.Controllers {
                 return HttpNotFound();
             }
 
-            // Conhecer todos os utilizadores da Base de Dados
-            //
-            var utilizadores = (from umUtilizador in db.Utilizador
-                                select umUtilizador);
-
             // Filtrar apenas aqueles que são clientes
             //
             var aspnetusers = (from umUtilizador in db.Utilizador
@@ -432,18 +427,11 @@ namespace ViveirosID.Controllers {
                                where umUtilizador.IDaspuser == umAspNetUser.Id && umRoleID.UserId == umAspNetUser.Id
                                select umUtilizador);
 
-            // Filtrar todas os UtilizadorCompra que estao associados a utlizadores do RoleID = 3
-            //
-            var utilizadorCompra = (from umUtilizadorCompra in db.Utilizador_Compra
-                                    from umAspNetUser in aspnetusers
-                                    where umUtilizadorCompra.UtilizadorFK == umAspNetUser.UtilizadorID
-                                    select umUtilizadorCompra);
-
             // Filtrar apenas as compras que sao de clientes
             //
             var comprasDeClientes = (from umaCompra in db.Compra
-                                     from umUtilizadorCompra in utilizadorCompra
-                                     where umaCompra.CompraID == umUtilizadorCompra.CompraFK
+                                     from umUtilizador in aspnetusers
+                                     where umaCompra.Utilizador.IDaspuser == umUtilizador.IDaspuser
                                      select umaCompra);
 
             // Faz a lista de artigos que estao a ser fortemente comprados quando
@@ -623,7 +611,7 @@ namespace ViveirosID.Controllers {
         }
 
         [Authorize]
-        public ActionResult Adiciona(int? id) {
+        public ActionResult Adiciona(int? id, string id2) {
 
             if (id == null) {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -676,7 +664,8 @@ namespace ViveirosID.Controllers {
                 db.SaveChanges();
             }
 
-            return RedirectToAction("Index");
+            if (id2.Equals("artigo")) return RedirectToAction("Index");
+            else return RedirectToAction("Index", "Home");
         }
 
         /// <summary>
@@ -696,16 +685,13 @@ namespace ViveirosID.Controllers {
                           where umUtilizador.IDaspuser == userAspNetID
                           select umUtilizador.UtilizadorID).FirstOrDefault();
 
-            var utilizador_compra = (from umUtilizador_Compra in db.Utilizador_Compra
-                                     where umUtilizador_Compra.UtilizadorFK == userID
-                                     select umUtilizador_Compra);
-
             // Fazer uma lista de todos os elementos da tabela CompraArtigos
+            // em que as CompraArtigos tem correspondecia com Compras em que o userID 
+            // aparece como chave forasteira UtilizadorFK
             // 
             var artigo_comprado = (from umaCompra in db.Compra
-                                   from umUtilizadorCompra in db.Utilizador_Compra
                                    from umaCompraArtigo in db.Compra_Artigos
-                                   where umaCompra.CompraID == umUtilizadorCompra.CompraFK && umUtilizadorCompra.UtilizadorFK == userID
+                                   where umaCompra.CompraID == umaCompraArtigo.CompraFK && umaCompra.UtilizadorFK == userID
                                    select umaCompraArtigo);
 
             var artigo = (from umArtigo in db.Artigo

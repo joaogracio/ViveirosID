@@ -18,7 +18,6 @@ namespace ViveirosID.Models {
         // Inicializa a ListadeArtigos associada a cada compra
         public Compras() {
             ListadeArtigos = new HashSet<CompraArtigo>();
-            ListadeUtilizadores = new HashSet<UtilizadorCompra>();
         }
 
         // Chave Primaria da Tabela Compra
@@ -38,8 +37,12 @@ namespace ViveirosID.Models {
         // Para cada Compra existe um Utilizador
         // Chave forasteira para Utilizador
 
-        public virtual ICollection<CompraArtigo> ListadeArtigos { get; set; }
+        // Cria uma Chave forasteira para a variavel Artigo
+        [ForeignKey("Utilizador")]
+        public int UtilizadorFK { get; set; }  
 
-        public virtual ICollection<UtilizadorCompra> ListadeUtilizadores { get; set; }
+        public virtual Utilizadores Utilizador { get; set; }
+
+        public virtual ICollection<CompraArtigo> ListadeArtigos { get; set; }
     }
 }

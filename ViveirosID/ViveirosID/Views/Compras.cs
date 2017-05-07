@@ -18,7 +18,6 @@ namespace ViveirosID.Views
         public Compras()
         {
             this.CompraArtigoes = new HashSet<CompraArtigoes>();
-            this.UtilizadorCompras = new HashSet<UtilizadorCompras>();
         }
     
         public int CompraID { get; set; }
@@ -27,10 +26,10 @@ namespace ViveirosID.Views
         public string estado { get; set; }
         public System.DateTime data { get; set; }
         public float precototal { get; set; }
+        public int UtilizadorFK { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CompraArtigoes> CompraArtigoes { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<UtilizadorCompras> UtilizadorCompras { get; set; }
+        public virtual Utilizadores Utilizadores { get; set; }
     }
 }

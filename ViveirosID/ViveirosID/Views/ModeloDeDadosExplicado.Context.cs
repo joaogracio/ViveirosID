@@ -13,10 +13,10 @@ namespace ViveirosID.Views
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class ModelodeBasedeDados : DbContext
+    public partial class Entities1 : DbContext
     {
-        public ModelodeBasedeDados()
-            : base("name=ModelodeBasedeDados")
+        public Entities1()
+            : base("name=Entities1")
         {
         }
     
@@ -38,7 +38,6 @@ namespace ViveirosID.Views
         public virtual DbSet<Compras> Compras { get; set; }
         public virtual DbSet<ContentViewModels> ContentViewModels { get; set; }
         public virtual DbSet<Imagens> Imagens { get; set; }
-        public virtual DbSet<UtilizadorCompras> UtilizadorCompras { get; set; }
         public virtual DbSet<Utilizadores> Utilizadores { get; set; }
     }
 }

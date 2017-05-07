@@ -181,10 +181,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201607021318460_Initial.cs" />
-    <Compile Include="Migrations\201607021318460_Initial.Designer.cs">
-      <DependentUpon>201607021318460_Initial.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Artigos.cs" />
@@ -193,6 +189,7 @@
     <Compile Include="Models\Categorias.cs" />
     <Compile Include="Models\CompraArtigo.cs" />
     <Compile Include="Models\Compras.cs" />
+    <Compile Include="Models\ICOlection.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Imagens.cs" />
     <Compile Include="Models\ImageViewModel.cs" />
@@ -200,76 +197,11 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\ProdutoDetalhesViewModel.cs" />
     <Compile Include="Models\Upload.cs" />
-    <Compile Include="Models\UtilizadorCompra.cs" />
     <Compile Include="Models\Utilizadores.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="Views\Artigos.cs">
-      <DependentUpon>ModelodeBasedeDados.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Views\AspNetRoles.cs">
-      <DependentUpon>ModelodeBasedeDados.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Views\AspNetUserClaims.cs">
-      <DependentUpon>ModelodeBasedeDados.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Views\AspNetUserLogins.cs">
-      <DependentUpon>ModelodeBasedeDados.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Views\AspNetUsers.cs">
-      <DependentUpon>ModelodeBasedeDados.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Views\CarrinhoArtigoes.cs">
-      <DependentUpon>ModelodeBasedeDados.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Carrinhos.cs">
-      <DependentUpon>ModelodeBasedeDados.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Categorias.cs">
-      <DependentUpon>ModelodeBasedeDados.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Views\CompraArtigoes.cs">
-      <DependentUpon>ModelodeBasedeDados.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Compras.cs">
-      <DependentUpon>ModelodeBasedeDados.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Views\ContentViewModels.cs">
-      <DependentUpon>ModelodeBasedeDados.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Views\C__MigrationHistory.cs">
-      <DependentUpon>ModelodeBasedeDados.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Imagens.cs">
-      <DependentUpon>ModelodeBasedeDados.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Views\ModelodeBasedeDados.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ModelodeBasedeDados.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Views\ModelodeBasedeDados.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ModelodeBasedeDados.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Views\ModelodeBasedeDados.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ModelodeBasedeDados.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Views\UtilizadorCompras.cs">
-      <DependentUpon>ModelodeBasedeDados.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Utilizadores.cs">
-      <DependentUpon>ModelodeBasedeDados.tt</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\aspnet-ViveirosID-20160701071552.mdf" />
-    <Content Include="App_Data\aspnet-ViveirosID-20160701071552_log.ldf">
-      <DependentUpon>aspnet-ViveirosID-20160701071552.mdf</DependentUpon>
-    </Content>
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -326,16 +258,6 @@
     <Content Include="Temporario\startbootstrap-shop-item-gh-pages\js\bootstrap.js" />
     <Content Include="Temporario\startbootstrap-shop-item-gh-pages\js\bootstrap.min.js" />
     <Content Include="Temporario\startbootstrap-shop-item-gh-pages\js\jquery.js" />
-    <Content Include="Views\ModelodeBasedeDados.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ModelodeBasedeDados.edmx</DependentUpon>
-      <LastGenOutput>ModelodeBasedeDados.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Views\ModelodeBasedeDados.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ModelodeBasedeDados.edmx</DependentUpon>
-      <LastGenOutput>ModelodeBasedeDados.cs</LastGenOutput>
-    </Content>
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -409,13 +331,6 @@
     <Content Include="Views\Carrinhos\Tranferencia.cshtml" />
     <Content Include="Views\Carrinhos\Envelope.cshtml" />
     <Content Include="Views\Carrinhos\BitCoin.cshtml" />
-    <EntityDeploy Include="Views\ModelodeBasedeDados.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ModelodeBasedeDados.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Views\ModelodeBasedeDados.edmx.diagram">
-      <DependentUpon>ModelodeBasedeDados.edmx</DependentUpon>
-    </Content>
     <Content Include="Temporario\startbootstrap-heroic-features-gh-pages\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Temporario\startbootstrap-heroic-features-gh-pages\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Temporario\startbootstrap-heroic-features-gh-pages\fonts\glyphicons-halflings-regular.woff" />
@@ -434,18 +349,15 @@
     <Content Include="Temporario\startbootstrap-shop-item-gh-pages\fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="Temporario\startbootstrap-shop-item-gh-pages\LICENSE" />
     <Content Include="Temporario\startbootstrap-shop-item-gh-pages\README.md" />
+    <Content Include="Views\Carrinhos\ConcluirCompra.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="App_Data\" />
     <Folder Include="Images\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201607021318460_Initial.resx">
-      <DependentUpon>201607021318460_Initial.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

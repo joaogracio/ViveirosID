@@ -18,7 +18,7 @@ namespace ViveirosID.Views
         public Utilizadores()
         {
             this.Carrinhos = new HashSet<Carrinhos>();
-            this.UtilizadorCompras = new HashSet<UtilizadorCompras>();
+            this.Compras = new HashSet<Compras>();
         }
     
         public int UtilizadorID { get; set; }
@@ -39,6 +39,6 @@ namespace ViveirosID.Views
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Carrinhos> Carrinhos { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<UtilizadorCompras> UtilizadorCompras { get; set; }
+        public virtual ICollection<Compras> Compras { get; set; }
     }
 }

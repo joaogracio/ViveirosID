@@ -32,7 +32,6 @@ namespace ViveirosID.Models {
 
         // Instrucoes para criar a tabela dentro da base de dados
         public virtual DbSet<Utilizadores> Utilizador { get; set; }
-        public virtual DbSet<UtilizadorCompra> Utilizador_Compra { get; set; }
         public virtual DbSet<Compras> Compra { get; set; }
         public virtual DbSet<Artigos> Artigo { get; set; }
         public virtual DbSet<CompraArtigo> Compra_Artigos { get; set; }

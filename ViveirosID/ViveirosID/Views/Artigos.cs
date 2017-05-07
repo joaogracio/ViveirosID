@@ -31,8 +31,8 @@ namespace ViveirosID.Views
         public string plantacaoAcaba { get; set; }
         public float peso { get; set; }
         public float crescimento { get; set; }
-        public float Luz { get; set; }
-        public float Rega { get; set; }
+        public float luz { get; set; }
+        public float rega { get; set; }
         public float preço { get; set; }
         public int CategoriaFK { get; set; }
     

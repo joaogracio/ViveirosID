@@ -24,7 +24,7 @@ namespace ViveirosID.Views
         public float preçototal { get; set; }
         public System.DateTime ultimaAlteracao { get; set; }
         public float peso { get; set; }
-        public int UtilizadorFK { get; set; }
+        public Nullable<int> Utilizador_UtilizadorID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CarrinhoArtigoes> CarrinhoArtigoes { get; set; }

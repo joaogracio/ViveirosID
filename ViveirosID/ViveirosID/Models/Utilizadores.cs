@@ -8,7 +8,7 @@ using System.Web;
 namespace ViveirosID.Models {
     public class Utilizadores {
         public Utilizadores() {
-            Compras = new HashSet<UtilizadorCompra>();
+            Compra = new HashSet<Compras>();
             Carrinho = new HashSet<Carrinhos>();
         }
 
@@ -57,13 +57,17 @@ namespace ViveirosID.Models {
 
         // Cria uma Chave Forasteira para a Tabela Utilizador
         [ForeignKey("Carrinho")]
-        public int CarrinhoFK { get; set; }
+        public int CarrinhoFK { get; set; }       
+
+        public virtual ICollection<Carrinhos> Carrinho { get; set; }
 
         public string IDaspuser { get; set; }
         // Determina que para cada Utilizador existe um Carrinho
 
-        public virtual ICollection<Carrinhos> Carrinho { get; set; }
-        public virtual ICollection<UtilizadorCompra> Compras { get; set; }
+
+      //  public virtual Carrinhos Carrinho { get; set; }
+
+        public virtual ICollection<Compras> Compra { get; set; }
 
         // public virtual Carrinho Carrinho { get; set; }
     }

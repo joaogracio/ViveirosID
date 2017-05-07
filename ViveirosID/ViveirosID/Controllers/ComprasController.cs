@@ -29,17 +29,10 @@ namespace Viveiros.Controllers {
                               where umUtilizador.IDaspuser == aspnetuser
                               select umUtilizador).FirstOrDefault();
 
-            // Recolhe todas as UtilizadorCompra
-            //
-            var UtilizadorCompra = (from umUtilizadorCompra in db.Utilizador_Compra
-                                    where umUtilizadorCompra.UtilizadorFK == utilizador.UtilizadorID
-                                    select umUtilizadorCompra);
-
             // Recolhe todas as Compras respectivas a este utilizador
             //
             var compras = (from umaCompra in db.Compra
-                           from umUtilizadorCompra in UtilizadorCompra
-                           where umaCompra.CompraID == umUtilizadorCompra.CompraFK
+                           where umaCompra.UtilizadorFK == utilizador.UtilizadorID
                            select umaCompra);
 
             return View(compras.ToList());

@@ -251,6 +251,7 @@ namespace ViveirosID.Controllers {
                         carrinho.peso = 0;
                         carrinho.preçototal = 0;
                         carrinho.ultimaAlteracao = DateTime.Now;
+                        carrinho.Utilizador = utilizador;
                         carrinho.UtilizadorFK = utilizador.UtilizadorID;
 
                         db.Carrinho.Add(carrinho);

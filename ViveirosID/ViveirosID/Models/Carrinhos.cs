@@ -11,7 +11,7 @@ namespace ViveirosID.Models {
 
         // Inicializar a variavel Lista de Compras
         public Carrinhos() {
-            ListaDeArtigos = new HashSet<CarrinhoArtigo>();
+            ListadeArtigos = new HashSet<CarrinhoArtigo>();
         }
 
         // Chave Primaria da Tabela Carrinho
@@ -24,14 +24,13 @@ namespace ViveirosID.Models {
 
         public float peso { get; set; }
 
-        // Inicializa a Chave Forasteira para Utilizador
-        // Para cada Carrinho existe um Utilizador
         [ForeignKey("Utilizador")]
-        public int UtilizadorFK { get; set; }
+        public int UtilizadorFK;
 
         public virtual Utilizadores Utilizador { get; set; }
+        //*************************************************************************************
 
         // Um utilizador tem uma lista de compras
-        public virtual ICollection<CarrinhoArtigo> ListaDeArtigos { get; set; }
+        public virtual ICollection<CarrinhoArtigo> ListadeArtigos { get; set; }
     }
 }

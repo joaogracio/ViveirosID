@@ -138,11 +138,11 @@
 
         <td>
             @if (Request.IsAuthenticated && User.IsInRole("Administrador")) {
-            @Html.ActionLink("Edit", "Edit", new { id = item.ArtigoID })} |
-            @Html.ActionLink("Details", "Details", new { id=item.ArtigoID }) |
-            @if (Request.IsAuthenticated && User.IsInRole("Administrador")) {
-            @Html.ActionLink("Delete", "Delete", new { id = item.ArtigoID })}|
-            @Html.ActionLink("Adiciona", "Adiciona", new { id=item.ArtigoID})
+                @Html.ActionLink("Edit", "Edit", new { id = item.ArtigoID })} |
+           @Html.ActionLink("Details", "Details", new { id=item.ArtigoID }) |
+           @if (Request.IsAuthenticated && User.IsInRole("Administrador")) {
+                @Html.ActionLink("Delete", "Delete", new { id = item.ArtigoID })}|
+          @Html.ActionLink("Adiciona", "Adiciona", new { id=item.ArtigoID, id2="artigo" })
         </td>
     </tr>
 }

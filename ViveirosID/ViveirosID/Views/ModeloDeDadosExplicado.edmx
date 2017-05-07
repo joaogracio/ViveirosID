@@ -28,8 +28,8 @@
           <Property Name="plantacaoAcaba" Type="nvarchar(max)" />
           <Property Name="peso" Type="real" Nullable="false" />
           <Property Name="crescimento" Type="real" Nullable="false" />
-          <Property Name="Luz" Type="real" Nullable="false" />
-          <Property Name="Rega" Type="real" Nullable="false" />
+          <Property Name="luz" Type="real" Nullable="false" />
+          <Property Name="rega" Type="real" Nullable="false" />
           <Property Name="preço" Type="real" Nullable="false" />
           <Property Name="CategoriaFK" Type="int" Nullable="false" />
         </EntityType>
@@ -102,7 +102,7 @@
           <Property Name="preçototal" Type="real" Nullable="false" />
           <Property Name="ultimaAlteracao" Type="datetime" Nullable="false" />
           <Property Name="peso" Type="real" Nullable="false" />
-          <Property Name="UtilizadorFK" Type="int" Nullable="false" />
+          <Property Name="Utilizador_UtilizadorID" Type="int" />
         </EntityType>
         <EntityType Name="Categorias">
           <Key>
@@ -132,6 +132,7 @@
           <Property Name="estado" Type="nvarchar(max)" />
           <Property Name="data" Type="datetime" Nullable="false" />
           <Property Name="precototal" Type="real" Nullable="false" />
+          <Property Name="UtilizadorFK" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="ContentViewModels">
           <Key>
@@ -153,14 +154,6 @@
           <Property Name="descricao" Type="nvarchar(max)" />
           <Property Name="tipo" Type="nvarchar(max)" />
           <Property Name="ArtigoFK" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="UtilizadorCompras">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="UtilizadorFK" Type="int" Nullable="false" />
-          <Property Name="CompraFK" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Utilizadores">
           <Key>
@@ -279,17 +272,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_dbo_Carrinhos_dbo_Utilizadores_UtilizadorFK">
-          <End Role="Utilizadores" Type="Self.Utilizadores" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
+        <Association Name="FK_dbo_Carrinhos_dbo_Utilizadores_Utilizador_UtilizadorID">
+          <End Role="Utilizadores" Type="Self.Utilizadores" Multiplicity="0..1" />
           <End Role="Carrinhos" Type="Self.Carrinhos" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Utilizadores">
               <PropertyRef Name="UtilizadorID" />
             </Principal>
             <Dependent Role="Carrinhos">
-              <PropertyRef Name="UtilizadorFK" />
+              <PropertyRef Name="Utilizador_UtilizadorID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -321,6 +312,20 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_dbo_Compras_dbo_Utilizadores_UtilizadorFK">
+          <End Role="Utilizadores" Type="Self.Utilizadores" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Compras" Type="Self.Compras" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Utilizadores">
+              <PropertyRef Name="UtilizadorID" />
+            </Principal>
+            <Dependent Role="Compras">
+              <PropertyRef Name="UtilizadorFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_dbo_Imagens_dbo_Artigos_ArtigoFK">
           <End Role="Artigos" Type="Self.Artigos" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -332,34 +337,6 @@
             </Principal>
             <Dependent Role="Imagens">
               <PropertyRef Name="ArtigoFK" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_dbo_UtilizadorCompras_dbo_Compras_CompraFK">
-          <End Role="Compras" Type="Self.Compras" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="UtilizadorCompras" Type="Self.UtilizadorCompras" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Compras">
-              <PropertyRef Name="CompraID" />
-            </Principal>
-            <Dependent Role="UtilizadorCompras">
-              <PropertyRef Name="CompraFK" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_dbo_UtilizadorCompras_dbo_Utilizadores_UtilizadorFK">
-          <End Role="Utilizadores" Type="Self.Utilizadores" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="UtilizadorCompras" Type="Self.UtilizadorCompras" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Utilizadores">
-              <PropertyRef Name="UtilizadorID" />
-            </Principal>
-            <Dependent Role="UtilizadorCompras">
-              <PropertyRef Name="UtilizadorFK" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -378,7 +355,6 @@
           <EntitySet Name="Compras" EntityType="Self.Compras" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ContentViewModels" EntityType="Self.ContentViewModels" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Imagens" EntityType="Self.Imagens" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="UtilizadorCompras" EntityType="Self.UtilizadorCompras" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Utilizadores" EntityType="Self.Utilizadores" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_dbo_Artigos_dbo_Categorias_CategoriaFK" Association="Self.FK_dbo_Artigos_dbo_Categorias_CategoriaFK">
             <End Role="Categorias" EntitySet="Categorias" />
@@ -408,7 +384,7 @@
             <End Role="Carrinhos" EntitySet="Carrinhos" />
             <End Role="CarrinhoArtigoes" EntitySet="CarrinhoArtigoes" />
           </AssociationSet>
-          <AssociationSet Name="FK_dbo_Carrinhos_dbo_Utilizadores_UtilizadorFK" Association="Self.FK_dbo_Carrinhos_dbo_Utilizadores_UtilizadorFK">
+          <AssociationSet Name="FK_dbo_Carrinhos_dbo_Utilizadores_Utilizador_UtilizadorID" Association="Self.FK_dbo_Carrinhos_dbo_Utilizadores_Utilizador_UtilizadorID">
             <End Role="Utilizadores" EntitySet="Utilizadores" />
             <End Role="Carrinhos" EntitySet="Carrinhos" />
           </AssociationSet>
@@ -420,17 +396,13 @@
             <End Role="Compras" EntitySet="Compras" />
             <End Role="CompraArtigoes" EntitySet="CompraArtigoes" />
           </AssociationSet>
+          <AssociationSet Name="FK_dbo_Compras_dbo_Utilizadores_UtilizadorFK" Association="Self.FK_dbo_Compras_dbo_Utilizadores_UtilizadorFK">
+            <End Role="Utilizadores" EntitySet="Utilizadores" />
+            <End Role="Compras" EntitySet="Compras" />
+          </AssociationSet>
           <AssociationSet Name="FK_dbo_Imagens_dbo_Artigos_ArtigoFK" Association="Self.FK_dbo_Imagens_dbo_Artigos_ArtigoFK">
             <End Role="Artigos" EntitySet="Artigos" />
             <End Role="Imagens" EntitySet="Imagens" />
-          </AssociationSet>
-          <AssociationSet Name="FK_dbo_UtilizadorCompras_dbo_Compras_CompraFK" Association="Self.FK_dbo_UtilizadorCompras_dbo_Compras_CompraFK">
-            <End Role="Compras" EntitySet="Compras" />
-            <End Role="UtilizadorCompras" EntitySet="UtilizadorCompras" />
-          </AssociationSet>
-          <AssociationSet Name="FK_dbo_UtilizadorCompras_dbo_Utilizadores_UtilizadorFK" Association="Self.FK_dbo_UtilizadorCompras_dbo_Utilizadores_UtilizadorFK">
-            <End Role="Utilizadores" EntitySet="Utilizadores" />
-            <End Role="UtilizadorCompras" EntitySet="UtilizadorCompras" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -461,8 +433,8 @@
           <Property Name="plantacaoAcaba" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="peso" Type="Single" Nullable="false" />
           <Property Name="crescimento" Type="Single" Nullable="false" />
-          <Property Name="Luz" Type="Single" Nullable="false" />
-          <Property Name="Rega" Type="Single" Nullable="false" />
+          <Property Name="luz" Type="Single" Nullable="false" />
+          <Property Name="rega" Type="Single" Nullable="false" />
           <Property Name="preço" Type="Single" Nullable="false" />
           <Property Name="CategoriaFK" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Categorias" Relationship="Self.FK_dbo_Artigos_dbo_Categorias_CategoriaFK" FromRole="Artigos" ToRole="Categorias" />
@@ -539,9 +511,9 @@
           <Property Name="preçototal" Type="Single" Nullable="false" />
           <Property Name="ultimaAlteracao" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="peso" Type="Single" Nullable="false" />
-          <Property Name="UtilizadorFK" Type="Int32" Nullable="false" />
+          <Property Name="Utilizador_UtilizadorID" Type="Int32" />
           <NavigationProperty Name="CarrinhoArtigoes" Relationship="Self.FK_dbo_CarrinhoArtigoes_dbo_Carrinhos_CarrinhoFK" FromRole="Carrinhos" ToRole="CarrinhoArtigoes" />
-          <NavigationProperty Name="Utilizadores" Relationship="Self.FK_dbo_Carrinhos_dbo_Utilizadores_UtilizadorFK" FromRole="Carrinhos" ToRole="Utilizadores" />
+          <NavigationProperty Name="Utilizadores" Relationship="Self.FK_dbo_Carrinhos_dbo_Utilizadores_Utilizador_UtilizadorID" FromRole="Carrinhos" ToRole="Utilizadores" />
         </EntityType>
         <EntityType Name="Categorias">
           <Key>
@@ -574,8 +546,9 @@
           <Property Name="estado" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="data" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="precototal" Type="Single" Nullable="false" />
+          <Property Name="UtilizadorFK" Type="Int32" Nullable="false" />
           <NavigationProperty Name="CompraArtigoes" Relationship="Self.FK_dbo_CompraArtigoes_dbo_Compras_CompraFK" FromRole="Compras" ToRole="CompraArtigoes" />
-          <NavigationProperty Name="UtilizadorCompras" Relationship="Self.FK_dbo_UtilizadorCompras_dbo_Compras_CompraFK" FromRole="Compras" ToRole="UtilizadorCompras" />
+          <NavigationProperty Name="Utilizadores" Relationship="Self.FK_dbo_Compras_dbo_Utilizadores_UtilizadorFK" FromRole="Compras" ToRole="Utilizadores" />
         </EntityType>
         <EntityType Name="ContentViewModels">
           <Key>
@@ -599,16 +572,6 @@
           <Property Name="ArtigoFK" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Artigos" Relationship="Self.FK_dbo_Imagens_dbo_Artigos_ArtigoFK" FromRole="Imagens" ToRole="Artigos" />
         </EntityType>
-        <EntityType Name="UtilizadorCompras">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UtilizadorFK" Type="Int32" Nullable="false" />
-          <Property Name="CompraFK" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Compras" Relationship="Self.FK_dbo_UtilizadorCompras_dbo_Compras_CompraFK" FromRole="UtilizadorCompras" ToRole="Compras" />
-          <NavigationProperty Name="Utilizadores" Relationship="Self.FK_dbo_UtilizadorCompras_dbo_Utilizadores_UtilizadorFK" FromRole="UtilizadorCompras" ToRole="Utilizadores" />
-        </EntityType>
         <EntityType Name="Utilizadores">
           <Key>
             <PropertyRef Name="UtilizadorID" />
@@ -627,8 +590,8 @@
           <Property Name="telefone" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="CarrinhoFK" Type="Int32" Nullable="false" />
           <Property Name="IDaspuser" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Carrinhos" Relationship="Self.FK_dbo_Carrinhos_dbo_Utilizadores_UtilizadorFK" FromRole="Utilizadores" ToRole="Carrinhos" />
-          <NavigationProperty Name="UtilizadorCompras" Relationship="Self.FK_dbo_UtilizadorCompras_dbo_Utilizadores_UtilizadorFK" FromRole="Utilizadores" ToRole="UtilizadorCompras" />
+          <NavigationProperty Name="Carrinhos" Relationship="Self.FK_dbo_Carrinhos_dbo_Utilizadores_Utilizador_UtilizadorID" FromRole="Utilizadores" ToRole="Carrinhos" />
+          <NavigationProperty Name="Compras" Relationship="Self.FK_dbo_Compras_dbo_Utilizadores_UtilizadorFK" FromRole="Utilizadores" ToRole="Compras" />
         </EntityType>
         <Association Name="FK_dbo_Artigos_dbo_Categorias_CategoriaFK">
           <End Role="Categorias" Type="Self.Categorias" Multiplicity="1">
@@ -728,17 +691,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_dbo_Carrinhos_dbo_Utilizadores_UtilizadorFK">
-          <End Role="Utilizadores" Type="Self.Utilizadores" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
+        <Association Name="FK_dbo_Carrinhos_dbo_Utilizadores_Utilizador_UtilizadorID">
+          <End Role="Utilizadores" Type="Self.Utilizadores" Multiplicity="0..1" />
           <End Role="Carrinhos" Type="Self.Carrinhos" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Utilizadores">
               <PropertyRef Name="UtilizadorID" />
             </Principal>
             <Dependent Role="Carrinhos">
-              <PropertyRef Name="UtilizadorFK" />
+              <PropertyRef Name="Utilizador_UtilizadorID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -756,30 +717,16 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_dbo_UtilizadorCompras_dbo_Compras_CompraFK">
-          <End Role="Compras" Type="Self.Compras" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="UtilizadorCompras" Type="Self.UtilizadorCompras" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Compras">
-              <PropertyRef Name="CompraID" />
-            </Principal>
-            <Dependent Role="UtilizadorCompras">
-              <PropertyRef Name="CompraFK" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_dbo_UtilizadorCompras_dbo_Utilizadores_UtilizadorFK">
+        <Association Name="FK_dbo_Compras_dbo_Utilizadores_UtilizadorFK">
           <End Role="Utilizadores" Type="Self.Utilizadores" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="UtilizadorCompras" Type="Self.UtilizadorCompras" Multiplicity="*" />
+          <End Role="Compras" Type="Self.Compras" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Utilizadores">
               <PropertyRef Name="UtilizadorID" />
             </Principal>
-            <Dependent Role="UtilizadorCompras">
+            <Dependent Role="Compras">
               <PropertyRef Name="UtilizadorFK" />
             </Dependent>
           </ReferentialConstraint>
@@ -788,7 +735,7 @@
           <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="*" />
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="*" />
         </Association>
-        <EntityContainer Name="ModelodeBasedeDados" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="Entities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
           <EntitySet Name="Artigos" EntityType="Self.Artigos" />
           <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" />
@@ -802,7 +749,6 @@
           <EntitySet Name="Compras" EntityType="Self.Compras" />
           <EntitySet Name="ContentViewModels" EntityType="Self.ContentViewModels" />
           <EntitySet Name="Imagens" EntityType="Self.Imagens" />
-          <EntitySet Name="UtilizadorCompras" EntityType="Self.UtilizadorCompras" />
           <EntitySet Name="Utilizadores" EntityType="Self.Utilizadores" />
           <AssociationSet Name="FK_dbo_Artigos_dbo_Categorias_CategoriaFK" Association="Self.FK_dbo_Artigos_dbo_Categorias_CategoriaFK">
             <End Role="Categorias" EntitySet="Categorias" />
@@ -832,7 +778,7 @@
             <End Role="Carrinhos" EntitySet="Carrinhos" />
             <End Role="CarrinhoArtigoes" EntitySet="CarrinhoArtigoes" />
           </AssociationSet>
-          <AssociationSet Name="FK_dbo_Carrinhos_dbo_Utilizadores_UtilizadorFK" Association="Self.FK_dbo_Carrinhos_dbo_Utilizadores_UtilizadorFK">
+          <AssociationSet Name="FK_dbo_Carrinhos_dbo_Utilizadores_Utilizador_UtilizadorID" Association="Self.FK_dbo_Carrinhos_dbo_Utilizadores_Utilizador_UtilizadorID">
             <End Role="Utilizadores" EntitySet="Utilizadores" />
             <End Role="Carrinhos" EntitySet="Carrinhos" />
           </AssociationSet>
@@ -840,13 +786,9 @@
             <End Role="Compras" EntitySet="Compras" />
             <End Role="CompraArtigoes" EntitySet="CompraArtigoes" />
           </AssociationSet>
-          <AssociationSet Name="FK_dbo_UtilizadorCompras_dbo_Compras_CompraFK" Association="Self.FK_dbo_UtilizadorCompras_dbo_Compras_CompraFK">
-            <End Role="Compras" EntitySet="Compras" />
-            <End Role="UtilizadorCompras" EntitySet="UtilizadorCompras" />
-          </AssociationSet>
-          <AssociationSet Name="FK_dbo_UtilizadorCompras_dbo_Utilizadores_UtilizadorFK" Association="Self.FK_dbo_UtilizadorCompras_dbo_Utilizadores_UtilizadorFK">
+          <AssociationSet Name="FK_dbo_Compras_dbo_Utilizadores_UtilizadorFK" Association="Self.FK_dbo_Compras_dbo_Utilizadores_UtilizadorFK">
             <End Role="Utilizadores" EntitySet="Utilizadores" />
-            <End Role="UtilizadorCompras" EntitySet="UtilizadorCompras" />
+            <End Role="Compras" EntitySet="Compras" />
           </AssociationSet>
           <AssociationSet Name="AspNetUserRoles" Association="Self.AspNetUserRoles">
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
@@ -858,7 +800,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="ModelodeBasedeDados">
+        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="Entities1">
           <EntitySetMapping Name="C__MigrationHistory">
             <EntityTypeMapping TypeName="Model.C__MigrationHistory">
               <MappingFragment StoreEntitySet="__MigrationHistory">
@@ -881,8 +823,8 @@
                 <ScalarProperty Name="plantacaoAcaba" ColumnName="plantacaoAcaba" />
                 <ScalarProperty Name="peso" ColumnName="peso" />
                 <ScalarProperty Name="crescimento" ColumnName="crescimento" />
-                <ScalarProperty Name="Luz" ColumnName="Luz" />
-                <ScalarProperty Name="Rega" ColumnName="Rega" />
+                <ScalarProperty Name="luz" ColumnName="luz" />
+                <ScalarProperty Name="rega" ColumnName="rega" />
                 <ScalarProperty Name="preço" ColumnName="preço" />
                 <ScalarProperty Name="CategoriaFK" ColumnName="CategoriaFK" />
               </MappingFragment>
@@ -951,7 +893,7 @@
                 <ScalarProperty Name="preçototal" ColumnName="preçototal" />
                 <ScalarProperty Name="ultimaAlteracao" ColumnName="ultimaAlteracao" />
                 <ScalarProperty Name="peso" ColumnName="peso" />
-                <ScalarProperty Name="UtilizadorFK" ColumnName="UtilizadorFK" />
+                <ScalarProperty Name="Utilizador_UtilizadorID" ColumnName="Utilizador_UtilizadorID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -984,6 +926,7 @@
                 <ScalarProperty Name="estado" ColumnName="estado" />
                 <ScalarProperty Name="data" ColumnName="data" />
                 <ScalarProperty Name="precototal" ColumnName="precototal" />
+                <ScalarProperty Name="UtilizadorFK" ColumnName="UtilizadorFK" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1007,15 +950,6 @@
                 <ScalarProperty Name="descricao" ColumnName="descricao" />
                 <ScalarProperty Name="tipo" ColumnName="tipo" />
                 <ScalarProperty Name="ArtigoFK" ColumnName="ArtigoFK" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="UtilizadorCompras">
-            <EntityTypeMapping TypeName="Model.UtilizadorCompras">
-              <MappingFragment StoreEntitySet="UtilizadorCompras">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="UtilizadorFK" ColumnName="UtilizadorFK" />
-                <ScalarProperty Name="CompraFK" ColumnName="CompraFK" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

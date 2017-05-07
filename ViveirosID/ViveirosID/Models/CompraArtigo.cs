@@ -24,6 +24,9 @@ namespace ViveirosID.Models {
 
         public int IVA { get; set; }
 
+       
+        /// /////////////////////////////////////////////////////////////////////////////////////
+  
         // Chave forasteira para Artigo
         [ForeignKey("Artigo")]
         public int ArtigoFK { get; set; }

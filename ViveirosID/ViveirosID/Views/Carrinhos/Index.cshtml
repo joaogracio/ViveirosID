@@ -10,7 +10,7 @@
 
 @if (Request.IsAuthenticated) {
 <p>
-    @Html.ActionLink("Pagar e Enviar", "ConcluirCompra")
+    @Html.ActionLink("Pagar e Enviar", "Tranferencia", new { trans = "transferencia" }) |
 </p>
 }
 <table class="table">

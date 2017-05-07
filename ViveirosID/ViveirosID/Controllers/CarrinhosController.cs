@@ -16,7 +16,7 @@ namespace ViveirosID.Controllers {
 
         // GET: Carrinhoes
         [Authorize]
-        public ActionResult Index() {
+        public ActionResult Index(){
             // determina o user ID do utilizador asp net numa string
             //
             string userAspNetID = User.Identity.GetUserId();
@@ -30,7 +30,7 @@ namespace ViveirosID.Controllers {
             // determina o ID do carrinho associado ao userID
             //
             int carID = (from umCarrinho in db.Carrinho
-                         where umCarrinho.UtilizadorFK == userID
+                         where umCarrinho.Utilizador.UtilizadorID == userID
                          select umCarrinho.CarrinhoID).FirstOrDefault();
 
 
@@ -39,6 +39,38 @@ namespace ViveirosID.Controllers {
                                           from art in db.Artigo
                                           where car_art.ArtigoFK == art.ArtigoID && car_art.CarrinhoFK == carID
                                           select new ListaArtigosCarrinhoViewModel() {
+                                              ArtigoID = art.ArtigoID,
+                                              nome = art.nome,
+                                              quantidade = car_art.quantidade
+                                          });
+
+            return View(listaArtigosNoCarrinho);
+        }
+
+        public ActionResult MetodoDePagamento() {
+            // determina o user ID do utilizador asp net numa string
+            //
+            string userAspNetID = User.Identity.GetUserId();
+
+            // determina o ID do utilizador parte da base de dados Viveiros num inteiro
+            //
+            int userID = (from umUtilizador in db.Utilizador
+                          where umUtilizador.IDaspuser == userAspNetID
+                          select umUtilizador.UtilizadorID).FirstOrDefault();
+
+            // determina o ID do carrinho associado ao userID
+            //
+            int carID = (from umCarrinho in db.Carrinho
+                         where umCarrinho.Utilizador.UtilizadorID == userID
+                         select umCarrinho.CarrinhoID).FirstOrDefault();
+
+
+
+            var listaArtigosNoCarrinho = (from car_art in db.Carrinho_Artigos
+                                          from art in db.Artigo
+                                          where car_art.ArtigoFK == art.ArtigoID && car_art.CarrinhoFK == carID
+                                          select new ListaArtigosCarrinhoViewModel()
+                                          {
                                               ArtigoID = art.ArtigoID,
                                               nome = art.nome,
                                               quantidade = car_art.quantidade
@@ -60,12 +92,25 @@ namespace ViveirosID.Controllers {
                           where umUtilizador.IDaspuser == userAspNetID
                           select umUtilizador.UtilizadorID).FirstOrDefault();
 
-            
+            // determina o carrinho que esta a ser usado
+            //
+            var carrinhoNOW = (from umCarrinho in db.Carrinho
+                               where umCarrinho.Utilizador.UtilizadorID == userID
+                               select umCarrinho).FirstOrDefault();
+
             // determina o ID do carrinho associado ao userID
             //
             int carID = (from umCarrinho in db.Carrinho
-                         where umCarrinho.UtilizadorFK == userID
+                         where umCarrinho.Utilizador.UtilizadorID == userID
                          select umCarrinho.CarrinhoID).FirstOrDefault();
+
+            // determina o ID o carrinhoArtigos associado ao carrinho 
+            // presente
+            Compras compra = new Compras();
+            compra.data = DateTime.Now;
+            
+            
+            // Calcula o preçototal
 
             return null;
         }
@@ -103,7 +148,7 @@ namespace ViveirosID.Controllers {
                 return RedirectToAction("Index");
             }
 
-            ViewBag.UtilizadorFK = new SelectList(db.Utilizador, "UtilizadorID", "nome", carrinho.UtilizadorFK);
+            ViewBag.UtilizadorFK = new SelectList(db.Utilizador, "UtilizadorID", "nome", carrinho.Utilizador.UtilizadorID);
             return View(carrinho);
         }
 
@@ -117,7 +162,7 @@ namespace ViveirosID.Controllers {
             if (carrinho == null) {
                 return HttpNotFound();
             }
-            ViewBag.UtilizadorFK = new SelectList(db.Utilizador, "UtilizadorID", "nome", carrinho.UtilizadorFK);
+            ViewBag.UtilizadorFK = new SelectList(db.Utilizador, "UtilizadorID", "nome", carrinho.Utilizador.UtilizadorID);
             return View(carrinho);
         }
 
@@ -133,7 +178,7 @@ namespace ViveirosID.Controllers {
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.UtilizadorFK = new SelectList(db.Utilizador, "UtilizadorID", "nome", carrinho.UtilizadorFK);
+            ViewBag.UtilizadorFK = new SelectList(db.Utilizador, "UtilizadorID", "nome", carrinho.Utilizador.UtilizadorID);
             return View(carrinho);
         }
 
@@ -179,8 +224,11 @@ namespace ViveirosID.Controllers {
                 // Determina o Carrinho ID do utilizador corrente
                 //
                 var carID = (from umCarrinho in db.Carrinho
-                             where umCarrinho.UtilizadorFK == utilizadorcorrente.UtilizadorID
+                             where umCarrinho.Utilizador.UtilizadorID == utilizadorcorrente.UtilizadorID
                              select umCarrinho).FirstOrDefault().CarrinhoID;
+
+                int comprasID = (from umaCompra in db.Compra
+                                 select umaCompra.CompraID).Max();
 
                 // Cria uma nova compra para o presente carrinho que ira ser encerrado
                 //
@@ -188,7 +236,8 @@ namespace ViveirosID.Controllers {
                 compra.data = DateTime.Now;
                 compra.estado = "Tranferencia a ser confirmada";
                 compra.metodoentrega = "A Definir";
-
+                compra.UtilizadorFK = userID;
+                compra.CompraID = comprasID;
                 db.Compra.Add(compra);
                 // Faz gravação aqui para poder recolher o ID do elemento compra
                 //
@@ -196,21 +245,9 @@ namespace ViveirosID.Controllers {
 
                 // Determina o ID da Compra presente no sentido de preencher a tabela Compra_Artigos
                 //
-                int compraID = compra.CompraID;
+                //int compraID = compra.CompraID;
 
-                // Com ID atribuido a esta compra "compraID" cria-se agora uma tabela Utilizador_Compra
-                //
-                UtilizadorCompra utilizador_compra = new UtilizadorCompra();
-                utilizador_compra.CompraFK = compraID;
-                utilizador_compra.UtilizadorFK = userID;
-                utilizador_compra.Utilizador = (from umUtilizador in db.Utilizador
-                                                where umUtilizador.UtilizadorID == userID
-                                                select umUtilizador).FirstOrDefault();
-                utilizador_compra.Compra = compra;
-
-                // Gravam-se os dados na base de dados
-                //
-                db.Utilizador_Compra.Add(utilizador_compra);
+                
                 db.SaveChanges();
                 
                 // determina a lista de artigos que estão no carrinho até ao presente momento
@@ -232,7 +269,7 @@ namespace ViveirosID.Controllers {
 
                     CompraArtigo compra_artigo = new CompraArtigo();
                     compra_artigo.ArtigoFK = artigo.ArtigoID;
-                    compra_artigo.CompraFK = compraID;
+                    compra_artigo.CompraFK = comprasID;
                     compra_artigo.preço = artigo.preço;
 
                     db.Compra_Artigos.Add(compra_artigo);

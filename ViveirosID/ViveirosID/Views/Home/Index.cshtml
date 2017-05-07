@@ -1,4 +1,5 @@
-﻿@model IEnumerable<ViveirosID.Models.Artigos>
+﻿@using Microsoft.AspNet.Identity
+@model IEnumerable<ViveirosID.Models.Artigos>
 
 @{
     ViewBag.Title = "Viveiros Zêzere";
@@ -34,7 +35,18 @@
                     <h3>@Html.DisplayFor(modelItem => item.nome)</h3>
                     <p>@Html.DisplayFor(modelItem => item.descricao)</p>
                     <p>
-                        <a href="@href_add" class="btn btn-primary">Adicionar!</a> <a href="@href_det" class="btn btn-default">Detalhes</a>
+                        @if (Request.IsAuthenticated)
+                        {
+                            @*@Html.ActionLink("Adiciona", "Adiciona", FormMethod.Post, new { id = item.ArtigoID , @class = "btn btn-primary" })*@
+                            <a href="/Artigos/Adiciona/@item.ArtigoID/home" class="btn btn-primary">Adicionar</a>
+                            @*@Html.ActionLink("Detalhes", "Details", new { id = item.ArtigoID, @class = "btn btn-primary"})*@
+                            @*<a href="" class="btn btn-primary">Adicionar!</a> <a href="@href_det" class="btn btn-default">Detalhes</a>*@ 
+                        }
+                        else
+                        {
+                            @Html.ActionLink("Adiciona","Login", new { @class = "btn btn-primary" })
+                            @Html.ActionLink("Detalhes", "Login", new { @class = "btn btn-primary" })
+                        }
                     </p>
                 </div>
             </div>

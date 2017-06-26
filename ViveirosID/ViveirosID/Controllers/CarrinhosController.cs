@@ -110,7 +110,7 @@ namespace ViveirosID.Controllers {
             compra.data = DateTime.Now;
             
             
-            // Calcula o preçototal
+            // Calcula o precototal
 
             return null;
         }
@@ -141,7 +141,7 @@ namespace ViveirosID.Controllers {
         [Authorize(Roles = "Administrador")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "CarrinhoID,preçototal,ultimaAlteracao,peso,UtilizadorFK")] Carrinhos carrinho) {
+        public ActionResult Create([Bind(Include = "CarrinhoID,precototal,ultimaAlteracao,peso,UtilizadorFK")] Carrinhos carrinho) {
             if (ModelState.IsValid) {
                 db.Carrinho.Add(carrinho);
                 db.SaveChanges();
@@ -172,7 +172,7 @@ namespace ViveirosID.Controllers {
         [Authorize(Roles = "Administrador")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "CarrinhoID,preçototal,ultimaAlteracao,peso,UtilizadorFK")] Carrinhos carrinho) {
+        public ActionResult Edit([Bind(Include = "CarrinhoID,precototal,ultimaAlteracao,peso,UtilizadorFK")] Carrinhos carrinho) {
             if (ModelState.IsValid) {
                 db.Entry(carrinho).State = EntityState.Modified;
                 db.SaveChanges();
@@ -239,7 +239,7 @@ namespace ViveirosID.Controllers {
                 compra.UtilizadorFK = userID;
                 compra.CompraID = comprasID;
                 db.Compra.Add(compra);
-                // Faz gravação aqui para poder recolher o ID do elemento compra
+                // Faz gravacão aqui para poder recolher o ID do elemento compra
                 //
                 db.SaveChanges();
 
@@ -270,7 +270,7 @@ namespace ViveirosID.Controllers {
                     CompraArtigo compra_artigo = new CompraArtigo();
                     compra_artigo.ArtigoFK = artigo.ArtigoID;
                     compra_artigo.CompraFK = comprasID;
-                    compra_artigo.preço = artigo.preço;
+                    compra_artigo.preco = artigo.preco;
 
                     db.Compra_Artigos.Add(compra_artigo);
                     db.SaveChanges();
@@ -288,7 +288,7 @@ namespace ViveirosID.Controllers {
                     //
                     db.Carrinho_Artigos.Remove(carrinho_artigo);
 
-                    // Regista as alterações de criacao de compra_artigo e remocao de carrinho_artigo
+                    // Regista as alteracões de criacao de compra_artigo e remocao de carrinho_artigo
                     //
                     db.SaveChanges();
                 }

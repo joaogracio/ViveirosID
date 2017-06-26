@@ -20,12 +20,12 @@ namespace ViveirosID.Models {
         public int ArtigoID { get; set; }
 
         [Required]
-        [RegularExpression("([A-Z][a-zãáéõç]{3,11})[ ]?([A-Z][a-zãáéõç]{3,11}|[d][eo][s]?)?[ ]?([A-Z][a-zãáéõç]{3,11})?[ ]?([A-Z][a-zãáéõç]{3,11})?",
-            ErrorMessage = "Nome do seu artigo em Portugues. Insira apenas caracteres [A-Z] e [a-z]. Comece as palavras por letra maiuscula. A segunda palavra pode ser um [de], [do] ou [dos]. Use apenas um espaço em branco [ ] entre palavras.")]
+        [RegularExpression("([A-Z][a-zãáéõç]{3,11})[_]?([A-Z][a-zãáéõç]{3,11}|[d][eo][s]?)?[_]?([A-Z][a-zãáéõç]{3,11})?[_]?([A-Z][a-zãáéõç]{3,11})?",
+            ErrorMessage = "Nome do seu artigo em Portugues. Insira apenas caracteres [A-Z] e [a-z]. Comece as palavras por letra maiuscula. A segunda palavra pode ser um [de], [do] ou [dos]. Use apenas um espaço em _ [_] entre palavras.")]
         public string nome { get; set; }
 
-        [RegularExpression("([A-Z][a-z]{3,11})[ ]([a-z]{3,12})",
-            ErrorMessage = "Nome cientifico da sua planta. Insira apenas caracteres [A-Z] e [a-z]. Coloque duas palavras. Comece primeira palavra por maiuscula e a segunda por minuscula.")]
+        [RegularExpression("([A-Z][a-z]{3,11})[_]([a-z]{3,12})",
+            ErrorMessage = "Nome cientifico da sua planta. Insira apenas caracteres [A-Z] e [a-z]. Coloque duas palavras. Comece primeira palavra por maiuscula e a segunda por minuscula. Para os espaços considere [_].")]
         public string nometecnico { get; set; }
 
         public Boolean disponibilidade { get; set; }
@@ -49,7 +49,7 @@ namespace ViveirosID.Models {
         public float crescimento { get; set; }
 
         [RegularExpression("[1-5]",
-            ErrorMessage = "Quantidade de Luz que o seu artigo deve receber. Coloque um valor entre 1 e 5. Sendo 1 para uma exposição solar baixa e 5 para uma exposição solar mais elevada.")]
+            ErrorMessage = "Quantidade de luz que o seu artigo deve receber. Coloque um valor entre 1 e 5. Sendo 1 para uma exposição solar baixa e 5 para uma exposição solar mais elevada.")]
         public float luz { get; set; }
 
         [RegularExpression("[1-5]",
@@ -57,7 +57,7 @@ namespace ViveirosID.Models {
         public float rega { get; set; }
 
 
-        public float preço { get; set; }
+        public float preco { get; set; }
 
 
         // Para cada artigo existe uma Categoria

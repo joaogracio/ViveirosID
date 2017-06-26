@@ -20,7 +20,7 @@ namespace ViveirosID.Models {
 
         public int quantidade { get; set; }
 
-        public double preço { get; set; }
+        public double preco { get; set; }
 
         public int IVA { get; set; }
 

@@ -21,7 +21,7 @@ namespace ViveirosID.Views
         }
     
         public int CarrinhoID { get; set; }
-        public float preçototal { get; set; }
+        public float precototal { get; set; }
         public System.DateTime ultimaAlteracao { get; set; }
         public float peso { get; set; }
         public Nullable<int> Utilizador_UtilizadorID { get; set; }

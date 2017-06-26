@@ -65,7 +65,7 @@ namespace ViveirosID.Models {
         // Determina que para cada Utilizador existe um Carrinho
 
 
-      //  public virtual Carrinhos Carrinho { get; set; }
+        //  public virtual Carrinhos Carrinho { get; set; }
 
         public virtual ICollection<Compras> Compra { get; set; }
 

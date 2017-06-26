@@ -24,9 +24,10 @@
 
 @foreach (var item in Model)
 {
-    var nome = "/Images/" + item.nome + " 1.jpeg";
-    var href_add = "http://localhost:64855/Artigos/Details/" + item.ArtigoID;
-    var href_det = "http://localhost:64855/Artigos/Details/" + item.ArtigoID;
+    var nome = "/Images/" + item.nome + "_1.jpeg";
+    <div>
+       @Html.ActionLink("texto a ser visto no ecra", "Details", "Artigos", new { id = item.ArtigoID }, null)
+    </div>
 
         <div class="col-md-3 col-sm-6 hero-feature">
             <div class="thumbnail">

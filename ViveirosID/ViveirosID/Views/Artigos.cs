@@ -33,7 +33,7 @@ namespace ViveirosID.Views
         public float crescimento { get; set; }
         public float luz { get; set; }
         public float rega { get; set; }
-        public float preço { get; set; }
+        public float preco { get; set; }
         public int CategoriaFK { get; set; }
     
         public virtual Categorias Categorias { get; set; }

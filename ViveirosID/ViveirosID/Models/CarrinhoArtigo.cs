@@ -13,7 +13,7 @@ namespace ViveirosID.Models {
         // muitos para muitos
 
         // Chave primaria de Carrinho_Artigos
-        // Nao e possivel a concatenação das duas chaves forasteiras
+        // Nao e possivel a concatenacão das duas chaves forasteiras
         // Artigo e Carrinho
         [Key]
         public int ID { get; set; }

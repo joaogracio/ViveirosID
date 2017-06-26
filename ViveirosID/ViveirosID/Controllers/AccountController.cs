@@ -249,7 +249,7 @@ namespace ViveirosID.Controllers {
                         //
                         Carrinhos carrinho = new Carrinhos();
                         carrinho.peso = 0;
-                        carrinho.preçototal = 0;
+                        carrinho.precototal = 0;
                         carrinho.ultimaAlteracao = DateTime.Now;
                         carrinho.Utilizador = utilizador;
                         carrinho.UtilizadorFK = utilizador.UtilizadorID;

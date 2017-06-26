@@ -6,145 +6,62 @@
 
 <h2>Index</h2>
 
-@if (Request.IsAuthenticated) {
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+@if (Request.IsAuthenticated)
+{
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
 }
-@*<p>
+    @*<p>
 
-    @using (Html.BeginForm()) {
+            @using (Html.BeginForm()) {
 
-        @Html.AntiForgeryToken()
+                @Html.AntiForgeryToken()
 
-        <div class="form-horizontal">
-            <button>Calculate</button>
-            Descendente:   @Html.RadioButton("Ordem", "Descendente", new { ordem = "true" })
-            Ascendente:    @Html.RadioButton("Ordem", "Ascendente", new { ordem = "false" })   
+                <div class="form-horizontal">
+                    <button>Calculate</button>
+                    Descendente:   @Html.RadioButton("Ordem", "Descendente", new { ordem = "true" })
+                    Ascendente:    @Html.RadioButton("Ordem", "Ascendente", new { ordem = "false" })
+                </div>
+            }
+        </p>*@
+
+    @for (int i = 0; i < Model.Count(); i += 3)
+    {
+        <div class="row">
+            @foreach (var item in Model.Skip(i).Take(3))
+            {
+                <div class="col-md-4 portfolio-item">
+                    <img class="img-responsive" src="http://placehold.it/700x400" alt="">
+                    <b> @Html.DisplayFor(modelItem => item.nome)  </b>
+                    @if (Request.IsAuthenticated && User.IsInRole("Administrador"))
+                    {
+                        @Html.ActionLink("Edit", "Edit", new { id = item.ArtigoID }) <b>  </b> 
+                        @Html.ActionLink("Detalhes", "Details", new { id = item.ArtigoID }) 
+                    }
+                    else if(Request.IsAuthenticated)
+                    {
+                        @Html.ActionLink("Detalhes", "Details", new { id = item.ArtigoID }) <b>  </b>
+                        @Html.ActionLink("Adiciona", "Adiciona", new { id = item.ArtigoID, id2 = "artigo" })
+                    }
+                </div>
+            }
         </div>
     }
-</p>*@
-
-<table class="table">
-    <tr>
-        <th>
-            tipo
-            <a href="@Url.Action("Index", new { filtro = "tipo", ordem = "descendente"})"><span class="glyphicon glyphicon-plus-sign"></span></a>
-            <a href="@Url.Action("Index", new { filtro = "tipo", ordem = "ascendente"})"><span class="glyphicon glyphicon-minus-sign"></span></a>
-        </th>
-        <th>
-            nome
-            <a href="@Url.Action("Index", new { filtro = "nome", ordem = "descendente"})"><span class="glyphicon glyphicon-plus-sign"></span></a>
-            <a href="@Url.Action("Index", new { filtro = "nome", ordem = "ascendente"})"><span class="glyphicon glyphicon-minus-sign"></span></a>
-        </th>
-        <th>
-            nome tecnico
-            <a href="@Url.Action("Index", new { filtro = "nome tecnico", ordem = "descendente"})"><span class="glyphicon glyphicon-plus-sign"></span></a>
-            <a href="@Url.Action("Index", new { filtro = "nome tecnico", ordem = "ascendente"})"><span class="glyphicon glyphicon-minus-sign"></span></a>
-        </th>
-        <th>
-            disponibilidade
-            <a href="@Url.Action("Index", new { filtro = "disponibilidade", ordem = "descendente"})"><span class="glyphicon glyphicon-plus-sign"></span></a>
-            <a href="@Url.Action("Index", new { filtro = "disponibilidade", ordem = "ascendente"})"><span class="glyphicon glyphicon-minus-sign"></span></a>
-        </th>
-        <th>
-            descricao
-            <a href="@Url.Action("Index", new { filtro = "descricao", ordem = "descendente"})"><span class="glyphicon glyphicon-plus-sign"></span></a>
-            <a href="@Url.Action("Index", new { filtro = "descricao", ordem = "ascendente"})"><span class="glyphicon glyphicon-minus-sign"></span></a>
-        </th>
-        <th>
-            plantacao comeca
-            <a href="@Url.Action("Index", new { filtro = "plantacao comeca", ordem = "descendente"})"><span class="glyphicon glyphicon-plus-sign"></span></a>
-            <a href="@Url.Action("Index", new { filtro = "plantacao comeca", ordem = "ascendente"})"><span class="glyphicon glyphicon-minus-sign"></span></a>
-        </th>
-        <th>
-            plantacao acaba
-            <a href="@Url.Action("Index", new { filtro = "plantacao acaba", ordem = "descendente"})"><span class="glyphicon glyphicon-plus-sign"></span></a>
-            <a href="@Url.Action("Index", new { filtro = "plantacao acaba", ordem = "ascendente"})"><span class="glyphicon glyphicon-minus-sign"></span></a>
-        </th>
-        <th>
-            peso
-            <a href="@Url.Action("Index", new { filtro = "peso", ordem = "descendente"})"><span class="glyphicon glyphicon-plus-sign"></span></a>
-            <a href="@Url.Action("Index", new { filtro = "peso", ordem = "ascendente"})"><span class="glyphicon glyphicon-minus-sign"></span></a>
-        </th>
-        <th>
-            crescimento
-            <a href="@Url.Action("Index", new { filtro = "crescimento", ordem = "descendente"})"><span class="glyphicon glyphicon-plus-sign"></span></a>
-            <a href="@Url.Action("Index", new { filtro = "crescimento", ordem = "ascendente"})"><span class="glyphicon glyphicon-minus-sign"></span></a>
-        </th>
-        <th>
-            luz
-            <a href="@Url.Action("Index", new { filtro = "luz", ordem = "descendente"})"><span class="glyphicon glyphicon-plus-sign"></span></a>
-            <a href="@Url.Action("Index", new { filtro = "luz", ordem = "ascendente"})"><span class="glyphicon glyphicon-minus-sign"></span></a>
-        </th>
-        <th>
-            rega
-            <a href="@Url.Action("Index", new { filtro = "rega", ordem = "descendente"})"><span class="glyphicon glyphicon-plus-sign"></span></a>
-            <a href="@Url.Action("Index", new { filtro = "rega", ordem = "ascendente"})"><span class="glyphicon glyphicon-minus-sign"></span></a>
-        </th>
-        <th>
-            preço
-            <a href="@Url.Action("Index", new { filtro = "preço", ordem = "descendente"})"><span class="glyphicon glyphicon-plus-sign"></span></a>
-            <a href="@Url.Action("Index", new { filtro = "preço", ordem = "ascendente"})"><span class="glyphicon glyphicon-minus-sign"></span></a>
-        </th>
-        <th>
-            imagem
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Categoria.tipo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.nome)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.nometecnico)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.disponibilidade)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.descricao)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.plantacaoComeca)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.plantacaoAcaba)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.peso)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.crescimento)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.luz)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.rega)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.preço)
-        </td>
-        <td>
-            <img src="@Html." />
-        </td>
 
 
-        <td>
-            @if (Request.IsAuthenticated && User.IsInRole("Administrador")) {
-                @Html.ActionLink("Edit", "Edit", new { id = item.ArtigoID })} |
-           @Html.ActionLink("Details", "Details", new { id=item.ArtigoID }) |
-           @if (Request.IsAuthenticated && User.IsInRole("Administrador")) {
-                @Html.ActionLink("Delete", "Delete", new { id = item.ArtigoID })}|
-          @Html.ActionLink("Adiciona", "Adiciona", new { id=item.ArtigoID, id2="artigo" })
-        </td>
-    </tr>
-}
+    @*<td>
+                @if (Request.IsAuthenticated && User.IsInRole("Administrador")) {
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ArtigoID })} |
+                    @Html.ActionLink("Details", "Details", new { id=item.ArtigoID
+               }) |
+               @if (Request.IsAuthenticated) {
+                    @Html.ActionLink("Details", "Details", new { id = item.ArtigoID })}|
+                    @Html.ActionLink("Adiciona", "Adiciona", new { id=item.ArtigoID, id2="artigo"
+               })
+            </td>
+        </tr>*@
 
-</table>
+
+
+

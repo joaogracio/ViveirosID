@@ -79,9 +79,9 @@
                 <a href="@Url.Action("Index", new { filtro = "rega", ordem = "ascendente"})"><span class="glyphicon glyphicon-minus-sign"></span></a>
             </th>
             <th>
-                preço
-                <a href="@Url.Action("Index", new { filtro = "preço", ordem = "descendente"})"><span class="glyphicon glyphicon-plus-sign"></span></a>
-                <a href="@Url.Action("Index", new { filtro = "preço", ordem = "ascendente"})"><span class="glyphicon glyphicon-minus-sign"></span></a>
+                preco
+                <a href="@Url.Action("Index", new { filtro = "preco", ordem = "descendente"})"><span class="glyphicon glyphicon-plus-sign"></span></a>
+                <a href="@Url.Action("Index", new { filtro = "preco", ordem = "ascendente"})"><span class="glyphicon glyphicon-minus-sign"></span></a>
             </th>
             <th></th>
         </tr>
@@ -121,7 +121,7 @@
                     @Html.DisplayFor(modelItem => item.rega)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.preço)
+                    @Html.DisplayFor(modelItem => item.preco)
                 </td>
                 <td>
                     @if (Request.IsAuthenticated && User.IsInRole("Administrador")) {

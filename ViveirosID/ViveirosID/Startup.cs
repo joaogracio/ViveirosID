@@ -89,7 +89,7 @@ namespace ViveirosID
                 Casimiro_Batista.Email = "casimiro_batista@ipt.pt";
                 // user.Nome = "Luís Freitas";
                 string userPWD_Cas_Bas = "123_Asd";
-                var chkUser_Cas_Bas = userManager.Create(Pedro_Dias, userPWD_Cas_Bas);
+                var chkUser_Cas_Bas = userManager.Create(Casimiro_Batista, userPWD_Cas_Bas);
                 //Adicionar o Utilizador à respetiva Role-Dono-
                 if (chkUser_Cas_Bas.Succeeded)
                 {
@@ -118,6 +118,43 @@ namespace ViveirosID
                 //utilizador.newsletter = newsletter; 
                 db.Utilizador.Add(Casimiro_Batista_user);
 
+
+                // criar um utilizador 'Cliente da loja'
+                // Neste caso Pedro Dias
+                var Casimiro_Pereira = new ApplicationUser();
+                Casimiro_Pereira.UserName = "casimiro_pereira@ipt.pt";
+                Casimiro_Pereira.Email = "casimiro_pereira@ipt.pt";
+                // user.Nome = "Luís Freitas";
+                string userPWD_Cas_Per = "123_Asd";
+                var chkUser_Cas_Per = userManager.Create(Casimiro_Pereira, userPWD_Cas_Per);
+                //Adicionar o Utilizador à respetiva Role-Dono-
+                if (chkUser_Cas_Bas.Succeeded)
+                {
+                    var result1 = userManager.AddToRole(Casimiro_Pereira.Id, "Cliente");
+                }
+
+                // Cria um novo Utilizador associado ao AspNetUser atraves do AspNetUser ID (string)
+                // Neste caso Pedro Dias
+                //
+                Utilizadores Casimiro_Pereira_user = new Utilizadores();
+                //utilizador.sexo = sexo;
+                Casimiro_Pereira_user.nome = "Casimiro";
+                Casimiro_Pereira_user.apelido = "Pereira";
+                Casimiro_Pereira_user.datadenascimento = Convert.ToDateTime("25/04/1974");
+                Casimiro_Pereira_user.NIF = Convert.ToInt32("128900776");
+                Casimiro_Pereira_user.morada = "Rua do Espírito Santo";
+                Casimiro_Pereira_user.local = "Nossa Senhora de Fátima";
+                Casimiro_Pereira_user.codigoposta = "2220-011";
+                Casimiro_Pereira_user.cidade = "Tomar";
+                Casimiro_Pereira_user.distrito = "Santarém";
+                Casimiro_Pereira_user.pais = "Portugal";
+                Casimiro_Pereira_user.telefone = "960579602";
+                // Aqui relaciona-se um AspUser a um Utilizador
+                //
+                Casimiro_Pereira_user.IDaspuser = Casimiro_Pereira.Id;
+                //utilizador.newsletter = newsletter; 
+                db.Utilizador.Add(Casimiro_Pereira_user);
+
                 db.SaveChanges();
             }
 
@@ -126,6 +163,7 @@ namespace ViveirosID
 
         public void Configuration(IAppBuilder app)
         {
+            iniciaAplicacao();
             ConfigureAuth(app);
         }
     }

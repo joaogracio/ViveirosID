@@ -31,8 +31,9 @@
         <div class="row">
             @foreach (var item in Model.Skip(i).Take(3))
             {
+                var nome = "/Images/" + item.nome + "_1.jpeg";
                 <div class="col-md-4 portfolio-item">
-                    <img class="img-responsive" src="http://placehold.it/700x400" alt="">
+                    <img class="img-responsive" src="@nome" alt="">
                     <b> @Html.DisplayFor(modelItem => item.nome)  </b>
                     @if (Request.IsAuthenticated && User.IsInRole("Administrador"))
                     {

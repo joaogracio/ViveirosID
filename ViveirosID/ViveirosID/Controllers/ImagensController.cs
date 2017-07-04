@@ -70,7 +70,7 @@ namespace ViveirosID.Controllers
 
                 // Pesquisas de todos os ficheiros comecados pelo nome do artigo em questao
                 //
-                string[] directorias = Directory.GetFiles(@"D:\Joao\Informática\Tecnologias da Internet II\TI_II_2016\ViveirosID-160dbc5b4180e74e950fc41da2e461ffc6a251c1\ViveirosID\ViveirosID\Images", artigo_nome + "*");
+                string[] directorias = Directory.GetFiles(@"D:\Joao\Informatica\PSI\ViveirosID\ViveirosID\ViveirosID\Images\", artigo_nome + "*");
 
                 var proxima_imagem = 1;
 
@@ -86,7 +86,7 @@ namespace ViveirosID.Controllers
 
                 // Directorio que pretendo para guardar a imagem
                 //
-                string directorio = "D:\\Joao\\Informática\\Tecnologias da Internet II\\TI_II_2016\\ViveirosID-160dbc5b4180e74e950fc41da2e461ffc6a251c1\\ViveirosID\\ViveirosID\\Images\\" + (artigo_nome + "_" + proxima_imagem + img_tipo);
+                string directorio = "D:\\Joao\\Informatica\\PSI\\ViveirosID\\ViveirosID\\ViveirosID\\Images\\" + (artigo_nome + "_" + proxima_imagem + img_tipo);
 
                 try {
                     file.SaveAs(directorio);

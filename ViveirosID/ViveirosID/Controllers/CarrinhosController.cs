@@ -227,8 +227,17 @@ namespace ViveirosID.Controllers {
                              where umCarrinho.Utilizador.UtilizadorID == utilizadorcorrente.UtilizadorID
                              select umCarrinho).FirstOrDefault().CarrinhoID;
 
-                int comprasID = (from umaCompra in db.Compra
-                                 select umaCompra.CompraID).Max();
+                int comprasID = 1;
+
+                try
+                {
+                    comprasID = (from umaCompra in db.Compra
+                                 select umaCompra.CompraID).Max() + 1;
+                }
+                catch (Exception ex) {
+                    //comprasID = 1;
+                    //A tabela de compras esta nula
+                }
 
                 // Cria uma nova compra para o presente carrinho que ira ser encerrado
                 //
@@ -269,7 +278,7 @@ namespace ViveirosID.Controllers {
 
                     CompraArtigo compra_artigo = new CompraArtigo();
                     compra_artigo.ArtigoFK = artigo.ArtigoID;
-                    compra_artigo.CompraFK = comprasID;
+                    compra_artigo.CompraFK = compra.CompraID;
                     compra_artigo.preco = artigo.preco;
 
                     db.Compra_Artigos.Add(compra_artigo);

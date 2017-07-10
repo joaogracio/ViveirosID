@@ -33,16 +33,29 @@ namespace ViveirosID.Controllers {
                          where umCarrinho.Utilizador.UtilizadorID == userID
                          select umCarrinho.CarrinhoID).FirstOrDefault();
 
-
-
+            // Preenche os parâmetros de ListaArtigosCarrinhoViewModel
+            //
             var listaArtigosNoCarrinho = (from car_art in db.Carrinho_Artigos
                                           from art in db.Artigo
-                                          where car_art.ArtigoFK == art.ArtigoID && car_art.CarrinhoFK == carID
+                                          from catedor in db.Categoria
+                                          where car_art.ArtigoFK == art.ArtigoID && car_art.CarrinhoFK == carID && catedor.CategoriaID == art.CategoriaFK 
                                           select new ListaArtigosCarrinhoViewModel() {
                                               ArtigoID = art.ArtigoID,
                                               nome = art.nome,
-                                              quantidade = car_art.quantidade
+                                              preco = art.preco,
+                                              preco_total_prd = (car_art.quantidade * art.preco),
+                                              quantidade = car_art.quantidade,
+                                              tipo = catedor.tipo
                                           });
+
+            // Cria uma lista de imagens relativas a cada artigo
+            //
+            /*foreach (var elm in listaArtigosNoCarrinho) {
+                var imagem = (from img in db.Imagem
+                              where img.ArtigoFK == elm.ArtigoID
+                              select img);
+                listaArtigosNoCarrinho.Where(id => id.ArtigoID == elm.ArtigoID).FirstOrDefault().Imagens = imagem.ToList() as ICollection<Imagens>; 
+            }*/
 
             return View(listaArtigosNoCarrinho);
         }
@@ -207,7 +220,7 @@ namespace ViveirosID.Controllers {
         }
 
         [Authorize]
-        public ActionResult Tranferencia(string trans) {
+        public ActionResult Transferencia(string trans) {
             if (trans == "transferencia") {
 
                 // Determina o Asp Net ID do utilizador corrente
@@ -221,11 +234,40 @@ namespace ViveirosID.Controllers {
                                           select umUtilizador).FirstOrDefault();
 
                 var userID = utilizadorcorrente.UtilizadorID;
+
+                // Determina o valor do trasporte
+                //
+                if (utilizadorcorrente.pais == "Portugal")
+                {
+                    utilizadorcorrente.preco_transporte = 6.0;
+                }
+                else {
+                    utilizadorcorrente.preco_transporte = 15.0;
+                }
+
+                db.SaveChanges();
+                
                 // Determina o Carrinho ID do utilizador corrente
                 //
                 var carID = (from umCarrinho in db.Carrinho
                              where umCarrinho.Utilizador.UtilizadorID == utilizadorcorrente.UtilizadorID
                              select umCarrinho).FirstOrDefault().CarrinhoID;
+                
+
+                // determina a lista de artigos que estão no carrinho até ao presente momento
+                // no momento de declaracao do lista_carrinho_artigos o metodo ToList
+                // evita uma exececao no comando a baixo por o DataReader estar aberto
+                //
+                var lista_carrinho_artigos = (from car_art in db.Carrinho_Artigos
+                                              from art in db.Artigo
+                                              where car_art.ArtigoFK == art.ArtigoID && car_art.CarrinhoFK == carID
+                                              select art).ToList();
+
+                // caso a lista de carrinhos_artigos seja nula retorna para a vista de carrinho sem alterações
+                //
+                if (lista_carrinho_artigos.Count == 0) {
+                    return View("Index");
+                }
 
                 int comprasID = 1;
 
@@ -252,37 +294,13 @@ namespace ViveirosID.Controllers {
                 //
                 db.SaveChanges();
 
-                // Determina o ID da Compra presente no sentido de preencher a tabela Compra_Artigos
-                //
-                //int compraID = compra.CompraID;
-
-                
-                db.SaveChanges();
-                
-                // determina a lista de artigos que estão no carrinho até ao presente momento
-                // no momento de declaracao do lista_carrinho_artigos o metodo ToList
-                // evita uma exececao no comando a baixo por o DataReader estar aberto
-                //
-                var lista_carrinho_artigos = (from car_art in db.Carrinho_Artigos
-                                              from art in db.Artigo
-                                              where car_art.ArtigoFK == art.ArtigoID && car_art.CarrinhoFK == carID
-                                              select art).ToList();
-
-                int precototal = 0;
+                double precototal = 0;
 
                 foreach (Artigos artigo in lista_carrinho_artigos) {
 
                     // Esclarece o ArtigoID para evitar usos artigo.ArtigoID
                     //
                     int artID = artigo.ArtigoID;
-
-                    CompraArtigo compra_artigo = new CompraArtigo();
-                    compra_artigo.ArtigoFK = artigo.ArtigoID;
-                    compra_artigo.CompraFK = compra.CompraID;
-                    compra_artigo.preco = artigo.preco;
-
-                    db.Compra_Artigos.Add(compra_artigo);
-                    db.SaveChanges();
 
                     // Determina a tabela correspondente ao relacionamento Carrinho_Artigo
                     // usando o carID e artID
@@ -293,6 +311,15 @@ namespace ViveirosID.Controllers {
                                                       where umCarrinho_Artigo.CarrinhoFK == carID && umCarrinho_Artigo.ArtigoFK == artID
                                                       select umCarrinho_Artigo).FirstOrDefault();
 
+                    CompraArtigo compra_artigo = new CompraArtigo();
+                    compra_artigo.ArtigoFK = artigo.ArtigoID;
+                    compra_artigo.CompraFK = compra.CompraID;
+                    compra_artigo.preco = artigo.preco;
+                    compra_artigo.quantidade = carrinho_artigo.quantidade;
+                    precototal += (compra_artigo.preco * compra_artigo.quantidade);
+                    db.Compra_Artigos.Add(compra_artigo);
+                    db.SaveChanges();
+
                     // Elimina a referencia a carrinho_artigo para a presente carID e artID
                     //
                     db.Carrinho_Artigos.Remove(carrinho_artigo);
@@ -301,9 +328,53 @@ namespace ViveirosID.Controllers {
                     //
                     db.SaveChanges();
                 }
+
+                compra.precototal = precototal + utilizadorcorrente.preco_transporte;
+
+                db.SaveChanges();
             }
 
-            return null;
+            return RedirectToAction("Index", "Compras"); 
+        }
+
+        public ActionResult Remover(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Artigos artigo = db.Artigo.Find(id);
+            if (artigo == null)
+            {
+                return HttpNotFound();
+            }
+
+            // Determina o Asp Net ID do utilizador corrente
+            //
+            var aspnetuser = User.Identity.GetUserId();
+
+            // Determina o Utilizador corrente atraves do aspnetuser
+            //
+            var utilizadorcorrente = (from umUtilizador in db.Utilizador
+                                      where umUtilizador.IDaspuser == aspnetuser
+                                      select umUtilizador).FirstOrDefault();
+
+            var userID = utilizadorcorrente.UtilizadorID;
+            // Determina o Carrinho ID do utilizador corrente
+            //
+            var carID = (from umCarrinho in db.Carrinho
+                         where umCarrinho.Utilizador.UtilizadorID == utilizadorcorrente.UtilizadorID
+                         select umCarrinho).FirstOrDefault().CarrinhoID;
+            
+            // Pesquisa o Carrinho_Artigos 
+            var car_art = (from umCarrinho_Artigo in db.Carrinho_Artigos
+                           where umCarrinho_Artigo.CarrinhoFK == carID && umCarrinho_Artigo.ArtigoFK == id
+                           select umCarrinho_Artigo).FirstOrDefault();
+
+            // Remove da tabela Carrinhos_Artigo o Carrinho_Artigo que corresponde aquele que armazena o produto
+            db.Carrinho_Artigos.Remove(car_art);
+
+            return View("Index");
         }
 
         protected override void Dispose(bool disposing) {

@@ -9,7 +9,7 @@
         <h1>Viveiros Zêzere</h1>
         <p>A Viveiros Zêzere apresenta agora este site para se representar a si mesma na internet. Divulgar os seus produtos e cativar novos clientes.</p>
         <p>
-            <a class="btn btn-primary btn-large">Call to action!</a>
+            <a class="btn btn-primary btn-large" href="~/Home/About">Ver Notícia!</a>
         </p>
     </header>
     <hr>
@@ -25,9 +25,6 @@
 @foreach (var item in Model)
 {
     var nome = "/Images/" + item.nome + "_1.jpeg";
-    <div>
-       @Html.ActionLink("texto a ser visto no ecra", "Details", "Artigos", new { id = item.ArtigoID }, null)
-    </div>
 
         <div class="col-md-3 col-sm-6 hero-feature">
             <div class="thumbnail">
@@ -40,6 +37,7 @@
                         {
                             @*@Html.ActionLink("Adiciona", "Adiciona", FormMethod.Post, new { id = item.ArtigoID , @class = "btn btn-primary" })*@
                             <a href="/Artigos/Adiciona/@item.ArtigoID/home" class="btn btn-primary">Adicionar</a>
+                            <a href="/Artigos/Details/@item.ArtigoID/" class="btn btn-primary">Detalhes</a>
                             @*@Html.ActionLink("Detalhes", "Details", new { id = item.ArtigoID, @class = "btn btn-primary"})*@
                             @*<a href="" class="btn btn-primary">Adicionar!</a> <a href="@href_det" class="btn btn-default">Detalhes</a>*@ 
                         }

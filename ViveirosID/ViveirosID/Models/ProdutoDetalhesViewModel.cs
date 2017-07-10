@@ -15,6 +15,10 @@ namespace ViveirosID.Models {
         //
         public Artigos Artigo { get; set; }
 
+        // Categoria a qual o artigo a ser visto esta associado
+        //
+        public Categorias Categoria { get; set; }
+
         // Lista de Imagens Respectivas ao grupo de Artigos Enviado
         // Varias Imagens por Artigos
         //

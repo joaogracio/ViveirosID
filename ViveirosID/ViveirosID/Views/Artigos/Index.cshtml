@@ -1,15 +1,15 @@
 ﻿@model IEnumerable<ViveirosID.Models.Artigos>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Artigos";
 }
 
 <h2>Index</h2>
 
-@if (Request.IsAuthenticated)
+@if (User.IsInRole("Administrador") || User.IsInRole("Profissional"))
 {
     <p>
-        @Html.ActionLink("Create New", "Create")
+        @Html.ActionLink("Criar Novo Artigo", "Create")
     </p>
 }
     @*<p>
@@ -32,6 +32,7 @@
             @foreach (var item in Model.Skip(i).Take(3))
             {
                 var nome = "/Images/" + item.nome + "_1.jpeg";
+                @*
                 <div class="col-md-4 portfolio-item">
                     <img class="img-responsive" src="@nome" alt="">
                     <b> @Html.DisplayFor(modelItem => item.nome)  </b>
@@ -45,6 +46,28 @@
                         @Html.ActionLink("Detalhes", "Details", new { id = item.ArtigoID }) <b>  </b>
                         @Html.ActionLink("Adiciona", "Adiciona", new { id = item.ArtigoID, id2 = "artigo" })
                     }
+                </div>
+                *@
+                <div class="col-md-3 col-sm-6 hero-feature">
+                    <div class="thumbnail">
+                        <img src="@nome" alt="@item.nome">
+                        <div class="caption">
+                            <h3>@Html.DisplayFor(modelItem => item.nome)</h3>
+                            <p>@Html.DisplayFor(modelItem => item.descricao)</p>
+                            <p>
+                                @if (Request.IsAuthenticated)
+                                {
+                                    <a href="/Artigos/Adiciona/@item.ArtigoID/home" class="btn btn-primary">Adicionar</a>
+                                    <a href="/Artigos/Details/@item.ArtigoID/" class="btn btn-primary">Detalhes</a>
+                                }
+                                else
+                                {
+                                    @Html.ActionLink("Adiciona", "Login", new { @class = "btn btn-primary" })
+                                    @Html.ActionLink("Detalhes", "Login", new { @class = "btn btn-primary" })
+                                }
+                            </p>
+                        </div>
+                    </div>
                 </div>
             }
         </div>

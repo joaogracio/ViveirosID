@@ -86,7 +86,7 @@ namespace ViveirosID.Controllers
 
                 // Directorio que pretendo para guardar a imagem
                 //
-                string directorio = "D:\\Joao\\Informatica\\PSI\\ViveirosID\\ViveirosID\\ViveirosID\\Images\\" + (artigo_nome + "_" + proxima_imagem + img_tipo);
+                string directorio = "\\Images\\" + (artigo_nome + "_" + proxima_imagem + img_tipo);
 
                 try {
                     file.SaveAs(directorio);

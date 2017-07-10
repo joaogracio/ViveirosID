@@ -455,11 +455,6 @@ namespace ViveirosID.Controllers {
             //
             comprasDeClientes = comprasDeClientes.Where(a => a.ListadeArtigos.Count > 1);
 
-            // seleciona todos os artigos disponiveis
-            //
-            var todos_artigos = (from umArtigo in db.Artigo
-                                 select umArtigo);
-
             // Prepara uma lista nula de artigos para adicionar os 
             // artigos a apresentar
             //
@@ -475,8 +470,6 @@ namespace ViveirosID.Controllers {
                                   select umaCompraArtigos);
 
             var compra_artigos_list = new List<CompraArtigo>();
-
-            //var xpto = new List<CompraArtigo>() as IQueryable<CompraArtigo>;
 
             // Compra a compra, listadeArtigos a listadeArtigos
             // coloca todos os compraArtigo em compra_artigos
@@ -509,21 +502,34 @@ namespace ViveirosID.Controllers {
                                    select umArtigo);
                 artigos_apresentar = artigos_apresentar.Concat(artigo_temp);
             }
+            //=========================================================================
 
-            /*var imagem = (from umArtigo in artigos_apresentar
-                          from umaImagem in db.Imagem
-                          where umArtigo.ArtigoID == umaImagem.ArtigoFK &&
-                                umaImagem.descricao == "A Tal"
-                          select umaImagem).FirstOrDefault().descricao;*/
+            //Seleciona uma lista de artigos da mesma categoria
+            //
+            var artigos_categoria = (from umArtigo in db.Artigo
+                                     //from umaCategoria in db.Categoria
+                                     where umArtigo.CategoriaFK == artigo.CategoriaFK 
+                                     select umArtigo);
 
-            var imagem = (from umArtigo in artigos_apresentar
+            // Seleciona a categoria a qual o artigo corresponde
+            //
+            var categoria = (from umaCategoria in db.Categoria
+                             where artigo.CategoriaFK == umaCategoria.CategoriaID
+                             select umaCategoria).FirstOrDefault();
+
+            // Imagem ou grupo de Imagens que corresponde ao artigo
+            //
+            var imagem = (from umArtigo in db.Artigo
                           from umaImagem in db.Imagem
-                          where umArtigo.ArtigoID == umaImagem.ArtigoFK 
+                          where umArtigo.ArtigoID == umaImagem.ArtigoFK && umaImagem.ArtigoFK == artigo.ArtigoID
                           select umaImagem);
 
+            // Faz o Modelo para ser enviado para a View Details
+            //
             var model = new ProdutoDetalhesViewModel();
             model.Artigo = artigo;
-            model.Artigos = artigos_apresentar.ToList() as ICollection<Artigos>;
+            model.Categoria = categoria;
+            model.Artigos = artigos_categoria.ToList() as ICollection<Artigos>;
             model.Imagens = imagem.ToList() as ICollection<Imagens>;
 
             return View(model);
@@ -615,9 +621,9 @@ namespace ViveirosID.Controllers {
         }
 
         [Authorize]
-        public ActionResult Adiciona(int? id, string id2) {
+        public ActionResult Adiciona(int? id, int? id2) {
 
-            if (id == null) {
+            if (id == null || id2 == null) {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
@@ -656,20 +662,22 @@ namespace ViveirosID.Controllers {
                 CarrinhoArtigo carrinho_artigos = new CarrinhoArtigo();
                 carrinho_artigos.CarrinhoFK = carID;
                 carrinho_artigos.ArtigoFK = (int)id;
-                carrinho_artigos.quantidade = 1;
+                carrinho_artigos.quantidade = (int) id2;
 
                 db.Carrinho_Artigos.Add(carrinho_artigos);
                 db.SaveChanges();
 
             } else {
                 CarrinhoArtigo carrinho_artigos = db.Carrinho_Artigos.Find(car_artID);
-                carrinho_artigos.quantidade = carrinho_artigos.quantidade + 1;
+                carrinho_artigos.quantidade = carrinho_artigos.quantidade + (int) id2;
 
                 db.SaveChanges();
             }
 
-            if (id2.Equals("artigo")) return RedirectToAction("Index");
-            else return RedirectToAction("Index", "Home");
+            /*if (id2.Equals("artigo")) return RedirectToAction("Index");
+            else return RedirectToAction("Index", "Home");*/
+
+            return Redirect(Request.UrlReferrer.PathAndQuery);
         }
 
         /// <summary>

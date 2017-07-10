@@ -1,77 +1,112 @@
 ﻿@model IQueryable<Viveiros.Models.ListaArtigosCarrinhoViewModel>
-@*   @model IEnumerable<Viveiros.Models.Artigo>     *@
 
 @{
     ViewBag.Title = "Index";
+    var preco_todos_pro = 0.0;
+    var preco_todos_total = 0.0;
+    var preco_transporte = 6.0;
 
-}
-
-<h2>Index</h2>
-
-@if (Request.IsAuthenticated) {
-<p>
-    @Html.ActionLink("Pagar e Enviar", "Tranferencia", new { trans = "transferencia" }) |
-</p>
-}
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.FirstOrDefault().ArtigoID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FirstOrDefault().nome)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FirstOrDefault().quantidade)
-        </th>
-        @*<th>
-                @Html.DisplayNameFor(model => model.disponibilidade)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.descricao)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.plantacaoComeca)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.plantacaoAcaba)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.peso)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.crescimento)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.luz)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.rega)
-            </th>
-            <th>
-                quantidade
-            </th>*@
-        <th></th>
-    </tr>
-
-
-    @foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.ArtigoID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.nome)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.quantidade)
-            </td>
-            <td>
-                @Html.ActionLink("Remover do carrinho", "Delete", new { id = item.ArtigoID })
-            </td>
-        </tr>
+    if (Model != null) {
+        foreach (var item in Model) {
+            preco_todos_pro += item.preco_total_prd;
+        }
     }
 
+    if (preco_todos_pro == 0.0) {
+        preco_transporte = 0.0;
+    }
 
+    preco_todos_total = preco_todos_pro + preco_transporte;
 
-</table>
+    var imagens = new ViveirosID.Models.Imagens();
+}
+
+<h2>O Seu Carrinho</h2>
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12 col-md-10 col-md-offset-1">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Producto</th>
+                        <th>Quantidade</th>
+                        <th class="text-center">Preço</th>
+                        <th class="text-center">Total</th>
+                        <th> </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @try
+                    {
+                        foreach (var item in Model)
+                        {
+                            var img = "/Images/" + item.nome + "_1.jpeg";
+                            <tr>
+                                <td class="col-sm-8 col-md-6">
+                                    <div class="media">
+                                        <a class="thumbnail pull-left" href="~/Artigos/Details/@item.ArtigoID"> <img class="media-object" src="@img" style="width: 72px; height: 72px;"> </a>
+                                        <div class="media-body">
+                                            <h4 class="media-heading"><a href="~/Artigos/Details/@item.ArtigoID">@item.nome</a></h4>
+                                            <h5 class="media-heading"> Categoria <a href="~/Artigos/Index">@item.tipo</a></h5>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="col-sm-1 col-md-1" style="text-align: center">
+                                    <input type="email" class="form-control" id="exampleInputEmail1" value="@item.quantidade">
+                                </td>
+                                <td class="col-sm-1 col-md-1 text-center"><strong>@item.preco $</strong></td>
+                                <td class="col-sm-1 col-md-1 text-center"><strong>@item.preco_total_prd $</strong></td>
+                                <td class="col-sm-1 col-md-1">
+                                    <a class="btn btn-danger btn-large" href="/Carinhos/Remover/@item.ArtigoID">
+                                        <span class="glyphicon glyphicon-remove"></span>  Remover
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                    catch (Exception ex){
+
+                    }
+
+                    <tr>
+                        <td>   </td>
+                        <td>   </td>
+                        <td>   </td>
+                        <td><h5>Subtotal</h5></td>
+                        <td class="text-right"><h5><strong>@preco_todos_pro $</strong></h5></td>
+                    </tr>
+                    <tr>
+                        <td>   </td>
+                        <td>   </td>
+                        <td>   </td>
+                        <td><h5>Preço Estimado para Transporte</h5></td>
+                        <td class="text-right"><h5><strong>@preco_transporte $</strong></h5></td>
+                    </tr>
+                    <tr>
+                        <td>   </td>
+                        <td>   </td>
+                        <td>   </td>
+                        <td><h3>Total</h3></td>
+                        <td class="text-right"><h3><strong>@preco_todos_total $</strong></h3></td>
+                    </tr>
+                    <tr>
+                        <td>   </td>
+                        <td>   </td>
+                        <td>   </td>
+                        <td>
+                            <a class="btn btn-info btn-large" href="/Artigos/Index">
+                                <span class="glyphicon glyphicon-shopping-cart"></span> Continuar Compras
+                            </a>
+                        </td>
+                        <td>
+                            <a class="btn btn-success btn-large" href="/Carrinhos/Transferencia?trans=transferencia">
+                                Pagar e Enviar <span class="glyphicon glyphicon-play"></span>
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

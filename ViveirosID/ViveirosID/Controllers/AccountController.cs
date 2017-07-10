@@ -237,6 +237,15 @@ namespace ViveirosID.Controllers {
                         utilizador.distrito = distrito;
                         utilizador.pais = pais;
                         utilizador.telefone = telefone;
+                        // Aqui calcula-se o preco do transporte
+                        //
+                        if (pais == "Portugal")
+                        {
+                            utilizador.preco_transporte = 6.0;
+                        }
+                        else {
+                            utilizador.preco_transporte = 15.0;
+                        }
                         // Aqui relaciona-se um AspUser a um Utilizador
                         //
                         utilizador.IDaspuser = user.Id;

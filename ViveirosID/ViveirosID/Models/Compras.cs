@@ -32,7 +32,7 @@ namespace ViveirosID.Models {
 
         public DateTime data { get; set; }
 
-        public float precototal { get; set; }
+        public double precototal { get; set; }
 
         // Para cada Compra existe um Utilizador
         // Chave forasteira para Utilizador

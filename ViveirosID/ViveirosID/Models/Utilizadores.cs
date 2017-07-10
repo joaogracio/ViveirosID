@@ -52,8 +52,7 @@ namespace ViveirosID.Models {
         [Required]
         public string telefone { get; set; }
 
-        //public Boolean newsletter { get; set; }
-
+        public double preco_transporte { get; set; }
 
         // Cria uma Chave Forasteira para a Tabela Utilizador
         [ForeignKey("Carrinho")]

@@ -337,6 +337,7 @@ namespace ViveirosID.Controllers {
             return RedirectToAction("Index", "Compras"); 
         }
 
+        [Authorize]
         public ActionResult Remover(int? id)
         {
             if (id == null)

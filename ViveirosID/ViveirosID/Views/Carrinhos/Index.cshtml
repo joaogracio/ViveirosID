@@ -23,6 +23,10 @@
 
 <h2>O Seu Carrinho</h2>
 
+
+@using (Html.BeginForm("Actualiza", "Artigos", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
 <div class="container">
     <div class="row">
         <div class="col-sm-12 col-md-10 col-md-offset-1">
@@ -53,23 +57,30 @@
                                     </div>
                                 </td>
                                 <td class="col-sm-1 col-md-1" style="text-align: center">
-                                    <input type="email" class="form-control" id="exampleInputEmail1" value="@item.quantidade">
+                                    <input type="text" class="form-control" name="id2" value="@item.quantidade">
                                 </td>
                                 <td class="col-sm-1 col-md-1 text-center"><strong>@item.preco $</strong></td>
                                 <td class="col-sm-1 col-md-1 text-center"><strong>@item.preco_total_prd $</strong></td>
                                 <td class="col-sm-1 col-md-1">
+                                    <button type="submit" class="btn btn-success" href="/Carrinhos/Actualiza/@item.ArtigoID">
+                                        <span class="glyphicon glyphicon-refresh"></span> Actualiza
+                                    </button>   
+                                </td>
+                                <td class="col-sm-1 col-md-1">
                                     <a class="btn btn-danger btn-large" href="/Carinhos/Remover/@item.ArtigoID">
-                                        <span class="glyphicon glyphicon-remove"></span>  Remover
+                                        <span class="glyphicon glyphicon-remove"></span> Remover
                                     </a>
                                 </td>
                             </tr>
                         }
                     }
-                    catch (Exception ex){
+                    catch (Exception ex)
+                    {
 
                     }
 
                     <tr>
+                        <td>   </td>
                         <td>   </td>
                         <td>   </td>
                         <td>   </td>
@@ -80,6 +91,7 @@
                         <td>   </td>
                         <td>   </td>
                         <td>   </td>
+                        <td>   </td>
                         <td><h5>Preço Estimado para Transporte</h5></td>
                         <td class="text-right"><h5><strong>@preco_transporte $</strong></h5></td>
                     </tr>
@@ -87,10 +99,12 @@
                         <td>   </td>
                         <td>   </td>
                         <td>   </td>
+                        <td>   </td>
                         <td><h3>Total</h3></td>
                         <td class="text-right"><h3><strong>@preco_todos_total $</strong></h3></td>
                     </tr>
                     <tr>
+                        <td>   </td>
                         <td>   </td>
                         <td>   </td>
                         <td>   </td>
@@ -110,3 +124,5 @@
         </div>
     </div>
 </div>
+
+}

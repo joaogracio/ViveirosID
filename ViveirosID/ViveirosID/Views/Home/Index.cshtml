@@ -36,7 +36,7 @@
                         @if (Request.IsAuthenticated)
                         {
                             @*@Html.ActionLink("Adiciona", "Adiciona", FormMethod.Post, new { id = item.ArtigoID , @class = "btn btn-primary" })*@
-                            <a href="/Artigos/Adiciona/@item.ArtigoID/home" class="btn btn-primary">Adicionar</a>
+                            <a href="/Artigos/Adiciona/@item.ArtigoID/1" class="btn btn-primary">Adicionar</a>
                             <a href="/Artigos/Details/@item.ArtigoID/" class="btn btn-primary">Detalhes</a>
                             @*@Html.ActionLink("Detalhes", "Details", new { id = item.ArtigoID, @class = "btn btn-primary"})*@
                             @*<a href="" class="btn btn-primary">Adicionar!</a> <a href="@href_det" class="btn btn-default">Detalhes</a>*@ 

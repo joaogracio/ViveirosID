@@ -201,6 +201,7 @@ namespace ViveirosID.Controllers {
         
         }
 
+        [Authorize]
         public ActionResult Pesquisa() {
 
             // Prepara a lista standart de artigos para enviar para a View
@@ -242,6 +243,7 @@ namespace ViveirosID.Controllers {
         }
 
         [HttpPost]
+        [Authorize]
         public ActionResult Pesquisa(string nome, string peso, string preco, string crescimento, string luz, string rega) {
 
             // Faz uma selecao de todos os artigos
@@ -536,7 +538,8 @@ namespace ViveirosID.Controllers {
         }
 
         // GET: Artigoes/Create
-        [Authorize (Roles="Administrador")]
+        [Authorize(Roles = "Administrador")]
+        [Authorize(Roles = "Profissonal")]
         public ActionResult Create() {
             ViewBag.CategoriaFK = new SelectList(db.Categoria, "CategoriaID", "tipo");
             return View();
@@ -546,6 +549,7 @@ namespace ViveirosID.Controllers {
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [Authorize (Roles = "Administrador")]
+        [Authorize(Roles = "Profissonal")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ArtigoID,nome,nometecnico,disponibilidade,descricao,plantacaoComeca,plantacaoAcaba,peso,crescimento,preco,luz,rega,CategoriaFK")] Artigos artigo) {
@@ -560,7 +564,8 @@ namespace ViveirosID.Controllers {
         }
 
         // GET: Artigoes/Edit/5
-        [Authorize (Roles = "Administrador")]
+        [Authorize(Roles = "Administrador")]
+        [Authorize(Roles = "Profissonal")]
         public ActionResult Edit(int? id) {
             if (id == null) {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -576,7 +581,8 @@ namespace ViveirosID.Controllers {
         // POST: Artigoes/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [Authorize (Roles = "Administrador")]
+        [Authorize(Roles = "Administrador")]
+        [Authorize(Roles = "Profissonal")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ArtigoID,nome,nometecnico,disponibilidade,descricao,plantacaoComeca,plantacaoAcaba,peso,crescimento,luz,rega,CategoriaFK")] Artigos artigo) {
@@ -677,7 +683,49 @@ namespace ViveirosID.Controllers {
             /*if (id2.Equals("artigo")) return RedirectToAction("Index");
             else return RedirectToAction("Index", "Home");*/
 
-            return Redirect(Request.UrlReferrer.PathAndQuery);
+            return Redirect(Request.UrlReferrer.ToString());
+        }
+
+        [Authorize]
+        public ActionResult Actualiza(int? id, int? id2) {
+
+            if (id == null || id2 == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            Artigos artigo = db.Artigo.Find(id);
+
+            if (artigo == null)
+            {
+                return HttpNotFound();
+            }
+
+            // determina o user ID do utilizador asp net numa string
+            //
+            string userAspNetID = User.Identity.GetUserId();
+
+            // determina o ID do utilizador parte da base de dados Viveiros num inteiro
+            //
+            int userID = (from umUtilizador in db.Utilizador
+                          where umUtilizador.IDaspuser == userAspNetID
+                          select umUtilizador.UtilizadorID).FirstOrDefault();
+
+            // determina o ID do carrinho associado ao utilizador da bd Viveiros
+            //
+            int carID = (from umUtilizador in db.Utilizador
+                         where umUtilizador.UtilizadorID == userID
+                         select umUtilizador.CarrinhoFK).FirstOrDefault();
+
+            // pesquisa se existe uma correspondencia para carrinho_artigos para o artigo de ID == id
+            //
+            var car_artID = (from umcar_art in db.Carrinho_Artigos
+                             where umcar_art.CarrinhoFK == carID && umcar_art.ArtigoFK == id
+                             select umcar_art).ToList();
+
+            car_artID.Select(c => { c.quantidade = (int) id2; return c; }).ToList();
+
+            return View("Index");
         }
 
         /// <summary>

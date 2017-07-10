@@ -16,6 +16,7 @@ namespace ViveirosID.Controllers
 
         // GET: Categorias
         [Authorize(Roles = "Administrador")]
+        [Authorize(Roles = "Profissional")]
         public ActionResult Index()
         {
             return View(db.Categoria.ToList());
@@ -23,6 +24,7 @@ namespace ViveirosID.Controllers
 
         // GET: Categorias/Details/5
         [Authorize(Roles = "Administrador")]
+        [Authorize(Roles = "Profissional")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -39,6 +41,7 @@ namespace ViveirosID.Controllers
 
         // GET: Categorias/Create
         [Authorize(Roles = "Administrador")]
+        [Authorize(Roles = "Profissional")]
         public ActionResult Create()
         {
             return View();
@@ -48,6 +51,7 @@ namespace ViveirosID.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [Authorize(Roles = "Administrador")]
+        [Authorize(Roles = "Profissional")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "CategoriaID,tipo")] Categorias categorias)

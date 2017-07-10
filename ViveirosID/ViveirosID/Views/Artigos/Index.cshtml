@@ -4,13 +4,17 @@
     ViewBag.Title = "Artigos";
 }
 
-<h2>Index</h2>
+<h2>Artigos</h2>
 
+<a class="btn btn-success" href="/Artigos/MaisProcurados/">
+    <span class="glyphicon glyphicon-star"></span> Mais Procurados
+</a>
+<br />
 @if (User.IsInRole("Administrador") || User.IsInRole("Profissional"))
 {
-    <p>
-        @Html.ActionLink("Criar Novo Artigo", "Create")
-    </p>
+    <a class="btn btn-success" href="/Artigos/MaisProcurados/">
+        <span class="glyphicon glyphicon-asterisk"></span> Criar Novo
+    </a>
 }
     @*<p>
 
@@ -57,7 +61,7 @@
                             <p>
                                 @if (Request.IsAuthenticated)
                                 {
-                                    <a href="/Artigos/Adiciona/@item.ArtigoID/home" class="btn btn-primary">Adicionar</a>
+                                    <a href="/Artigos/Adiciona/@item.ArtigoID/1" class="btn btn-primary">Adicionar</a>
                                     <a href="/Artigos/Details/@item.ArtigoID/" class="btn btn-primary">Detalhes</a>
                                 }
                                 else

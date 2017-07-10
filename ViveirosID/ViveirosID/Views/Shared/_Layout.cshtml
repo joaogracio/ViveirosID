@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title - Viveiros Zezere</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/jquery")
     <script src="~/Scripts/mine.js"></script>
@@ -182,6 +182,28 @@
                 </button>
                 @Html.ActionLink("Viveiros Zezere", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
+            @*<div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="~/">Home</a></li>
+                    <li>
+                        <a href="#">About Us</a>
+                        <ul class="dropdown">
+                            <li><a href="~/Tradit.aspx">Traditions</a></li>
+                            <li><a href="~/Hounds.aspx">Hods</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">Notice Board</a>
+                        <ul class="dropdown">
+                            <li><a href="~/News.aspx">News</a></li>
+                            <li><a href="~/Events.aspx">HT Club</a></li>
+                        </ul>
+                    </li>
+                    <li><a href ="~/Adverts">Adverts</a></li>
+                    <li><a href="~/Gallery">Gallery</a></li>
+                    <li><a href="~/Contact">Contact</a></li>
+                </ul>
+            </div>*@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">a
                     <li>@Html.ActionLink("Acerca de Viveiros Zêzere", "About", "Home")</li>
@@ -190,7 +212,7 @@
                      @if (Request.IsAuthenticated) {
                         <li>@Html.ActionLink("Carrinho","Index","Carrinhos")</li>
                         <li>@Html.ActionLink("Compras", "Index", "Compras")</li>
-                         if (User.IsInRole("Administrador")) {
+                         if (User.IsInRole("Administrador") || User.IsInRole("Profissional")) {
                              <li>@Html.ActionLink("Categorias", "Index", "Categorias")</li>
                              <li>@Html.ActionLink("Imagens", "Index", "Imagens")</li>
                          }

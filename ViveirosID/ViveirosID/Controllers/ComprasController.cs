@@ -52,7 +52,7 @@ namespace Viveiros.Controllers {
         }
 
         // GET: Compras/Create
-        [Authorize]
+        [Authorize(Roles = "Adminstrador")]
         public ActionResult Create() {
             return View();
         }

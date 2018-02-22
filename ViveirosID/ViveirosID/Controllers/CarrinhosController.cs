@@ -166,7 +166,7 @@ namespace ViveirosID.Controllers {
         }
 
         // GET: Carrinhoes/Edit/5
-        [Authorize(Roles = "Administador")]
+        [Authorize(Roles = "Administrador")]
         public ActionResult Edit(int? id) {
             if (id == null) {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);

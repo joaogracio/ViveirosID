@@ -548,7 +548,7 @@ namespace ViveirosID.Controllers {
         // POST: Artigoes/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [Authorize (Roles = "Administrador")]
+        [Authorize(Roles = "Administrador")]
         [Authorize(Roles = "Profissonal")]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -733,7 +733,7 @@ namespace ViveirosID.Controllers {
         /// </summary>
         /// <returns></returns>
         [Authorize]
-        public ActionResult Mais_Procurados() {
+        public ActionResult MaisProcurados() {
 
             // determina o user ID do utilizador asp net numa string
             //

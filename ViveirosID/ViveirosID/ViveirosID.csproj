@@ -25,6 +25,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -374,7 +375,7 @@
     <Content Include="Views\Imagens\Edit.cshtml" />
     <Content Include="Views\Imagens\Index.cshtml" />
     <Content Include="Views\Artigos\Pesquisa.cshtml" />
-    <Content Include="Views\Artigos\Mais_Procurados.cshtml" />
+    <Content Include="Views\Artigos\MaisProcurados.cshtml" />
     <Content Include="Views\Carrinhos\MetodoDePagamento.cshtml" />
     <Content Include="Views\Carrinhos\Visa.cshtml" />
     <Content Include="Views\Carrinhos\Tranferencia.cshtml" />

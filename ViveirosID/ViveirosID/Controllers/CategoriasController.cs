@@ -15,8 +15,7 @@ namespace ViveirosID.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Categorias
-        [Authorize(Roles = "Administrador")]
-        [Authorize(Roles = "Profissional")]
+        [Authorize]
         public ActionResult Index()
         {
             return View(db.Categoria.ToList());

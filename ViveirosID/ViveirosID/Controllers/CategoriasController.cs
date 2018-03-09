@@ -23,8 +23,7 @@ namespace ViveirosID.Controllers
         }
 
         // GET: Categorias/Details/5
-        [Authorize(Roles = "Administrador")]
-        [Authorize(Roles = "Profissional")]
+        [Authorize]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -40,8 +39,7 @@ namespace ViveirosID.Controllers
         }
 
         // GET: Categorias/Create
-        [Authorize(Roles = "Administrador")]
-        [Authorize(Roles = "Profissional")]
+        [Authorize]
         public ActionResult Create()
         {
             return View();
@@ -50,8 +48,7 @@ namespace ViveirosID.Controllers
         // POST: Categorias/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [Authorize(Roles = "Administrador")]
-        [Authorize(Roles = "Profissional")]
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "CategoriaID,tipo")] Categorias categorias)
@@ -67,7 +64,7 @@ namespace ViveirosID.Controllers
         }
 
         // GET: Categorias/Edit/5
-        [Authorize(Roles = "Administrador")]
+        [Authorize]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -85,7 +82,7 @@ namespace ViveirosID.Controllers
         // POST: Categorias/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [Authorize(Roles = "Administrador")]
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "CategoriaID,tipo")] Categorias categorias)
@@ -100,7 +97,7 @@ namespace ViveirosID.Controllers
         }
 
         // GET: Categorias/Delete/5
-        [Authorize(Roles = "Administrador")]
+        [Authorize]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -116,7 +113,7 @@ namespace ViveirosID.Controllers
         }
 
         // POST: Categorias/Delete/5
-        [Authorize(Roles = "Administrador")]
+        [Authorize]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

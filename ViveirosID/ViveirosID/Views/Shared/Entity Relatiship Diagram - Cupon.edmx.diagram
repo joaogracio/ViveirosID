@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="0a447a0fda4f4a21a242b1fc2eaab626" Name="Diagram1">
+        <EntityTypeShape EntityType="Model1.Artigos" Width="1.5" PointX="3" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model1.CarrinhoArtigoes" Width="1.5" PointX="5.25" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model1.Carrinhos" Width="1.5" PointX="3" PointY="12" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model1.Categorias" Width="1.5" PointX="0.75" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model1.CompraArtigoes" Width="1.5" PointX="8.25" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model1.Compras" Width="1.5" PointX="6" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model1.ContentViewModels" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model1.Cupons" Width="1.5" PointX="3" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model1.CuponsArtigos" Width="1.5" PointX="5.25" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model1.Imagens" Width="1.5" PointX="5.25" PointY="15.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model1.Utilizadores" Width="1.5" PointX="0.75" PointY="11" IsExpanded="true" />
+        <AssociationConnector Association="Model1.FK_dbo_Artigos_dbo_Categorias_CategoriaFK" ManuallyRouted="false" />
+        <AssociationConnector Association="Model1.FK_dbo_CarrinhoArtigoes_dbo_Artigos_ArtigoFK" ManuallyRouted="false" />
+        <AssociationConnector Association="Model1.FK_dbo_CompraArtigoes_dbo_Artigos_ArtigoFK" ManuallyRouted="false" />
+        <AssociationConnector Association="Model1.FK_dbo_CuponsArtigos_dbo_Artigos_ArtigoFK" ManuallyRouted="false" />
+        <AssociationConnector Association="Model1.FK_dbo_Imagens_dbo_Artigos_ArtigoFK" ManuallyRouted="false" />
+        <AssociationConnector Association="Model1.FK_dbo_CarrinhoArtigoes_dbo_Carrinhos_CarrinhoFK" ManuallyRouted="false" />
+        <AssociationConnector Association="Model1.FK_dbo_Carrinhos_dbo_Utilizadores_Utilizador_UtilizadorID" ManuallyRouted="false" />
+        <AssociationConnector Association="Model1.FK_dbo_CompraArtigoes_dbo_Compras_CompraFK" ManuallyRouted="false" />
+        <AssociationConnector Association="Model1.FK_dbo_Compras_dbo_Utilizadores_UtilizadorFK" ManuallyRouted="false" />
+        <AssociationConnector Association="Model1.FK_dbo_CuponsArtigos_dbo_Cupons_CuponsFK" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

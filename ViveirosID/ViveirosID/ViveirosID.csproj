@@ -190,6 +190,8 @@
     <Compile Include="Models\Categorias.cs" />
     <Compile Include="Models\CompraArtigo.cs" />
     <Compile Include="Models\Compras.cs" />
+    <Compile Include="Models\Cupons.cs" />
+    <Compile Include="Models\CuponsArtigos.cs" />
     <Compile Include="Models\ICOlection.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Imagens.cs" />

@@ -1,0 +1,833 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Model1.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Artigos">
+          <Key>
+            <PropertyRef Name="ArtigoID" />
+          </Key>
+          <Property Name="ArtigoID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nome" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="nometecnico" Type="nvarchar(max)" />
+          <Property Name="disponibilidade" Type="bit" Nullable="false" />
+          <Property Name="descricao" Type="nvarchar(max)" />
+          <Property Name="plantacaoComeca" Type="nvarchar(max)" />
+          <Property Name="plantacaoAcaba" Type="nvarchar(max)" />
+          <Property Name="peso" Type="real" Nullable="false" />
+          <Property Name="crescimento" Type="real" Nullable="false" />
+          <Property Name="luz" Type="real" Nullable="false" />
+          <Property Name="rega" Type="real" Nullable="false" />
+          <Property Name="preco" Type="real" Nullable="false" />
+          <Property Name="CategoriaFK" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CarrinhoArtigoes">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="quantidade" Type="int" Nullable="false" />
+          <Property Name="ArtigoFK" Type="int" Nullable="false" />
+          <Property Name="CarrinhoFK" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Carrinhos">
+          <Key>
+            <PropertyRef Name="CarrinhoID" />
+          </Key>
+          <Property Name="CarrinhoID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="precototal" Type="real" Nullable="false" />
+          <Property Name="ultimaAlteracao" Type="datetime" Nullable="false" />
+          <Property Name="peso" Type="real" Nullable="false" />
+          <Property Name="Utilizador_UtilizadorID" Type="int" />
+        </EntityType>
+        <EntityType Name="Categorias">
+          <Key>
+            <PropertyRef Name="CategoriaID" />
+          </Key>
+          <Property Name="CategoriaID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tipo" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="CompraArtigoes">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="quantidade" Type="int" Nullable="false" />
+          <Property Name="preco" Type="float" Nullable="false" />
+          <Property Name="IVA" Type="int" Nullable="false" />
+          <Property Name="ArtigoFK" Type="int" Nullable="false" />
+          <Property Name="CompraFK" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Compras">
+          <Key>
+            <PropertyRef Name="CompraID" />
+          </Key>
+          <Property Name="CompraID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="metodoentrega" Type="nvarchar(max)" />
+          <Property Name="metodopagamento" Type="nvarchar(max)" />
+          <Property Name="estado" Type="nvarchar(max)" />
+          <Property Name="data" Type="datetime" Nullable="false" />
+          <Property Name="precototal" Type="float" Nullable="false" />
+          <Property Name="UtilizadorFK" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ContentViewModels">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar(max)" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="Contents" Type="nvarchar(max)" />
+          <Property Name="Image" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Cupons">
+          <Key>
+            <PropertyRef Name="CuponsID" />
+          </Key>
+          <Property Name="CuponsID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="codigo" Type="nvarchar(max)" />
+          <Property Name="descricao" Type="nvarchar(max)" />
+          <Property Name="dataLimite" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CuponsArtigos">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="percentagem" Type="int" Nullable="false" />
+          <Property Name="ArtigoFK" Type="int" Nullable="false" />
+          <Property Name="CuponsFK" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Imagens">
+          <Key>
+            <PropertyRef Name="ImagemID" />
+          </Key>
+          <Property Name="ImagemID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nome" Type="nvarchar(max)" />
+          <Property Name="directorio" Type="nvarchar(max)" />
+          <Property Name="descricao" Type="nvarchar(max)" />
+          <Property Name="tipo" Type="nvarchar(max)" />
+          <Property Name="ArtigoFK" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Utilizadores">
+          <Key>
+            <PropertyRef Name="UtilizadorID" />
+          </Key>
+          <Property Name="UtilizadorID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nome" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="apelido" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="datadenascimento" Type="datetime" Nullable="false" />
+          <Property Name="NIF" Type="int" Nullable="false" />
+          <Property Name="morada" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="local" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="codigoposta" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="cidade" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="distrito" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="pais" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="telefone" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="preco_transporte" Type="float" Nullable="false" />
+          <Property Name="CarrinhoFK" Type="int" Nullable="false" />
+          <Property Name="IDaspuser" Type="nvarchar(max)" />
+        </EntityType>
+        <Association Name="FK_dbo_Artigos_dbo_Categorias_CategoriaFK">
+          <End Role="Categorias" Type="Self.Categorias" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Artigos" Type="Self.Artigos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categorias">
+              <PropertyRef Name="CategoriaID" />
+            </Principal>
+            <Dependent Role="Artigos">
+              <PropertyRef Name="CategoriaFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_CarrinhoArtigoes_dbo_Artigos_ArtigoFK">
+          <End Role="Artigos" Type="Self.Artigos" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="CarrinhoArtigoes" Type="Self.CarrinhoArtigoes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Artigos">
+              <PropertyRef Name="ArtigoID" />
+            </Principal>
+            <Dependent Role="CarrinhoArtigoes">
+              <PropertyRef Name="ArtigoFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_CarrinhoArtigoes_dbo_Carrinhos_CarrinhoFK">
+          <End Role="Carrinhos" Type="Self.Carrinhos" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="CarrinhoArtigoes" Type="Self.CarrinhoArtigoes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Carrinhos">
+              <PropertyRef Name="CarrinhoID" />
+            </Principal>
+            <Dependent Role="CarrinhoArtigoes">
+              <PropertyRef Name="CarrinhoFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Carrinhos_dbo_Utilizadores_Utilizador_UtilizadorID">
+          <End Role="Utilizadores" Type="Self.Utilizadores" Multiplicity="0..1" />
+          <End Role="Carrinhos" Type="Self.Carrinhos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Utilizadores">
+              <PropertyRef Name="UtilizadorID" />
+            </Principal>
+            <Dependent Role="Carrinhos">
+              <PropertyRef Name="Utilizador_UtilizadorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_CompraArtigoes_dbo_Artigos_ArtigoFK">
+          <End Role="Artigos" Type="Self.Artigos" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="CompraArtigoes" Type="Self.CompraArtigoes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Artigos">
+              <PropertyRef Name="ArtigoID" />
+            </Principal>
+            <Dependent Role="CompraArtigoes">
+              <PropertyRef Name="ArtigoFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_CompraArtigoes_dbo_Compras_CompraFK">
+          <End Role="Compras" Type="Self.Compras" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="CompraArtigoes" Type="Self.CompraArtigoes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Compras">
+              <PropertyRef Name="CompraID" />
+            </Principal>
+            <Dependent Role="CompraArtigoes">
+              <PropertyRef Name="CompraFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Compras_dbo_Utilizadores_UtilizadorFK">
+          <End Role="Utilizadores" Type="Self.Utilizadores" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Compras" Type="Self.Compras" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Utilizadores">
+              <PropertyRef Name="UtilizadorID" />
+            </Principal>
+            <Dependent Role="Compras">
+              <PropertyRef Name="UtilizadorFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_CuponsArtigos_dbo_Artigos_ArtigoFK">
+          <End Role="Artigos" Type="Self.Artigos" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="CuponsArtigos" Type="Self.CuponsArtigos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Artigos">
+              <PropertyRef Name="ArtigoID" />
+            </Principal>
+            <Dependent Role="CuponsArtigos">
+              <PropertyRef Name="ArtigoFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_CuponsArtigos_dbo_Cupons_CuponsFK">
+          <End Role="Cupons" Type="Self.Cupons" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="CuponsArtigos" Type="Self.CuponsArtigos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cupons">
+              <PropertyRef Name="CuponsID" />
+            </Principal>
+            <Dependent Role="CuponsArtigos">
+              <PropertyRef Name="CuponsFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Imagens_dbo_Artigos_ArtigoFK">
+          <End Role="Artigos" Type="Self.Artigos" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Imagens" Type="Self.Imagens" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Artigos">
+              <PropertyRef Name="ArtigoID" />
+            </Principal>
+            <Dependent Role="Imagens">
+              <PropertyRef Name="ArtigoFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Model1StoreContainer">
+          <EntitySet Name="Artigos" EntityType="Self.Artigos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CarrinhoArtigoes" EntityType="Self.CarrinhoArtigoes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Carrinhos" EntityType="Self.Carrinhos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Categorias" EntityType="Self.Categorias" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CompraArtigoes" EntityType="Self.CompraArtigoes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Compras" EntityType="Self.Compras" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ContentViewModels" EntityType="Self.ContentViewModels" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cupons" EntityType="Self.Cupons" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CuponsArtigos" EntityType="Self.CuponsArtigos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Imagens" EntityType="Self.Imagens" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Utilizadores" EntityType="Self.Utilizadores" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_dbo_Artigos_dbo_Categorias_CategoriaFK" Association="Self.FK_dbo_Artigos_dbo_Categorias_CategoriaFK">
+            <End Role="Categorias" EntitySet="Categorias" />
+            <End Role="Artigos" EntitySet="Artigos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_CarrinhoArtigoes_dbo_Artigos_ArtigoFK" Association="Self.FK_dbo_CarrinhoArtigoes_dbo_Artigos_ArtigoFK">
+            <End Role="Artigos" EntitySet="Artigos" />
+            <End Role="CarrinhoArtigoes" EntitySet="CarrinhoArtigoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_CarrinhoArtigoes_dbo_Carrinhos_CarrinhoFK" Association="Self.FK_dbo_CarrinhoArtigoes_dbo_Carrinhos_CarrinhoFK">
+            <End Role="Carrinhos" EntitySet="Carrinhos" />
+            <End Role="CarrinhoArtigoes" EntitySet="CarrinhoArtigoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Carrinhos_dbo_Utilizadores_Utilizador_UtilizadorID" Association="Self.FK_dbo_Carrinhos_dbo_Utilizadores_Utilizador_UtilizadorID">
+            <End Role="Utilizadores" EntitySet="Utilizadores" />
+            <End Role="Carrinhos" EntitySet="Carrinhos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_CompraArtigoes_dbo_Artigos_ArtigoFK" Association="Self.FK_dbo_CompraArtigoes_dbo_Artigos_ArtigoFK">
+            <End Role="Artigos" EntitySet="Artigos" />
+            <End Role="CompraArtigoes" EntitySet="CompraArtigoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_CompraArtigoes_dbo_Compras_CompraFK" Association="Self.FK_dbo_CompraArtigoes_dbo_Compras_CompraFK">
+            <End Role="Compras" EntitySet="Compras" />
+            <End Role="CompraArtigoes" EntitySet="CompraArtigoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Compras_dbo_Utilizadores_UtilizadorFK" Association="Self.FK_dbo_Compras_dbo_Utilizadores_UtilizadorFK">
+            <End Role="Utilizadores" EntitySet="Utilizadores" />
+            <End Role="Compras" EntitySet="Compras" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_CuponsArtigos_dbo_Artigos_ArtigoFK" Association="Self.FK_dbo_CuponsArtigos_dbo_Artigos_ArtigoFK">
+            <End Role="Artigos" EntitySet="Artigos" />
+            <End Role="CuponsArtigos" EntitySet="CuponsArtigos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_CuponsArtigos_dbo_Cupons_CuponsFK" Association="Self.FK_dbo_CuponsArtigos_dbo_Cupons_CuponsFK">
+            <End Role="Cupons" EntitySet="Cupons" />
+            <End Role="CuponsArtigos" EntitySet="CuponsArtigos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Imagens_dbo_Artigos_ArtigoFK" Association="Self.FK_dbo_Imagens_dbo_Artigos_ArtigoFK">
+            <End Role="Artigos" EntitySet="Artigos" />
+            <End Role="Imagens" EntitySet="Imagens" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Model1" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Artigos">
+          <Key>
+            <PropertyRef Name="ArtigoID" />
+          </Key>
+          <Property Name="ArtigoID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nome" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="nometecnico" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="disponibilidade" Type="Boolean" Nullable="false" />
+          <Property Name="descricao" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="plantacaoComeca" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="plantacaoAcaba" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="peso" Type="Single" Nullable="false" />
+          <Property Name="crescimento" Type="Single" Nullable="false" />
+          <Property Name="luz" Type="Single" Nullable="false" />
+          <Property Name="rega" Type="Single" Nullable="false" />
+          <Property Name="preco" Type="Single" Nullable="false" />
+          <Property Name="CategoriaFK" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Categorias" Relationship="Self.FK_dbo_Artigos_dbo_Categorias_CategoriaFK" FromRole="Artigos" ToRole="Categorias" />
+          <NavigationProperty Name="CarrinhoArtigoes" Relationship="Self.FK_dbo_CarrinhoArtigoes_dbo_Artigos_ArtigoFK" FromRole="Artigos" ToRole="CarrinhoArtigoes" />
+          <NavigationProperty Name="CompraArtigoes" Relationship="Self.FK_dbo_CompraArtigoes_dbo_Artigos_ArtigoFK" FromRole="Artigos" ToRole="CompraArtigoes" />
+          <NavigationProperty Name="CuponsArtigos" Relationship="Self.FK_dbo_CuponsArtigos_dbo_Artigos_ArtigoFK" FromRole="Artigos" ToRole="CuponsArtigos" />
+          <NavigationProperty Name="Imagens" Relationship="Self.FK_dbo_Imagens_dbo_Artigos_ArtigoFK" FromRole="Artigos" ToRole="Imagens" />
+        </EntityType>
+        <EntityType Name="CarrinhoArtigoes">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="quantidade" Type="Int32" Nullable="false" />
+          <Property Name="ArtigoFK" Type="Int32" Nullable="false" />
+          <Property Name="CarrinhoFK" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Artigos" Relationship="Self.FK_dbo_CarrinhoArtigoes_dbo_Artigos_ArtigoFK" FromRole="CarrinhoArtigoes" ToRole="Artigos" />
+          <NavigationProperty Name="Carrinhos" Relationship="Self.FK_dbo_CarrinhoArtigoes_dbo_Carrinhos_CarrinhoFK" FromRole="CarrinhoArtigoes" ToRole="Carrinhos" />
+        </EntityType>
+        <EntityType Name="Carrinhos">
+          <Key>
+            <PropertyRef Name="CarrinhoID" />
+          </Key>
+          <Property Name="CarrinhoID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="precototal" Type="Single" Nullable="false" />
+          <Property Name="ultimaAlteracao" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="peso" Type="Single" Nullable="false" />
+          <Property Name="Utilizador_UtilizadorID" Type="Int32" />
+          <NavigationProperty Name="CarrinhoArtigoes" Relationship="Self.FK_dbo_CarrinhoArtigoes_dbo_Carrinhos_CarrinhoFK" FromRole="Carrinhos" ToRole="CarrinhoArtigoes" />
+          <NavigationProperty Name="Utilizadores" Relationship="Self.FK_dbo_Carrinhos_dbo_Utilizadores_Utilizador_UtilizadorID" FromRole="Carrinhos" ToRole="Utilizadores" />
+        </EntityType>
+        <EntityType Name="Categorias">
+          <Key>
+            <PropertyRef Name="CategoriaID" />
+          </Key>
+          <Property Name="CategoriaID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tipo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Artigos" Relationship="Self.FK_dbo_Artigos_dbo_Categorias_CategoriaFK" FromRole="Categorias" ToRole="Artigos" />
+        </EntityType>
+        <EntityType Name="CompraArtigoes">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="quantidade" Type="Int32" Nullable="false" />
+          <Property Name="preco" Type="Double" Nullable="false" />
+          <Property Name="IVA" Type="Int32" Nullable="false" />
+          <Property Name="ArtigoFK" Type="Int32" Nullable="false" />
+          <Property Name="CompraFK" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Artigos" Relationship="Self.FK_dbo_CompraArtigoes_dbo_Artigos_ArtigoFK" FromRole="CompraArtigoes" ToRole="Artigos" />
+          <NavigationProperty Name="Compras" Relationship="Self.FK_dbo_CompraArtigoes_dbo_Compras_CompraFK" FromRole="CompraArtigoes" ToRole="Compras" />
+        </EntityType>
+        <EntityType Name="Compras">
+          <Key>
+            <PropertyRef Name="CompraID" />
+          </Key>
+          <Property Name="CompraID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="metodoentrega" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="metodopagamento" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="estado" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="data" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="precototal" Type="Double" Nullable="false" />
+          <Property Name="UtilizadorFK" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CompraArtigoes" Relationship="Self.FK_dbo_CompraArtigoes_dbo_Compras_CompraFK" FromRole="Compras" ToRole="CompraArtigoes" />
+          <NavigationProperty Name="Utilizadores" Relationship="Self.FK_dbo_Compras_dbo_Utilizadores_UtilizadorFK" FromRole="Compras" ToRole="Utilizadores" />
+        </EntityType>
+        <EntityType Name="ContentViewModels">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Contents" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Cupons">
+          <Key>
+            <PropertyRef Name="CuponsID" />
+          </Key>
+          <Property Name="CuponsID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="codigo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="descricao" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="dataLimite" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="CuponsArtigos" Relationship="Self.FK_dbo_CuponsArtigos_dbo_Cupons_CuponsFK" FromRole="Cupons" ToRole="CuponsArtigos" />
+        </EntityType>
+        <EntityType Name="CuponsArtigos">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="percentagem" Type="Int32" Nullable="false" />
+          <Property Name="ArtigoFK" Type="Int32" Nullable="false" />
+          <Property Name="CuponsFK" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Artigos" Relationship="Self.FK_dbo_CuponsArtigos_dbo_Artigos_ArtigoFK" FromRole="CuponsArtigos" ToRole="Artigos" />
+          <NavigationProperty Name="Cupons" Relationship="Self.FK_dbo_CuponsArtigos_dbo_Cupons_CuponsFK" FromRole="CuponsArtigos" ToRole="Cupons" />
+        </EntityType>
+        <EntityType Name="Imagens">
+          <Key>
+            <PropertyRef Name="ImagemID" />
+          </Key>
+          <Property Name="ImagemID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nome" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="directorio" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="descricao" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="tipo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ArtigoFK" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Artigos" Relationship="Self.FK_dbo_Imagens_dbo_Artigos_ArtigoFK" FromRole="Imagens" ToRole="Artigos" />
+        </EntityType>
+        <EntityType Name="Utilizadores">
+          <Key>
+            <PropertyRef Name="UtilizadorID" />
+          </Key>
+          <Property Name="UtilizadorID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nome" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="apelido" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="datadenascimento" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="NIF" Type="Int32" Nullable="false" />
+          <Property Name="morada" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="local" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="codigoposta" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="cidade" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="distrito" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="pais" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="telefone" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="preco_transporte" Type="Double" Nullable="false" />
+          <Property Name="CarrinhoFK" Type="Int32" Nullable="false" />
+          <Property Name="IDaspuser" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Carrinhos" Relationship="Self.FK_dbo_Carrinhos_dbo_Utilizadores_Utilizador_UtilizadorID" FromRole="Utilizadores" ToRole="Carrinhos" />
+          <NavigationProperty Name="Compras" Relationship="Self.FK_dbo_Compras_dbo_Utilizadores_UtilizadorFK" FromRole="Utilizadores" ToRole="Compras" />
+        </EntityType>
+        <Association Name="FK_dbo_Artigos_dbo_Categorias_CategoriaFK">
+          <End Role="Categorias" Type="Self.Categorias" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Artigos" Type="Self.Artigos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categorias">
+              <PropertyRef Name="CategoriaID" />
+            </Principal>
+            <Dependent Role="Artigos">
+              <PropertyRef Name="CategoriaFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_CarrinhoArtigoes_dbo_Artigos_ArtigoFK">
+          <End Role="Artigos" Type="Self.Artigos" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="CarrinhoArtigoes" Type="Self.CarrinhoArtigoes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Artigos">
+              <PropertyRef Name="ArtigoID" />
+            </Principal>
+            <Dependent Role="CarrinhoArtigoes">
+              <PropertyRef Name="ArtigoFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_CompraArtigoes_dbo_Artigos_ArtigoFK">
+          <End Role="Artigos" Type="Self.Artigos" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="CompraArtigoes" Type="Self.CompraArtigoes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Artigos">
+              <PropertyRef Name="ArtigoID" />
+            </Principal>
+            <Dependent Role="CompraArtigoes">
+              <PropertyRef Name="ArtigoFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_CuponsArtigos_dbo_Artigos_ArtigoFK">
+          <End Role="Artigos" Type="Self.Artigos" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="CuponsArtigos" Type="Self.CuponsArtigos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Artigos">
+              <PropertyRef Name="ArtigoID" />
+            </Principal>
+            <Dependent Role="CuponsArtigos">
+              <PropertyRef Name="ArtigoFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Imagens_dbo_Artigos_ArtigoFK">
+          <End Role="Artigos" Type="Self.Artigos" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Imagens" Type="Self.Imagens" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Artigos">
+              <PropertyRef Name="ArtigoID" />
+            </Principal>
+            <Dependent Role="Imagens">
+              <PropertyRef Name="ArtigoFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_CarrinhoArtigoes_dbo_Carrinhos_CarrinhoFK">
+          <End Role="Carrinhos" Type="Self.Carrinhos" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="CarrinhoArtigoes" Type="Self.CarrinhoArtigoes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Carrinhos">
+              <PropertyRef Name="CarrinhoID" />
+            </Principal>
+            <Dependent Role="CarrinhoArtigoes">
+              <PropertyRef Name="CarrinhoFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Carrinhos_dbo_Utilizadores_Utilizador_UtilizadorID">
+          <End Role="Utilizadores" Type="Self.Utilizadores" Multiplicity="0..1" />
+          <End Role="Carrinhos" Type="Self.Carrinhos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Utilizadores">
+              <PropertyRef Name="UtilizadorID" />
+            </Principal>
+            <Dependent Role="Carrinhos">
+              <PropertyRef Name="Utilizador_UtilizadorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_CompraArtigoes_dbo_Compras_CompraFK">
+          <End Role="Compras" Type="Self.Compras" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="CompraArtigoes" Type="Self.CompraArtigoes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Compras">
+              <PropertyRef Name="CompraID" />
+            </Principal>
+            <Dependent Role="CompraArtigoes">
+              <PropertyRef Name="CompraFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Compras_dbo_Utilizadores_UtilizadorFK">
+          <End Role="Utilizadores" Type="Self.Utilizadores" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Compras" Type="Self.Compras" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Utilizadores">
+              <PropertyRef Name="UtilizadorID" />
+            </Principal>
+            <Dependent Role="Compras">
+              <PropertyRef Name="UtilizadorFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_CuponsArtigos_dbo_Cupons_CuponsFK">
+          <End Role="Cupons" Type="Self.Cupons" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="CuponsArtigos" Type="Self.CuponsArtigos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cupons">
+              <PropertyRef Name="CuponsID" />
+            </Principal>
+            <Dependent Role="CuponsArtigos">
+              <PropertyRef Name="CuponsFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Entities2" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Artigos" EntityType="Self.Artigos" />
+          <EntitySet Name="CarrinhoArtigoes" EntityType="Self.CarrinhoArtigoes" />
+          <EntitySet Name="Carrinhos" EntityType="Self.Carrinhos" />
+          <EntitySet Name="Categorias" EntityType="Self.Categorias" />
+          <EntitySet Name="CompraArtigoes" EntityType="Self.CompraArtigoes" />
+          <EntitySet Name="Compras" EntityType="Self.Compras" />
+          <EntitySet Name="ContentViewModels" EntityType="Self.ContentViewModels" />
+          <EntitySet Name="Cupons" EntityType="Self.Cupons" />
+          <EntitySet Name="CuponsArtigos" EntityType="Self.CuponsArtigos" />
+          <EntitySet Name="Imagens" EntityType="Self.Imagens" />
+          <EntitySet Name="Utilizadores" EntityType="Self.Utilizadores" />
+          <AssociationSet Name="FK_dbo_Artigos_dbo_Categorias_CategoriaFK" Association="Self.FK_dbo_Artigos_dbo_Categorias_CategoriaFK">
+            <End Role="Categorias" EntitySet="Categorias" />
+            <End Role="Artigos" EntitySet="Artigos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_CarrinhoArtigoes_dbo_Artigos_ArtigoFK" Association="Self.FK_dbo_CarrinhoArtigoes_dbo_Artigos_ArtigoFK">
+            <End Role="Artigos" EntitySet="Artigos" />
+            <End Role="CarrinhoArtigoes" EntitySet="CarrinhoArtigoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_CompraArtigoes_dbo_Artigos_ArtigoFK" Association="Self.FK_dbo_CompraArtigoes_dbo_Artigos_ArtigoFK">
+            <End Role="Artigos" EntitySet="Artigos" />
+            <End Role="CompraArtigoes" EntitySet="CompraArtigoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_CuponsArtigos_dbo_Artigos_ArtigoFK" Association="Self.FK_dbo_CuponsArtigos_dbo_Artigos_ArtigoFK">
+            <End Role="Artigos" EntitySet="Artigos" />
+            <End Role="CuponsArtigos" EntitySet="CuponsArtigos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Imagens_dbo_Artigos_ArtigoFK" Association="Self.FK_dbo_Imagens_dbo_Artigos_ArtigoFK">
+            <End Role="Artigos" EntitySet="Artigos" />
+            <End Role="Imagens" EntitySet="Imagens" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_CarrinhoArtigoes_dbo_Carrinhos_CarrinhoFK" Association="Self.FK_dbo_CarrinhoArtigoes_dbo_Carrinhos_CarrinhoFK">
+            <End Role="Carrinhos" EntitySet="Carrinhos" />
+            <End Role="CarrinhoArtigoes" EntitySet="CarrinhoArtigoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Carrinhos_dbo_Utilizadores_Utilizador_UtilizadorID" Association="Self.FK_dbo_Carrinhos_dbo_Utilizadores_Utilizador_UtilizadorID">
+            <End Role="Utilizadores" EntitySet="Utilizadores" />
+            <End Role="Carrinhos" EntitySet="Carrinhos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_CompraArtigoes_dbo_Compras_CompraFK" Association="Self.FK_dbo_CompraArtigoes_dbo_Compras_CompraFK">
+            <End Role="Compras" EntitySet="Compras" />
+            <End Role="CompraArtigoes" EntitySet="CompraArtigoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Compras_dbo_Utilizadores_UtilizadorFK" Association="Self.FK_dbo_Compras_dbo_Utilizadores_UtilizadorFK">
+            <End Role="Utilizadores" EntitySet="Utilizadores" />
+            <End Role="Compras" EntitySet="Compras" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_CuponsArtigos_dbo_Cupons_CuponsFK" Association="Self.FK_dbo_CuponsArtigos_dbo_Cupons_CuponsFK">
+            <End Role="Cupons" EntitySet="Cupons" />
+            <End Role="CuponsArtigos" EntitySet="CuponsArtigos" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Model1StoreContainer" CdmEntityContainer="Entities2">
+          <EntitySetMapping Name="Artigos">
+            <EntityTypeMapping TypeName="Model1.Artigos">
+              <MappingFragment StoreEntitySet="Artigos">
+                <ScalarProperty Name="ArtigoID" ColumnName="ArtigoID" />
+                <ScalarProperty Name="nome" ColumnName="nome" />
+                <ScalarProperty Name="nometecnico" ColumnName="nometecnico" />
+                <ScalarProperty Name="disponibilidade" ColumnName="disponibilidade" />
+                <ScalarProperty Name="descricao" ColumnName="descricao" />
+                <ScalarProperty Name="plantacaoComeca" ColumnName="plantacaoComeca" />
+                <ScalarProperty Name="plantacaoAcaba" ColumnName="plantacaoAcaba" />
+                <ScalarProperty Name="peso" ColumnName="peso" />
+                <ScalarProperty Name="crescimento" ColumnName="crescimento" />
+                <ScalarProperty Name="luz" ColumnName="luz" />
+                <ScalarProperty Name="rega" ColumnName="rega" />
+                <ScalarProperty Name="preco" ColumnName="preco" />
+                <ScalarProperty Name="CategoriaFK" ColumnName="CategoriaFK" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CarrinhoArtigoes">
+            <EntityTypeMapping TypeName="Model1.CarrinhoArtigoes">
+              <MappingFragment StoreEntitySet="CarrinhoArtigoes">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="quantidade" ColumnName="quantidade" />
+                <ScalarProperty Name="ArtigoFK" ColumnName="ArtigoFK" />
+                <ScalarProperty Name="CarrinhoFK" ColumnName="CarrinhoFK" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Carrinhos">
+            <EntityTypeMapping TypeName="Model1.Carrinhos">
+              <MappingFragment StoreEntitySet="Carrinhos">
+                <ScalarProperty Name="CarrinhoID" ColumnName="CarrinhoID" />
+                <ScalarProperty Name="precototal" ColumnName="precototal" />
+                <ScalarProperty Name="ultimaAlteracao" ColumnName="ultimaAlteracao" />
+                <ScalarProperty Name="peso" ColumnName="peso" />
+                <ScalarProperty Name="Utilizador_UtilizadorID" ColumnName="Utilizador_UtilizadorID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Categorias">
+            <EntityTypeMapping TypeName="Model1.Categorias">
+              <MappingFragment StoreEntitySet="Categorias">
+                <ScalarProperty Name="CategoriaID" ColumnName="CategoriaID" />
+                <ScalarProperty Name="tipo" ColumnName="tipo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CompraArtigoes">
+            <EntityTypeMapping TypeName="Model1.CompraArtigoes">
+              <MappingFragment StoreEntitySet="CompraArtigoes">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="quantidade" ColumnName="quantidade" />
+                <ScalarProperty Name="preco" ColumnName="preco" />
+                <ScalarProperty Name="IVA" ColumnName="IVA" />
+                <ScalarProperty Name="ArtigoFK" ColumnName="ArtigoFK" />
+                <ScalarProperty Name="CompraFK" ColumnName="CompraFK" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Compras">
+            <EntityTypeMapping TypeName="Model1.Compras">
+              <MappingFragment StoreEntitySet="Compras">
+                <ScalarProperty Name="CompraID" ColumnName="CompraID" />
+                <ScalarProperty Name="metodoentrega" ColumnName="metodoentrega" />
+                <ScalarProperty Name="metodopagamento" ColumnName="metodopagamento" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="data" ColumnName="data" />
+                <ScalarProperty Name="precototal" ColumnName="precototal" />
+                <ScalarProperty Name="UtilizadorFK" ColumnName="UtilizadorFK" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ContentViewModels">
+            <EntityTypeMapping TypeName="Model1.ContentViewModels">
+              <MappingFragment StoreEntitySet="ContentViewModels">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Contents" ColumnName="Contents" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cupons">
+            <EntityTypeMapping TypeName="Model1.Cupons">
+              <MappingFragment StoreEntitySet="Cupons">
+                <ScalarProperty Name="CuponsID" ColumnName="CuponsID" />
+                <ScalarProperty Name="codigo" ColumnName="codigo" />
+                <ScalarProperty Name="descricao" ColumnName="descricao" />
+                <ScalarProperty Name="dataLimite" ColumnName="dataLimite" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CuponsArtigos">
+            <EntityTypeMapping TypeName="Model1.CuponsArtigos">
+              <MappingFragment StoreEntitySet="CuponsArtigos">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="percentagem" ColumnName="percentagem" />
+                <ScalarProperty Name="ArtigoFK" ColumnName="ArtigoFK" />
+                <ScalarProperty Name="CuponsFK" ColumnName="CuponsFK" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Imagens">
+            <EntityTypeMapping TypeName="Model1.Imagens">
+              <MappingFragment StoreEntitySet="Imagens">
+                <ScalarProperty Name="ImagemID" ColumnName="ImagemID" />
+                <ScalarProperty Name="nome" ColumnName="nome" />
+                <ScalarProperty Name="directorio" ColumnName="directorio" />
+                <ScalarProperty Name="descricao" ColumnName="descricao" />
+                <ScalarProperty Name="tipo" ColumnName="tipo" />
+                <ScalarProperty Name="ArtigoFK" ColumnName="ArtigoFK" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Utilizadores">
+            <EntityTypeMapping TypeName="Model1.Utilizadores">
+              <MappingFragment StoreEntitySet="Utilizadores">
+                <ScalarProperty Name="UtilizadorID" ColumnName="UtilizadorID" />
+                <ScalarProperty Name="nome" ColumnName="nome" />
+                <ScalarProperty Name="apelido" ColumnName="apelido" />
+                <ScalarProperty Name="datadenascimento" ColumnName="datadenascimento" />
+                <ScalarProperty Name="NIF" ColumnName="NIF" />
+                <ScalarProperty Name="morada" ColumnName="morada" />
+                <ScalarProperty Name="local" ColumnName="local" />
+                <ScalarProperty Name="codigoposta" ColumnName="codigoposta" />
+                <ScalarProperty Name="cidade" ColumnName="cidade" />
+                <ScalarProperty Name="distrito" ColumnName="distrito" />
+                <ScalarProperty Name="pais" ColumnName="pais" />
+                <ScalarProperty Name="telefone" ColumnName="telefone" />
+                <ScalarProperty Name="preco_transporte" ColumnName="preco_transporte" />
+                <ScalarProperty Name="CarrinhoFK" ColumnName="CarrinhoFK" />
+                <ScalarProperty Name="IDaspuser" ColumnName="IDaspuser" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

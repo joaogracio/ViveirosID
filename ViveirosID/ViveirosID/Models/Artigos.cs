@@ -10,6 +10,7 @@ namespace ViveirosID.Models {
 
         // Inicializar as variaveis ListaDeCompras, ListaDeArtigos, ListaDeImagens
         public Artigos() {
+            ListaDeCuponsArtigos = new HashSet<CuponsArtigos>();
             ListaDeCompras = new HashSet<CompraArtigo>();
             ListaDeCarrinhos = new HashSet<CarrinhoArtigo>();
             ListaDeImagens = new HashSet<Imagens>();
@@ -68,6 +69,8 @@ namespace ViveirosID.Models {
         // Relaciona um Artigo com uma Categoria
         public Categorias Categoria { get; set; }
 
+        // Um Artigo tem uma lista de Compras
+        public virtual ICollection<CuponsArtigos> ListaDeCuponsArtigos { get; set; }
         // Um Artigo tem uma lista de Compras
         public virtual ICollection<CompraArtigo> ListaDeCompras { get; set; }
         // Um Artigo tem uma lista de Carrinho

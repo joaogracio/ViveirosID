@@ -1,6 +1,6 @@
-﻿function file_up(input) {
+﻿$(function () {
 
-    //var input = $("#file").value;
+    var input = $("#file").value;
     if (input.files && input.files[0]) {
 
         var reader = new FileReader();
@@ -11,4 +11,4 @@
         reader.readAsDataURL(input.files[0]);
     }
 
-};
+});

@@ -17,8 +17,7 @@ namespace ViveirosID.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Imagens
-        [Authorize(Roles = "Administrador")]
-        [Authorize(Roles = "Profissional")]
+        [Authorize]
         public ActionResult Index()
         {
             var imagem = db.Imagem.Include(i => i.Artigo);
@@ -26,8 +25,7 @@ namespace ViveirosID.Controllers
         }
 
         // GET: Imagens/Details/5
-        [Authorize(Roles = "Administrador")]
-        [Authorize(Roles = "Profissional")]
+        [Authorize]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -43,8 +41,7 @@ namespace ViveirosID.Controllers
         }
 
         // GET: Imagens/Create
-        [Authorize(Roles = "Administrador")]
-        [Authorize(Roles = "Profissional")]
+        [Authorize]
         public ActionResult Create()
         {
             ViewBag.ArtigoFK = new SelectList(db.Artigo, "ArtigoID", "nome");
@@ -55,8 +52,7 @@ namespace ViveirosID.Controllers
         // POST: Imagens/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [Authorize(Roles = "Administrador")]
-        [Authorize(Roles = "Profissional")]
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "descricao,ArtigoFK")] Imagens imagens, HttpPostedFileBase file)
@@ -133,7 +129,7 @@ namespace ViveirosID.Controllers
         }
 
         // GET: Imagens/Edit/5
-        [Authorize(Roles = "Administrador")]
+        [Authorize]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -152,7 +148,7 @@ namespace ViveirosID.Controllers
         // POST: Imagens/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [Authorize(Roles = "Administrador")]
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ImagemID,nome,directorio,descricao,tipo,ArtigoFK")] Imagens imagens)
@@ -168,7 +164,7 @@ namespace ViveirosID.Controllers
         }
 
         // GET: Imagens/Delete/5
-        [Authorize(Roles = "Administrador")]
+        [Authorize]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -184,7 +180,7 @@ namespace ViveirosID.Controllers
         }
 
         // POST: Imagens/Delete/5
-        [Authorize(Roles = "Administrador")]
+        [Authorize]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

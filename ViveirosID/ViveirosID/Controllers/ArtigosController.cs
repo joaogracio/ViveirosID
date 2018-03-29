@@ -377,35 +377,37 @@ namespace ViveirosID.Controllers {
             artigo = artigo.Where(a => a.luz >= primeira_luz);
             artigo = artigo.Where(a => a.luz <= ultima_luz);
 
+            var artigos = (from umArtigo in db.Artigo
+                          select umArtigo);
             // Recolhe o valor mais alto de preco e o mais baixo
             //
-            ViewBag.primeiro_preco = artigo.OrderBy(a => a.preco).FirstOrDefault().preco;
+            ViewBag.primeiro_preco = artigos.OrderBy(a => a.preco).FirstOrDefault().preco;
 
-            ViewBag.ultimo_preco = artigo.OrderByDescending(a => a.preco).FirstOrDefault().preco;
+            ViewBag.ultimo_preco = artigos.OrderByDescending(a => a.preco).FirstOrDefault().preco;
 
             // Recolhe o valor mais alto de peso e o mais baixo
             //
-            ViewBag.primeiro_peso = artigo.OrderBy(a => a.peso).FirstOrDefault().peso;
+            ViewBag.primeiro_peso = artigos.OrderBy(a => a.peso).FirstOrDefault().peso;
 
-            ViewBag.ultimo_peso = artigo.OrderByDescending(a => a.peso).FirstOrDefault().peso;
+            ViewBag.ultimo_peso = artigos.OrderByDescending(a => a.peso).FirstOrDefault().peso;
 
             // Recolhe o valor de crescimento mais baixo e o mais elevado
             //
-            ViewBag.primeiro_crescimento = artigo.OrderBy(a => a.crescimento).FirstOrDefault().crescimento;
+            ViewBag.primeiro_crescimento = artigos.OrderBy(a => a.crescimento).FirstOrDefault().crescimento;
 
-            ViewBag.ultimo_crescimento = artigo.OrderByDescending(a => a.crescimento).FirstOrDefault().crescimento;
+            ViewBag.ultimo_crescimento = artigos.OrderByDescending(a => a.crescimento).FirstOrDefault().crescimento;
 
             // Recolhe o valor de luz mais baixo e mais elevado
             //
-            ViewBag.primeira_luz = artigo.OrderBy(a => a.luz).FirstOrDefault().luz;
+            ViewBag.primeira_luz = artigos.OrderBy(a => a.luz).FirstOrDefault().luz;
 
-            ViewBag.ultima_luz = artigo.OrderByDescending(a => a.luz).FirstOrDefault().luz;
+            ViewBag.ultima_luz = artigos.OrderByDescending(a => a.luz).FirstOrDefault().luz;
 
             // Recolhe o valor de rega mais baixo e o mais elevado
             //
-            ViewBag.primeira_rega = artigo.OrderBy(a => a.rega).FirstOrDefault().rega;
+            ViewBag.primeira_rega = artigos.OrderBy(a => a.rega).FirstOrDefault().rega;
 
-            ViewBag.ultima_rega = artigo.OrderByDescending(a => a.rega).FirstOrDefault().rega;
+            ViewBag.ultima_rega = artigos.OrderByDescending(a => a.rega).FirstOrDefault().rega;
 
             return View(artigo.ToList());
         }

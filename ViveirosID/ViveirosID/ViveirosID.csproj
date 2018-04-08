@@ -239,6 +239,54 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ModeloDeDadosExplicado.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Views\Shared\Artigos.cs">
+      <DependentUpon>Entity Relatiship Diagram - Cupon.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shared\CarrinhoArtigoes.cs">
+      <DependentUpon>Entity Relatiship Diagram - Cupon.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shared\Carrinhos.cs">
+      <DependentUpon>Entity Relatiship Diagram - Cupon.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shared\Categorias.cs">
+      <DependentUpon>Entity Relatiship Diagram - Cupon.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shared\CompraArtigoes.cs">
+      <DependentUpon>Entity Relatiship Diagram - Cupon.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shared\Compras.cs">
+      <DependentUpon>Entity Relatiship Diagram - Cupon.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shared\ContentViewModels.cs">
+      <DependentUpon>Entity Relatiship Diagram - Cupon.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shared\Cupons.cs">
+      <DependentUpon>Entity Relatiship Diagram - Cupon.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shared\CuponsArtigos.cs">
+      <DependentUpon>Entity Relatiship Diagram - Cupon.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shared\Entity Relatiship Diagram - Cupon.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Entity Relatiship Diagram - Cupon.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shared\Entity Relatiship Diagram - Cupon.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Entity Relatiship Diagram - Cupon.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shared\Entity Relatiship Diagram - Cupon.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Entity Relatiship Diagram - Cupon.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shared\Imagens.cs">
+      <DependentUpon>Entity Relatiship Diagram - Cupon.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shared\Utilizadores.cs">
+      <DependentUpon>Entity Relatiship Diagram - Cupon.tt</DependentUpon>
+    </Compile>
     <Compile Include="Views\Utilizadores.cs">
       <DependentUpon>ModeloDeDadosExplicado.tt</DependentUpon>
     </Compile>
@@ -312,6 +360,16 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>ModeloDeDadosExplicado.edmx</DependentUpon>
       <LastGenOutput>ModeloDeDadosExplicado.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\Entity Relatiship Diagram - Cupon.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Entity Relatiship Diagram - Cupon.edmx</DependentUpon>
+      <LastGenOutput>Entity Relatiship Diagram - Cupon.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\Entity Relatiship Diagram - Cupon.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Entity Relatiship Diagram - Cupon.edmx</DependentUpon>
+      <LastGenOutput>Entity Relatiship Diagram - Cupon.cs</LastGenOutput>
     </Content>
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -411,6 +469,13 @@
     </EntityDeploy>
     <Content Include="Views\ModeloDeDadosExplicado.edmx.diagram">
       <DependentUpon>ModeloDeDadosExplicado.edmx</DependentUpon>
+    </Content>
+    <EntityDeploy Include="Views\Shared\Entity Relatiship Diagram - Cupon.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Entity Relatiship Diagram - Cupon.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Views\Shared\Entity Relatiship Diagram - Cupon.edmx.diagram">
+      <DependentUpon>Entity Relatiship Diagram - Cupon.edmx</DependentUpon>
     </Content>
   </ItemGroup>
   <ItemGroup>

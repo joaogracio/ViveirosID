@@ -198,6 +198,7 @@
     <Compile Include="Models\ImageViewModel.cs" />
     <Compile Include="Models\ListaArtigosCarrinhoViewModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\MetodoDePagamento.cs" />
     <Compile Include="Models\ProdutoDetalhesViewModel.cs" />
     <Compile Include="Models\Upload.cs" />
     <Compile Include="Models\Utilizadores.cs" />
@@ -441,9 +442,7 @@
     <Content Include="Views\Artigos\MaisProcurados.cshtml" />
     <Content Include="Views\Carrinhos\MetodoDePagamento.cshtml" />
     <Content Include="Views\Carrinhos\Visa.cshtml" />
-    <Content Include="Views\Carrinhos\Tranferencia.cshtml" />
     <Content Include="Views\Carrinhos\Envelope.cshtml" />
-    <Content Include="Views\Carrinhos\BitCoin.cshtml" />
     <Content Include="Temporario\startbootstrap-heroic-features-gh-pages\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Temporario\startbootstrap-heroic-features-gh-pages\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Temporario\startbootstrap-heroic-features-gh-pages\fonts\glyphicons-halflings-regular.woff" />
@@ -477,6 +476,7 @@
     <Content Include="Views\Shared\Entity Relatiship Diagram - Cupon.edmx.diagram">
       <DependentUpon>Entity Relatiship Diagram - Cupon.edmx</DependentUpon>
     </Content>
+    <Content Include="Views\Carrinhos\Transferencia.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

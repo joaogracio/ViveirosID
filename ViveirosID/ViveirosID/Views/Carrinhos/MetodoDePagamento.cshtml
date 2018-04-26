@@ -1,48 +1,132 @@
-﻿@model ViveirosID.Models.Carrinhos
+﻿@model IQueryable<Viveiros.Models.ListaArtigosCarrinhoViewModel>
 
 @{
-    ViewBag.Title = "MetodoDePagamento";
+    ViewBag.Title = "Index";
+    var preco_todos_pro = 0.0;
+    var preco_todos_total = 0.0;
+    var preco_transporte = 6.0;
+
+    if (Model != null)
+    {
+        foreach (var item in Model)
+        {
+            preco_todos_pro += item.preco_total_prd;
+        }
+    }
+
+    if (preco_todos_pro == 0.0)
+    {
+        preco_transporte = 0.0;
+    }
+
+    preco_todos_total = preco_todos_pro + preco_transporte;
+
+    var imagens = new ViveirosID.Models.Imagens();
 }
 
-<h2>MetodoDePagamento</h2>
+<h2>O Seu Carrinho</h2>
 
-<div>
-    <h4>Carrinhos</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Utilizador.nome)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Utilizador.nome)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.precototal)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.precototal)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.ultimaAlteracao)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.ultimaAlteracao)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.peso)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.peso)
-        </dd>
-    </dl>
-</div>
 
-<div>
-    @Html.ActionLink("Pagamento Seguro com Visa, Mastercard e European Solucões", "Visa");
-    @Html.ActionLink("Tranferencia Bancaria", "Tranferencia");
-    @Html.ActionLink("Dinheiro no Envelope", "Envelope");
-    @Html.ActionLink("BitCoin", "BitCoin");
-</div>
-<p>
-    @Html.ActionLink("Back to List", "Index")
-</p>
+@using (Html.BeginForm("Actualiza", "Carrinhos", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-md-10 col-md-offset-1">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Producto</th>
+                            <th>Quantidade</th>
+                            <th class="text-center">Preço</th>
+                            <th class="text-center">Total</th>
+                            <th> </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @try
+                        {
+                            foreach (var item in Model)
+                            {
+                                var img = "/Images/" + item.nome + "_1.jpeg";
+                                <tr>
+                                    <td class="col-sm-8 col-md-6">
+                                        <div class="media">
+                                            <a class="thumbnail pull-left" href="~/Artigos/Details/@item.ArtigoID"> <img class="media-object" src="@img" style="width: 72px; height: 72px;"> </a>
+                                            <div class="media-body">
+                                                <h4 class="media-heading"><a href="~/Artigos/Details/@item.ArtigoID">@item.nome</a></h4>
+                                                <h5 class="media-heading"> Categoria <a href="~/Artigos/Index">@item.tipo</a></h5>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="col-sm-1 col-md-1" style="text-align: center">
+                                        <input type="text" class="form-control" name="id2" value="@item.quantidade">
+                                        <input type="text" class="form-control" style="display:none" name="id" value="@item.ArtigoID" />
+                                    </td>
+                                    <td class="col-sm-1 col-md-1 text-center"><strong>@item.preco $</strong></td>
+                                    <td class="col-sm-1 col-md-1 text-center"><strong>@item.preco_total_prd $</strong></td>
+                                    <td class="col-sm-1 col-md-1">
+                                        <button type="submit" class="btn btn-success" href="/Carrinhos/Actualiza/@item.ArtigoID">
+                                            <span class="glyphicon glyphicon-refresh"></span> Actualiza
+                                        </button>
+                                    </td>
+                                    <td class="col-sm-1 col-md-1">
+                                        <a class="btn btn-danger btn-large" href="/Carrinhos/Remover/@item.ArtigoID">
+                                            <span class="glyphicon glyphicon-remove"></span> Remover
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+
+                        }
+
+                        <tr>
+                            <td>   </td>
+                            <td>   </td>
+                            <td>   </td>
+                            <td>   </td>
+                            <td><h5>Subtotal</h5></td>
+                            <td class="text-right"><h5><strong>@preco_todos_pro $</strong></h5></td>
+                        </tr>
+                        <tr>
+                            <td>   </td>
+                            <td>   </td>
+                            <td>   </td>
+                            <td>   </td>
+                            <td><h5>Preço Estimado para Transporte</h5></td>
+                            <td class="text-right"><h5><strong>@preco_transporte $</strong></h5></td>
+                        </tr>
+                        <tr>
+                            <td>   </td>
+                            <td>   </td>
+                            <td>   </td>
+                            <td>   </td>
+                            <td><h3>Total</h3></td>
+                            <td class="text-right"><h3><strong>@preco_todos_total $</strong></h3></td>
+                        </tr>
+                        <tr>
+                            <td>   </td>
+                            <td>   </td>
+                            <td>   </td>
+                            <td>   </td>
+                            <td>
+                                <a class="btn btn-info btn-large" href="/Artigos/Index">
+                                    <span class="glyphicon glyphicon-shopping-cart"></span> Continuar Compras
+                                </a>
+                            </td>
+                            <td>
+                                <a class="btn btn-success btn-large" href="~/Carrinhos/MetodoDePagamento.cshtml">
+                                    Pagar e Enviar <span class="glyphicon glyphicon-play"></span>
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+}

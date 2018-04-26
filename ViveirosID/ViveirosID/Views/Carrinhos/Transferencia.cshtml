@@ -1,0 +1,24 @@
+﻿
+@{
+    ViewBag.Title = "Transferencia";
+}
+
+<h2>Escolha o Modo de Tranferencia Pretendido</h2>
+
+<br />
+
+@using (Html.BeginForm("Transferencia", "Carrinhos", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <input type="text" class="form-control" name="trans" value="" />
+}
+
+<button type="submit" onclick="">Visa</button>
+<button type="submit" onclick="">Envelope</button>
+<button type="submit" onclick="">Transferencia</button>
+<button type="submit" onclick=""></button>
+
+@Html.ActionLink("Escolher outro metodo de pagamento", "MetodoDePagamento")
+
+@Html.ActionLink("Confirmar pagamento por tranferencia", "Tranferencia(transferencia)")
+

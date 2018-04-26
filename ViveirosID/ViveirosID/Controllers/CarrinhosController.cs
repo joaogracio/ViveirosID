@@ -89,7 +89,7 @@ namespace ViveirosID.Controllers {
                                               quantidade = car_art.quantidade
                                           });
 
-            return View(listaArtigosNoCarrinho);
+            return View("MetodoDePagamento", listaArtigosNoCarrinho);
         }
 
         [Authorize]
@@ -219,6 +219,14 @@ namespace ViveirosID.Controllers {
             return RedirectToAction("Index");
         }
 
+        [Authorize]
+        public ActionResult Transferencia()
+        {
+
+            return View("Transferencia", "Carrinhos");
+        }
+
+        [HttpPost]
         [Authorize]
         public ActionResult Transferencia(string trans) {
             if (trans == "transferencia") {
@@ -375,7 +383,89 @@ namespace ViveirosID.Controllers {
             // Remove da tabela Carrinhos_Artigo o Carrinho_Artigo que corresponde aquele que armazena o produto
             db.Carrinho_Artigos.Remove(car_art);
 
-            return View("Index");
+            db.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
+
+        [Authorize]
+        public ActionResult Actualiza(int? id, int? id2)
+        {
+
+            if (id == null || id2 == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            Artigos artigo = db.Artigo.Find(id);
+
+            if (artigo == null)
+            {
+                return HttpNotFound();
+            }
+
+            // determina o user ID do utilizador asp net numa string
+            //
+            string userAspNetID = User.Identity.GetUserId();
+
+            // determina o ID do utilizador parte da base de dados Viveiros num inteiro
+            //
+            int userID = (from umUtilizador in db.Utilizador
+                          where umUtilizador.IDaspuser == userAspNetID
+                          select umUtilizador.UtilizadorID).FirstOrDefault();
+
+            // determina o ID do carrinho associado ao utilizador da bd Viveiros
+            //
+            int carID = (from umUtilizador in db.Utilizador
+                         where umUtilizador.UtilizadorID == userID
+                         select umUtilizador.CarrinhoFK).FirstOrDefault();
+
+            // pesquisa se existe uma correspondencia para carrinho_artigos para o artigo de ID == id
+            //
+            // pesquisa se existe uma correspondencia para carrinho_artigos para o artigo de ID == id
+            //
+            int car_artID = (from umcar_art in db.Carrinho_Artigos
+                             where umcar_art.CarrinhoFK == carID && umcar_art.ArtigoFK == id
+                             select umcar_art.ID).FirstOrDefault();
+
+            // se não existe uma correspondencia para o ID == id de carrinho_artigo cria um carrinho_artigo com 1 produto de ID == id
+            // se existe uma correspondencia para um carrinho_artigo para o porduto de ID == id aumenta a quantidade em 1
+            //
+            if (car_artID == 0)
+            {
+                CarrinhoArtigo carrinho_artigos = new CarrinhoArtigo();
+                carrinho_artigos.CarrinhoFK = carID;
+                carrinho_artigos.ArtigoFK = (int)id;
+                carrinho_artigos.quantidade = (int)id2;
+
+                db.Carrinho_Artigos.Add(carrinho_artigos);
+                db.SaveChanges();
+
+            }
+            else
+            {
+                CarrinhoArtigo carrinho_artigos = db.Carrinho_Artigos.Find(car_artID);
+                carrinho_artigos.quantidade = (int)id2;
+
+                db.SaveChanges();
+            }
+
+
+            var listaArtigosNoCarrinho = (from car_art in db.Carrinho_Artigos
+                                          from art in db.Artigo
+                                          from catedor in db.Categoria
+                                          where car_art.ArtigoFK == art.ArtigoID && car_art.CarrinhoFK == carID && catedor.CategoriaID == art.CategoriaFK
+                                          select new ListaArtigosCarrinhoViewModel()
+                                          {
+                                              ArtigoID = art.ArtigoID,
+                                              nome = art.nome,
+                                              preco = art.preco,
+                                              preco_total_prd = (car_art.quantidade * art.preco),
+                                              quantidade = car_art.quantidade,
+                                              tipo = catedor.tipo
+                                          });
+
+            return View("Index", listaArtigosNoCarrinho);
         }
 
         protected override void Dispose(bool disposing) {

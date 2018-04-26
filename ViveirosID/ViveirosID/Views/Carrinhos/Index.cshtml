@@ -24,7 +24,7 @@
 <h2>O Seu Carrinho</h2>
 
 
-@using (Html.BeginForm("Actualiza", "Artigos", FormMethod.Post))
+@using (Html.BeginForm("Actualiza", "Carrinhos", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
 <div class="container">
@@ -58,6 +58,7 @@
                                 </td>
                                 <td class="col-sm-1 col-md-1" style="text-align: center">
                                     <input type="text" class="form-control" name="id2" value="@item.quantidade">
+                                    <input type="text" class="form-control" style="display:none" name="id" value="@item.ArtigoID" />
                                 </td>
                                 <td class="col-sm-1 col-md-1 text-center"><strong>@item.preco $</strong></td>
                                 <td class="col-sm-1 col-md-1 text-center"><strong>@item.preco_total_prd $</strong></td>
@@ -67,7 +68,7 @@
                                     </button>   
                                 </td>
                                 <td class="col-sm-1 col-md-1">
-                                    <a class="btn btn-danger btn-large" href="/Carinhos/Remover/@item.ArtigoID">
+                                    <a class="btn btn-danger btn-large" href="/Carrinhos/Remover/@item.ArtigoID">
                                         <span class="glyphicon glyphicon-remove"></span> Remover
                                     </a>
                                 </td>
@@ -114,7 +115,7 @@
                             </a>
                         </td>
                         <td>
-                            <a class="btn btn-success btn-large" href="/Carrinhos/Transferencia?trans=transferencia">
+                            <a class="btn btn-success btn-large" href="~/Carrinhos/Transferencia">
                                 Pagar e Enviar <span class="glyphicon glyphicon-play"></span>
                             </a>
                         </td>

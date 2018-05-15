@@ -33,6 +33,7 @@ namespace ViveirosID.Views
         public string distrito { get; set; }
         public string pais { get; set; }
         public string telefone { get; set; }
+        public double preco_transporte { get; set; }
         public int CarrinhoFK { get; set; }
         public string IDaspuser { get; set; }
     

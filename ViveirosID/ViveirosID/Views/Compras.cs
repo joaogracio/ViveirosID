@@ -25,7 +25,7 @@ namespace ViveirosID.Views
         public string metodopagamento { get; set; }
         public string estado { get; set; }
         public System.DateTime data { get; set; }
-        public float precototal { get; set; }
+        public double precototal { get; set; }
         public int UtilizadorFK { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

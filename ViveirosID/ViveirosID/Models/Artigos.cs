@@ -40,8 +40,8 @@ namespace ViveirosID.Models {
             ErrorMessage = "Mes do ano para interromper a plantação do seu artigo. Coloque apenas palavras reservadas para meses do ano: Janeiro, Fevereiro, ..., Dezembro")]
         public string plantacaoAcaba { get; set; }
 
-        [RegularExpression("([0-9]{2})([0-9]{0,7})",
-            ErrorMessage = "Peso do seu artigo em gramas. Coloque apenas numeros. No minimo 2 no máximo 9")]
+        [RegularExpression("([0-9]{2})((,|.)([0-9]{0,7}))?",
+            ErrorMessage = "Peso do seu artigo em gramas. Coloque apenas números. No mínimo 2 no máximo 9")]
         public float peso { get; set; }
 
         [RegularExpression("[1-5]",
@@ -57,7 +57,7 @@ namespace ViveirosID.Models {
         public float rega { get; set; }
 
 
-        public float preco { get; set; }
+        public float preco { get; set; }  // converter para 'decimal'
 
 
         // Para cada artigo existe uma Categoria

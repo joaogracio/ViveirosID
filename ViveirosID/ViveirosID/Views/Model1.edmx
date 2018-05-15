@@ -5,6 +5,16 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
       <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="Model" Type="varbinary(max)" Nullable="false" />
+          <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
+        </EntityType>
         <EntityType Name="Artigos">
           <Key>
             <PropertyRef Name="ArtigoID" />
@@ -69,8 +79,18 @@
           <Property Name="metodopagamento" Type="nvarchar(max)" />
           <Property Name="estado" Type="nvarchar(max)" />
           <Property Name="data" Type="datetime" Nullable="false" />
-          <Property Name="precototal" Type="real" Nullable="false" />
+          <Property Name="precototal" Type="float" Nullable="false" />
           <Property Name="UtilizadorFK" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ContentViewModels">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar(max)" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="Contents" Type="nvarchar(max)" />
+          <Property Name="Image" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="Imagens">
           <Key>
@@ -99,6 +119,7 @@
           <Property Name="distrito" Type="nvarchar(max)" Nullable="false" />
           <Property Name="pais" Type="nvarchar(max)" Nullable="false" />
           <Property Name="telefone" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="preco_transporte" Type="float" Nullable="false" />
           <Property Name="CarrinhoFK" Type="int" Nullable="false" />
           <Property Name="IDaspuser" Type="nvarchar(max)" />
         </EntityType>
@@ -213,12 +234,14 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="ModelStoreContainer">
+          <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Artigos" EntityType="Self.Artigos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CarrinhoArtigoes" EntityType="Self.CarrinhoArtigoes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Carrinhos" EntityType="Self.Carrinhos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Categorias" EntityType="Self.Categorias" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CompraArtigoes" EntityType="Self.CompraArtigoes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Compras" EntityType="Self.Compras" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ContentViewModels" EntityType="Self.ContentViewModels" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Imagens" EntityType="Self.Imagens" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Utilizadores" EntityType="Self.Utilizadores" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_dbo_Artigos_dbo_Categorias_CategoriaFK" Association="Self.FK_dbo_Artigos_dbo_Categorias_CategoriaFK">
@@ -259,6 +282,16 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="C__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ContextKey" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Model" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="ProductVersion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
         <EntityType Name="Artigos">
           <Key>
             <PropertyRef Name="ArtigoID" />
@@ -334,10 +367,20 @@
           <Property Name="metodopagamento" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="estado" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="data" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="precototal" Type="Single" Nullable="false" />
+          <Property Name="precototal" Type="Double" Nullable="false" />
           <Property Name="UtilizadorFK" Type="Int32" Nullable="false" />
           <NavigationProperty Name="CompraArtigoes" Relationship="Self.FK_dbo_CompraArtigoes_dbo_Compras_CompraFK" FromRole="Compras" ToRole="CompraArtigoes" />
           <NavigationProperty Name="Utilizadores" Relationship="Self.FK_dbo_Compras_dbo_Utilizadores_UtilizadorFK" FromRole="Compras" ToRole="Utilizadores" />
+        </EntityType>
+        <EntityType Name="ContentViewModels">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Contents" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="Imagens">
           <Key>
@@ -367,6 +410,7 @@
           <Property Name="distrito" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="pais" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="telefone" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="preco_transporte" Type="Double" Nullable="false" />
           <Property Name="CarrinhoFK" Type="Int32" Nullable="false" />
           <Property Name="IDaspuser" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Carrinhos" Relationship="Self.FK_dbo_Carrinhos_dbo_Utilizadores_Utilizador_UtilizadorID" FromRole="Utilizadores" ToRole="Carrinhos" />
@@ -482,13 +526,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="Entities1" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="Entities2" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
           <EntitySet Name="Artigos" EntityType="Self.Artigos" />
           <EntitySet Name="CarrinhoArtigoes" EntityType="Self.CarrinhoArtigoes" />
           <EntitySet Name="Carrinhos" EntityType="Self.Carrinhos" />
           <EntitySet Name="Categorias" EntityType="Self.Categorias" />
           <EntitySet Name="CompraArtigoes" EntityType="Self.CompraArtigoes" />
           <EntitySet Name="Compras" EntityType="Self.Compras" />
+          <EntitySet Name="ContentViewModels" EntityType="Self.ContentViewModels" />
           <EntitySet Name="Imagens" EntityType="Self.Imagens" />
           <EntitySet Name="Utilizadores" EntityType="Self.Utilizadores" />
           <AssociationSet Name="FK_dbo_Artigos_dbo_Categorias_CategoriaFK" Association="Self.FK_dbo_Artigos_dbo_Categorias_CategoriaFK">
@@ -529,7 +575,17 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="Entities1">
+        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="Entities2">
+          <EntitySetMapping Name="C__MigrationHistory">
+            <EntityTypeMapping TypeName="Model.C__MigrationHistory">
+              <MappingFragment StoreEntitySet="__MigrationHistory">
+                <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+                <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Artigos">
             <EntityTypeMapping TypeName="Model.Artigos">
               <MappingFragment StoreEntitySet="Artigos">
@@ -603,6 +659,17 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="ContentViewModels">
+            <EntityTypeMapping TypeName="Model.ContentViewModels">
+              <MappingFragment StoreEntitySet="ContentViewModels">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Contents" ColumnName="Contents" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Imagens">
             <EntityTypeMapping TypeName="Model.Imagens">
               <MappingFragment StoreEntitySet="Imagens">
@@ -630,6 +697,7 @@
                 <ScalarProperty Name="distrito" ColumnName="distrito" />
                 <ScalarProperty Name="pais" ColumnName="pais" />
                 <ScalarProperty Name="telefone" ColumnName="telefone" />
+                <ScalarProperty Name="preco_transporte" ColumnName="preco_transporte" />
                 <ScalarProperty Name="CarrinhoFK" ColumnName="CarrinhoFK" />
                 <ScalarProperty Name="IDaspuser" ColumnName="IDaspuser" />
               </MappingFragment>

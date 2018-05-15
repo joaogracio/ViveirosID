@@ -4,15 +4,17 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="57354b0fd5264664be979805055fbfa2" Name="Diagram1" ZoomLevel="72">
-        <EntityTypeShape EntityType="Model.Artigos" Width="1.5" PointX="3" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.CarrinhoArtigoes" Width="1.5" PointX="5.25" PointY="6.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Carrinhos" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Categorias" Width="1.5" PointX="0.75" PointY="6.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.CompraArtigoes" Width="1.5" PointX="8.25" PointY="5.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Compras" Width="1.5" PointX="6" PointY="1.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Imagens" Width="1.5" PointX="3" PointY="9.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Utilizadores" Width="2.125" PointX="0.5" PointY="0.5" IsExpanded="true" />
+      <Diagram DiagramId="4187acd35a594964aeeef6cbb5ec0328" Name="Diagram1">
+        <EntityTypeShape EntityType="Model.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Artigos" Width="1.5" PointX="3" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.CarrinhoArtigoes" Width="1.5" PointX="5.125" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Carrinhos" Width="1.5" PointX="3" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Categorias" Width="1.5" PointX="0.75" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.CompraArtigoes" Width="1.5" PointX="6.25" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Compras" Width="1.5" PointX="0.625" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.ContentViewModels" Width="1.5" PointX="2.375" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Imagens" Width="1.5" PointX="3" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Utilizadores" Width="1.5" PointX="0.75" PointY="11.5" IsExpanded="true" />
         <AssociationConnector Association="Model.FK_dbo_Artigos_dbo_Categorias_CategoriaFK" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_dbo_CarrinhoArtigoes_dbo_Artigos_ArtigoFK" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_dbo_CompraArtigoes_dbo_Artigos_ArtigoFK" ManuallyRouted="false" />

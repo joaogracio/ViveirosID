@@ -13,10 +13,10 @@ namespace ViveirosID.Views
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class Entities1 : DbContext
+    public partial class Entities2 : DbContext
     {
-        public Entities1()
-            : base("name=Entities1")
+        public Entities2()
+            : base("name=Entities2")
         {
         }
     
@@ -25,12 +25,14 @@ namespace ViveirosID.Views
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<C__MigrationHistory> C__MigrationHistory { get; set; }
         public virtual DbSet<Artigos> Artigos { get; set; }
         public virtual DbSet<CarrinhoArtigoes> CarrinhoArtigoes { get; set; }
         public virtual DbSet<Carrinhos> Carrinhos { get; set; }
         public virtual DbSet<Categorias> Categorias { get; set; }
         public virtual DbSet<CompraArtigoes> CompraArtigoes { get; set; }
         public virtual DbSet<Compras> Compras { get; set; }
+        public virtual DbSet<ContentViewModels> ContentViewModels { get; set; }
         public virtual DbSet<Imagens> Imagens { get; set; }
         public virtual DbSet<Utilizadores> Utilizadores { get; set; }
     }

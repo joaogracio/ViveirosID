@@ -26,7 +26,7 @@ namespace ViveirosID.Models {
         public string apelido { get; set; }
 
         [Required]
-        public DateTime? datadenascimento { get; set; }
+        public DateTime? DataDeNascimento { get; set; }
 
         [Required]
         public int? NIF { get; set; }

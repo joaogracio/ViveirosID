@@ -68,40 +68,26 @@ namespace ViveirosID.Controllers
 
                 // Recolhe o nome do artigo sobre o qual se vai trabalhar
                 //
-                string artigo_nome = (from umArtigo in db.Artigo
-                                      where umArtigo.ArtigoID == imagens.ArtigoFK
-                                      select umArtigo).FirstOrDefault().nome;
+                var last_art = (from umaImg in db.Imagem
+                                where umaImg.ArtigoFK == imagens.ArtigoFK
+                                select umaImg);
 
-                // Pesquisas de todos os ficheiros comecados pelo nome do artigo em questao
-                //
-                string[] directorias = Directory.GetFiles(@"D:\Joao\Informatica\PSI\ViveirosID\ViveirosID\ViveirosID\Images\", artigo_nome + "*");
-
-                var proxima_imagem = 1;
-
-                // Ve qual o numero a aplicar a imagem que vai ficar registada
-                //
-                if (directorias.Length > 0) {
-                    proxima_imagem = directorias.Length + 1;
-                }
-
-                var split_content_type = file.ContentType.Split('/');
-
-                var img_tipo = "." + split_content_type[1];
+                var tipo_conteudo = file.ContentType.Split('/');
 
                 // Directorio que pretendo para guardar a imagem
                 //
-                string directorio = "\\Images\\" + (artigo_nome + "_" + proxima_imagem + img_tipo);
-
+                string directorio = "~\\Images\\" + (last_art.FirstOrDefault().nome + "_" + (last_art.Count()+1) + "." + tipo_conteudo[1]);
                 try {
-                    file.SaveAs(directorio);
+                    file.SaveAs(Server.MapPath(directorio));
                     ViewBag.Message = "File uploaded successfully";
                 } catch (Exception ex) {
                     ViewBag.Message = "ERROR:" + ex.Message.ToString();
+                    return View();
                 }
 
                 // Determina o tipo de imagem de que se trata
                 //
-                Image img = System.Drawing.Image.FromFile(directorio);
+                Image img = System.Drawing.Image.FromFile(Server.MapPath(directorio));
                 int largura = img.Width;
                 int altura = img.Height;
 
@@ -113,9 +99,9 @@ namespace ViveirosID.Controllers
                     tipo = "grande";
                 }
 
-                imagens.nome = artigo_nome;
+                imagens.nome = last_art.FirstOrDefault().nome;
                 imagens.tipo = tipo;
-                imagens.directorio = directorio;
+                imagens.directorio = last_art.FirstOrDefault().nome + "_" + (last_art.Count() + 1) + "." + tipo_conteudo[1];
                 db.Imagem.Add(imagens);
                 db.SaveChanges();
             }
@@ -125,7 +111,7 @@ namespace ViveirosID.Controllers
 
             ViewData["ArtigoFK"] = new SelectList(db.Artigo.ToList(), "ArtigoID", "nome");
 
-            return View();
+            return RedirectToAction("Index");
         }
 
         // GET: Imagens/Edit/5

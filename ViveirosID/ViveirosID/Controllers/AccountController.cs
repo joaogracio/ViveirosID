@@ -134,7 +134,7 @@ namespace ViveirosID.Controllers {
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModel model, string nome, string apelido, string datadenascimento, string email, string NIF, string morada, string local, string codigoposta, string cidade, string distrito, string pais, string telefone /*,Boolean newsletter*/) {
+        public async Task<ActionResult> Register(RegisterViewModel model, string nome, string apelido, string DataDeNascimento, string email, string NIF, string morada, string local, string codigoposta, string cidade, string distrito, string pais, string telefone /*,Boolean newsletter*/) {
             // Variavel Booleana no sentido de determinar todos os valores passam na filtragem das expressoes regulares
             // 
             Boolean regex_reject = false;
@@ -143,7 +143,7 @@ namespace ViveirosID.Controllers {
             //
             String reg_nome = "([A-Z][a-zãáéíõç]{3,11})[ ]?";
             String reg_apelido = "([A-Z][a-zãáéíõç]{3,11})[ ]?";
-            String reg_datadenascimento = "^([0-9]{4}[-/]?((0[13-9]|1[012])[-/]?(0[1-9]|[12][0-9]|30)|(0[13578]|1[02])[-/]?31|02[-/]?(0[1-9]|1[0-9]|2[0-8]))|([0-9]{2}(([2468][048]|[02468][48])|[13579][26])|([13579][26]|[02468][048]|0[0-9]|1[0-6])00)[-/]?02[-/]?29)$";
+            String reg_DataDeNascimento = "^([0-9]{4}[-/]?((0[13-9]|1[012])[-/]?(0[1-9]|[12][0-9]|30)|(0[13578]|1[02])[-/]?31|02[-/]?(0[1-9]|1[0-9]|2[0-8]))|([0-9]{2}(([2468][048]|[02468][48])|[13579][26])|([13579][26]|[02468][048]|0[0-9]|1[0-6])00)[-/]?02[-/]?29)$";
             String reg_email = "";
             String reg_NIF = "([0-9]{9})";
             String reg_morada = "([R][u][a]|[E][s][t][r][a][d][a]|[A][v][e][n][i][d][a])[ ]?([A-Z][a-zãáéíõç]{3,11})[ ]?([A-Z][a-zãáéõç]{3,11}|[d][eo][s]?)?[ ]?([A-Z][a-zãáéõç]{3,11}|[d][eo][s]?)?[ ]?([A-Z][a-zãáéõç]{3,11}|[d][eo][s]?)?[ ]?";
@@ -165,8 +165,8 @@ namespace ViveirosID.Controllers {
                 ModelState.AddModelError("apelido", "Introduza apenas um apelido. Este nome deve começar por maiuscula, não pode usar números e tem que ter no máximo 11 caracteres.");
                 regex_reject = true;
             }
-            if (!Regex.IsMatch(datadenascimento, reg_datadenascimento)) {
-                ModelState.AddModelError("datadenascimento", "Introduza a data de nascimento no seguinte formato: 1987-05-21. Ano, mes, dia. Separado por ifen - .");
+            if (!Regex.IsMatch(DataDeNascimento, reg_DataDeNascimento)) {
+                ModelState.AddModelError("DataDeNascimento", "Introduza a data de nascimento no seguinte formato: 1987-05-21. Ano, mes, dia. Separado por ifen - .");
                 regex_reject = true;
             }
             if (!Regex.IsMatch(email, reg_email)) {
@@ -228,7 +228,7 @@ namespace ViveirosID.Controllers {
                         //utilizador.sexo = sexo;
                         utilizador.nome = nome;
                         utilizador.apelido = apelido;
-                        utilizador.datadenascimento = Convert.ToDateTime(datadenascimento);
+                        utilizador.DataDeNascimento = Convert.ToDateTime(DataDeNascimento);
                         utilizador.NIF = Convert.ToInt32(NIF);
                         utilizador.morada = morada;
                         utilizador.local = local;

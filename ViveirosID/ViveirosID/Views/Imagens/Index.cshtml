@@ -7,51 +7,23 @@
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Upload Nova Imagem", "Create")
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Artigo.nome)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.nome)
-        </th>
-        @*<th>
-            @Html.DisplayNameFor(model => model.directorio)
-        </th>*@
-        <th>
-            @Html.DisplayNameFor(model => model.descricao)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.tipo)
-        </th>
-        <th></th>
-    </tr>
+<div class="container">
+    <h1 class="my-4 text-center text-lg-left">Galeria de Imagens</h1>
+    <div class="row text-center text-lg-left">
+        @foreach (var item in Model)
+    {
+        var nome = "/Images/" + item.directorio;
+        <!-- Page Content -->
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Artigo.nome)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.nome)
-        </td>
-        @*<td>
-            @Html.DisplayFor(modelItem => item.directorio)
-        </td>*@
-        <td>
-            @Html.DisplayFor(modelItem => item.descricao)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.tipo)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ImagemID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ImagemID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ImagemID })
-        </td>
-    </tr>
+        <div class="col-lg-3 col-md-4 col-xs-6">
+            <a href="/Imagens/Details/@item.ImagemID/" class="d-block mb-4 h-100">
+                <img class="img-fluid img-thumbnail" src="@nome" height="300" width="300">
+            </a>
+        </div>
+
+
 }
-
-</table>
+    </div>
+</div>

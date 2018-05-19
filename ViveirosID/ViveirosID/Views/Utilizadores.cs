@@ -24,7 +24,7 @@ namespace ViveirosID.Views
         public int UtilizadorID { get; set; }
         public string nome { get; set; }
         public string apelido { get; set; }
-        public System.DateTime datadenascimento { get; set; }
+        public System.DateTime DataDeNascimento { get; set; }
         public int NIF { get; set; }
         public string morada { get; set; }
         public string local { get; set; }

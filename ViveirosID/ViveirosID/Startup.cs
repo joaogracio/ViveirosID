@@ -50,7 +50,7 @@ namespace ViveirosID
                 //utilizador.sexo = sexo;
                 Joao_Gracio_user.nome = "João";
                 Joao_Gracio_user.apelido = "Grácio";
-                Joao_Gracio_user.datadenascimento = Convert.ToDateTime("21/05/1898");
+                Joao_Gracio_user.DataDeNascimento = Convert.ToDateTime("21/05/1898");
                 Joao_Gracio_user.NIF = Convert.ToInt32("128900337");
                 Joao_Gracio_user.morada = "Rua Primeiro de Dezembro";
                 Joao_Gracio_user.local = "Nossa Senhora de Fátima";
@@ -111,7 +111,7 @@ namespace ViveirosID
                 //utilizador.sexo = sexo;
                 Ana_Gois_user.nome = "Ana";
                 Ana_Gois_user.apelido = "Gois";
-                Ana_Gois_user.datadenascimento = Convert.ToDateTime("05/06/1977");
+                Ana_Gois_user.DataDeNascimento = Convert.ToDateTime("05/06/1977");
                 Ana_Gois_user.NIF = Convert.ToInt32("128900775");
                 Ana_Gois_user.morada = "Rua da Sorriso";
                 Ana_Gois_user.local = "Planicie da Calma";
@@ -171,7 +171,7 @@ namespace ViveirosID
                 //utilizador.sexo = sexo;
                 Pedro_Dias_user.nome = "Pedro";
                 Pedro_Dias_user.apelido = "Dias";
-                Pedro_Dias_user.datadenascimento = Convert.ToDateTime("05/06/1989");
+                Pedro_Dias_user.DataDeNascimento = Convert.ToDateTime("05/06/1989");
                 Pedro_Dias_user.NIF = Convert.ToInt32("128900778");
                 Pedro_Dias_user.morada = "Rua da Alegria";
                 Pedro_Dias_user.local = "Lagar do Ouro";
@@ -224,7 +224,7 @@ namespace ViveirosID
                 //utilizador.sexo = sexo;
                 Casimiro_Batista_user.nome = "Casimiro";
                 Casimiro_Batista_user.apelido = "Batista";
-                Casimiro_Batista_user.datadenascimento = Convert.ToDateTime("27/03/1977");
+                Casimiro_Batista_user.DataDeNascimento = Convert.ToDateTime("27/03/1977");
                 Casimiro_Batista_user.NIF = Convert.ToInt32("128900777");
                 Casimiro_Batista_user.morada = "Rua dos Operários";
                 Casimiro_Batista_user.local = "Montanha da Força";
@@ -277,7 +277,7 @@ namespace ViveirosID
                 //utilizador.sexo = sexo;
                 Casimiro_Pereira_user.nome = "Casimiro";
                 Casimiro_Pereira_user.apelido = "Pereira";
-                Casimiro_Pereira_user.datadenascimento = Convert.ToDateTime("25/04/1974");
+                Casimiro_Pereira_user.DataDeNascimento = Convert.ToDateTime("25/04/1974");
                 Casimiro_Pereira_user.NIF = Convert.ToInt32("128900776");
                 Casimiro_Pereira_user.morada = "Rua do Espírito Santo";
                 Casimiro_Pereira_user.local = "Nossa Senhora de Fátima";
@@ -317,7 +317,7 @@ namespace ViveirosID
 
         public void Configuration(IAppBuilder app)
         {
-            iniciaAplicacao();
+            //iniciaAplicacao();
             ConfigureAuth(app);
         }
     }

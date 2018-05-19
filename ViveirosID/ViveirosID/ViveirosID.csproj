@@ -261,6 +261,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\aspnet-ViveirosID-20160701071552.mdf" />
+    <Content Include="App_Data\aspnet-ViveirosID-20160701071552_log.ldf">
+      <DependentUpon>aspnet-ViveirosID-20160701071552.mdf</DependentUpon>
+    </Content>
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -432,7 +436,6 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Folder Include="Images\" />
   </ItemGroup>
   <ItemGroup>

@@ -48,17 +48,17 @@ namespace ViveirosID
                 //
                 Utilizadores Joao_Gracio_user = new Utilizadores();
                 //utilizador.sexo = sexo;
-                Joao_Gracio_user.nome = "João";
-                Joao_Gracio_user.apelido = "Grácio";
+                Joao_Gracio_user.Nome = "João";
+                Joao_Gracio_user.Apelido = "Grácio";
                 Joao_Gracio_user.DataDeNascimento = Convert.ToDateTime("21/05/1898");
                 Joao_Gracio_user.NIF = Convert.ToInt32("128900337");
-                Joao_Gracio_user.morada = "Rua Primeiro de Dezembro";
-                Joao_Gracio_user.local = "Nossa Senhora de Fátima";
-                Joao_Gracio_user.codigoposta = "2330-088";
-                Joao_Gracio_user.cidade = "Entroncamento";
-                Joao_Gracio_user.distrito = "Santarém";
-                Joao_Gracio_user.pais = "Portugal";
-                Joao_Gracio_user.telefone = "966005796";
+                Joao_Gracio_user.Morada = "Rua Primeiro de Dezembro";
+                Joao_Gracio_user.Local = "Nossa Senhora de Fátima";
+                Joao_Gracio_user.Codigopostal = "2330-088";
+                Joao_Gracio_user.Cidade = "Entroncamento";
+                Joao_Gracio_user.Distrito = "Santarém";
+                Joao_Gracio_user.Pais = "Portugal";
+                Joao_Gracio_user.Telefone = "966005796";
                 // Aqui relaciona-se um AspUser a um Utilizador
                 //
                 Joao_Gracio_user.IDaspuser = Joao_Gracio.Id;
@@ -68,9 +68,9 @@ namespace ViveirosID
                 // Este ira ser o Carrinho deste Utilizador (num relacionamento um para um)
                 //
                 Carrinhos Joao_Gracio_Carrinho = new Carrinhos();
-                Joao_Gracio_Carrinho.peso = 0;
-                Joao_Gracio_Carrinho.precototal = 0;
-                Joao_Gracio_Carrinho.ultimaAlteracao = DateTime.Now;
+                Joao_Gracio_Carrinho.Peso = 0;
+                Joao_Gracio_Carrinho.Precototal = 0;
+                Joao_Gracio_Carrinho.UltimaAlteracao = DateTime.Now;
                 Joao_Gracio_Carrinho.Utilizador = Joao_Gracio_user;
                 Joao_Gracio_Carrinho.UtilizadorFK = Joao_Gracio_user.UtilizadorID;
 
@@ -109,17 +109,17 @@ namespace ViveirosID
                 //
                 Utilizadores Ana_Gois_user = new Utilizadores();
                 //utilizador.sexo = sexo;
-                Ana_Gois_user.nome = "Ana";
-                Ana_Gois_user.apelido = "Gois";
+                Ana_Gois_user.Nome = "Ana";
+                Ana_Gois_user.Apelido = "Gois";
                 Ana_Gois_user.DataDeNascimento = Convert.ToDateTime("05/06/1977");
                 Ana_Gois_user.NIF = Convert.ToInt32("128900775");
-                Ana_Gois_user.morada = "Rua da Sorriso";
-                Ana_Gois_user.local = "Planicie da Calma";
-                Ana_Gois_user.codigoposta = "2220-033";
-                Ana_Gois_user.cidade = "Tomar";
-                Ana_Gois_user.distrito = "Santarém";
-                Ana_Gois_user.pais = "Portugal";
-                Ana_Gois_user.telefone = "960579644";
+                Ana_Gois_user.Morada = "Rua da Sorriso";
+                Ana_Gois_user.Local = "Planicie da Calma";
+                Ana_Gois_user.Codigopostal = "2220-033";
+                Ana_Gois_user.Cidade = "Tomar";
+                Ana_Gois_user.Distrito = "Santarém";
+                Ana_Gois_user.Pais = "Portugal";
+                Ana_Gois_user.Telefone = "960579644";
                 // Aqui relaciona-se um AspUser a um Utilizador
                 //
                 Ana_Gois_user.IDaspuser = Ana_Gois.Id;
@@ -129,9 +129,9 @@ namespace ViveirosID
                 // Este ira ser o Carrinho deste Utilizador (num relacionamento um para um)
                 //
                 Carrinhos Ana_Gois_Carrinho = new Carrinhos();
-                Ana_Gois_Carrinho.peso = 0;
-                Ana_Gois_Carrinho.precototal = 0;
-                Ana_Gois_Carrinho.ultimaAlteracao = DateTime.Now;
+                Ana_Gois_Carrinho.Peso = 0;
+                Ana_Gois_Carrinho.Precototal = 0;
+                Ana_Gois_Carrinho.UltimaAlteracao = DateTime.Now;
                 Ana_Gois_Carrinho.Utilizador = Ana_Gois_user;
                 Ana_Gois_Carrinho.UtilizadorFK = Ana_Gois_user.UtilizadorID;
 
@@ -169,17 +169,17 @@ namespace ViveirosID
                 //
                 Utilizadores Pedro_Dias_user = new Utilizadores();
                 //utilizador.sexo = sexo;
-                Pedro_Dias_user.nome = "Pedro";
-                Pedro_Dias_user.apelido = "Dias";
+                Pedro_Dias_user.Nome = "Pedro";
+                Pedro_Dias_user.Apelido = "Dias";
                 Pedro_Dias_user.DataDeNascimento = Convert.ToDateTime("05/06/1989");
                 Pedro_Dias_user.NIF = Convert.ToInt32("128900778");
-                Pedro_Dias_user.morada = "Rua da Alegria";
-                Pedro_Dias_user.local = "Lagar do Ouro";
-                Pedro_Dias_user.codigoposta = "2440-011";
-                Pedro_Dias_user.cidade = "Abrantes";
-                Pedro_Dias_user.distrito = "Santarém";
-                Pedro_Dias_user.pais = "Portugal";
-                Pedro_Dias_user.telefone = "960579600";
+                Pedro_Dias_user.Morada = "Rua da Alegria";
+                Pedro_Dias_user.Local = "Lagar do Ouro";
+                Pedro_Dias_user.Codigopostal = "2440-011";
+                Pedro_Dias_user.Cidade = "Abrantes";
+                Pedro_Dias_user.Distrito = "Santarém";
+                Pedro_Dias_user.Pais = "Portugal";
+                Pedro_Dias_user.Telefone = "960579600";
                 // Aqui relaciona-se um AspUser a um Utilizador
                 //
                 Pedro_Dias_user.IDaspuser = Pedro_Dias.Id;
@@ -189,9 +189,9 @@ namespace ViveirosID
                 // Este ira ser o Carrinho deste Utilizador (num relacionamento um para um)
                 //
                 Carrinhos Pedro_Dias_Carrinho = new Carrinhos();
-                Pedro_Dias_Carrinho.peso = 0;
-                Pedro_Dias_Carrinho.precototal = 0;
-                Pedro_Dias_Carrinho.ultimaAlteracao = DateTime.Now;
+                Pedro_Dias_Carrinho.Peso = 0;
+                Pedro_Dias_Carrinho.Precototal = 0;
+                Pedro_Dias_Carrinho.UltimaAlteracao = DateTime.Now;
                 Pedro_Dias_Carrinho.Utilizador = Pedro_Dias_user;
                 Pedro_Dias_Carrinho.UtilizadorFK = Pedro_Dias_user.UtilizadorID;
 
@@ -222,17 +222,17 @@ namespace ViveirosID
                 //
                 Utilizadores Casimiro_Batista_user = new Utilizadores();
                 //utilizador.sexo = sexo;
-                Casimiro_Batista_user.nome = "Casimiro";
-                Casimiro_Batista_user.apelido = "Batista";
+                Casimiro_Batista_user.Nome = "Casimiro";
+                Casimiro_Batista_user.Apelido = "Batista";
                 Casimiro_Batista_user.DataDeNascimento = Convert.ToDateTime("27/03/1977");
                 Casimiro_Batista_user.NIF = Convert.ToInt32("128900777");
-                Casimiro_Batista_user.morada = "Rua dos Operários";
-                Casimiro_Batista_user.local = "Montanha da Força";
-                Casimiro_Batista_user.codigoposta = "2330-011";
-                Casimiro_Batista_user.cidade = "Coimbra";
-                Casimiro_Batista_user.distrito = "Coimbra";
-                Casimiro_Batista_user.pais = "Portugal";
-                Casimiro_Batista_user.telefone = "960579601";
+                Casimiro_Batista_user.Morada = "Rua dos Operários";
+                Casimiro_Batista_user.Local = "Montanha da Força";
+                Casimiro_Batista_user.Codigopostal = "2330-011";
+                Casimiro_Batista_user.Cidade = "Coimbra";
+                Casimiro_Batista_user.Distrito = "Coimbra";
+                Casimiro_Batista_user.Pais = "Portugal";
+                Casimiro_Batista_user.Telefone = "960579601";
                 // Aqui relaciona-se um AspUser a um Utilizador
                 //
                 Casimiro_Batista_user.IDaspuser = Casimiro_Batista.Id;
@@ -242,9 +242,9 @@ namespace ViveirosID
                 // Este ira ser o Carrinho deste Utilizador (num relacionamento um para um)
                 //
                 Carrinhos Casimiro_Batista_Carrinho = new Carrinhos();
-                Casimiro_Batista_Carrinho.peso = 0;
-                Casimiro_Batista_Carrinho.precototal = 0;
-                Casimiro_Batista_Carrinho.ultimaAlteracao = DateTime.Now;
+                Casimiro_Batista_Carrinho.Peso = 0;
+                Casimiro_Batista_Carrinho.Precototal = 0;
+                Casimiro_Batista_Carrinho.UltimaAlteracao = DateTime.Now;
                 Casimiro_Batista_Carrinho.Utilizador = Casimiro_Batista_user;
                 Casimiro_Batista_Carrinho.UtilizadorFK = Casimiro_Batista_user.UtilizadorID;
 
@@ -275,17 +275,17 @@ namespace ViveirosID
                 //
                 Utilizadores Casimiro_Pereira_user = new Utilizadores();
                 //utilizador.sexo = sexo;
-                Casimiro_Pereira_user.nome = "Casimiro";
-                Casimiro_Pereira_user.apelido = "Pereira";
+                Casimiro_Pereira_user.Nome = "Casimiro";
+                Casimiro_Pereira_user.Apelido = "Pereira";
                 Casimiro_Pereira_user.DataDeNascimento = Convert.ToDateTime("25/04/1974");
                 Casimiro_Pereira_user.NIF = Convert.ToInt32("128900776");
-                Casimiro_Pereira_user.morada = "Rua do Espírito Santo";
-                Casimiro_Pereira_user.local = "Nossa Senhora de Fátima";
-                Casimiro_Pereira_user.codigoposta = "2220-011";
-                Casimiro_Pereira_user.cidade = "Tomar";
-                Casimiro_Pereira_user.distrito = "Santarém";
-                Casimiro_Pereira_user.pais = "Portugal";
-                Casimiro_Pereira_user.telefone = "960579602";
+                Casimiro_Pereira_user.Morada = "Rua do Espírito Santo";
+                Casimiro_Pereira_user.Local = "Nossa Senhora de Fátima";
+                Casimiro_Pereira_user.Codigopostal = "2220-011";
+                Casimiro_Pereira_user.Cidade = "Tomar";
+                Casimiro_Pereira_user.Distrito = "Santarém";
+                Casimiro_Pereira_user.Pais = "Portugal";
+                Casimiro_Pereira_user.Telefone = "960579602";
                 // Aqui relaciona-se um AspUser a um Utilizador
                 //
                 Casimiro_Pereira_user.IDaspuser = Casimiro_Pereira.Id;
@@ -295,9 +295,9 @@ namespace ViveirosID
                 // Este ira ser o Carrinho deste Utilizador (num relacionamento um para um)
                 //
                 Carrinhos Casimiro_Pereira_Carrinho = new Carrinhos();
-                Casimiro_Pereira_Carrinho.peso = 0;
-                Casimiro_Pereira_Carrinho.precototal = 0;
-                Casimiro_Pereira_Carrinho.ultimaAlteracao = DateTime.Now;
+                Casimiro_Pereira_Carrinho.Peso = 0;
+                Casimiro_Pereira_Carrinho.Precototal = 0;
+                Casimiro_Pereira_Carrinho.UltimaAlteracao = DateTime.Now;
                 Casimiro_Pereira_Carrinho.Utilizador = Casimiro_Pereira_user;
                 Casimiro_Pereira_Carrinho.UtilizadorFK = Casimiro_Pereira_user.UtilizadorID;
 

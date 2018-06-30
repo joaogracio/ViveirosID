@@ -21,17 +21,17 @@ namespace ViveirosID.Controllers {
             //Cria uma lista de artigos nula
             //
             var artigos = (from umArtigo in db.Artigo
-                           where umArtigo.nome == ""
+                           where umArtigo.Nome == ""
                            select umArtigo);
 
-            var artigos_mais_quantidade = artigos_comprados.GroupBy(a => a.ArtigoFK)
-                                            .Select(a => new { ArtigoFK = a.Key, quantidade = a.Sum(b => b.quantidade) });
+            var artigos_mais_Quantidade = artigos_comprados.GroupBy(a => a.ArtigoFK)
+                                            .Select(a => new { ArtigoFK = a.Key, Quantidade = a.Sum(b => b.Quantidade) });
 
-            artigos_mais_quantidade = artigos_mais_quantidade.OrderByDescending(a => a.quantidade);
+            artigos_mais_Quantidade = artigos_mais_Quantidade.OrderByDescending(a => a.Quantidade);
 
-            artigos_mais_quantidade = artigos_mais_quantidade.Take(4);
+            artigos_mais_Quantidade = artigos_mais_Quantidade.Take(4);
 
-            foreach (var elm in artigos_mais_quantidade)
+            foreach (var elm in artigos_mais_Quantidade)
             {
                 var artigo_temp = (from umArtigo in db.Artigo
                                    where umArtigo.ArtigoID == elm.ArtigoFK

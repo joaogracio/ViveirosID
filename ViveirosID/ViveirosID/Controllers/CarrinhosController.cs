@@ -41,11 +41,11 @@ namespace ViveirosID.Controllers {
                                           where car_art.ArtigoFK == art.ArtigoID && car_art.CarrinhoFK == carID && catedor.CategoriaID == art.CategoriaFK 
                                           select new ListaArtigosCarrinhoViewModel() {
                                               ArtigoID = art.ArtigoID,
-                                              nome = art.nome,
-                                              preco = art.preco,
-                                              preco_total_prd = (car_art.quantidade * art.preco),
-                                              quantidade = car_art.quantidade,
-                                              tipo = catedor.tipo
+                                              Nome = art.Nome,
+                                              Preco = art.Preco,
+                                              Preco_total_prd = (car_art.Quantidade * art.Preco),
+                                              Quantidade = car_art.Quantidade,
+                                              Tipo = catedor.Tipo
                                           });
 
             // Cria uma lista de imagens relativas a cada artigo
@@ -60,6 +60,7 @@ namespace ViveirosID.Controllers {
             return View(listaArtigosNoCarrinho);
         }
 
+        [Authorize]
         public ActionResult MetodoDePagamento() {
             // determina o user ID do utilizador asp net numa string
             //
@@ -85,8 +86,8 @@ namespace ViveirosID.Controllers {
                                           select new ListaArtigosCarrinhoViewModel()
                                           {
                                               ArtigoID = art.ArtigoID,
-                                              nome = art.nome,
-                                              quantidade = car_art.quantidade
+                                              Nome = art.Nome,
+                                              Quantidade = car_art.Quantidade
                                           });
 
             return View(listaArtigosNoCarrinho);
@@ -120,10 +121,10 @@ namespace ViveirosID.Controllers {
             // determina o ID o carrinhoArtigos associado ao carrinho 
             // presente
             Compras compra = new Compras();
-            compra.data = DateTime.Now;
+            compra.Data = DateTime.Now;
             
             
-            // Calcula o precototal
+            // Calcula o Precototal
 
             return null;
         }
@@ -142,31 +143,31 @@ namespace ViveirosID.Controllers {
         }
 
         // GET: Carrinhoes/Create
-        [Authorize(Roles = "Administrador")]
+        [Authorize(Roles = "SuperAdmin")]
         public ActionResult Create() {
-            ViewBag.UtilizadorFK = new SelectList(db.Utilizador, "UtilizadorID", "nome");
+            ViewBag.UtilizadorFK = new SelectList(db.Utilizador, "UtilizadorID", "Nome");
             return View();
         }
 
         // POST: Carrinhoes/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [Authorize(Roles = "Administrador")]
+        [Authorize(Roles = "SuperAdmin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "CarrinhoID,precototal,ultimaAlteracao,peso,UtilizadorFK")] Carrinhos carrinho) {
+        public ActionResult Create([Bind(Include = "CarrinhoID,Precototal,UltimaAlteracao,peso,UtilizadorFK")] Carrinhos carrinho) {
             if (ModelState.IsValid) {
                 db.Carrinho.Add(carrinho);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.UtilizadorFK = new SelectList(db.Utilizador, "UtilizadorID", "nome", carrinho.Utilizador.UtilizadorID);
+            ViewBag.UtilizadorFK = new SelectList(db.Utilizador, "UtilizadorID", "Nome", carrinho.Utilizador.UtilizadorID);
             return View(carrinho);
         }
 
         // GET: Carrinhoes/Edit/5
-        [Authorize(Roles = "Administrador")]
+        [Authorize]
         public ActionResult Edit(int? id) {
             if (id == null) {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -175,28 +176,28 @@ namespace ViveirosID.Controllers {
             if (carrinho == null) {
                 return HttpNotFound();
             }
-            ViewBag.UtilizadorFK = new SelectList(db.Utilizador, "UtilizadorID", "nome", carrinho.Utilizador.UtilizadorID);
+            ViewBag.UtilizadorFK = new SelectList(db.Utilizador, "UtilizadorID", "Nome", carrinho.Utilizador.UtilizadorID);
             return View(carrinho);
         }
 
         // POST: Carrinhoes/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [Authorize(Roles = "Administrador")]
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "CarrinhoID,precototal,ultimaAlteracao,peso,UtilizadorFK")] Carrinhos carrinho) {
+        public ActionResult Edit([Bind(Include = "CarrinhoID,Precototal,UltimaAlteracao,peso,UtilizadorFK")] Carrinhos carrinho) {
             if (ModelState.IsValid) {
                 db.Entry(carrinho).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.UtilizadorFK = new SelectList(db.Utilizador, "UtilizadorID", "nome", carrinho.Utilizador.UtilizadorID);
+            ViewBag.UtilizadorFK = new SelectList(db.Utilizador, "UtilizadorID", "Nome", carrinho.Utilizador.UtilizadorID);
             return View(carrinho);
         }
 
         // GET: Carrinhoes/Delete/5
-        [Authorize(Roles = "Administrador")]
+        [Authorize(Roles = "SuperAdmin")]
         public ActionResult Delete(int? id) {
             if (id == null) {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -209,7 +210,7 @@ namespace ViveirosID.Controllers {
         }
 
         // POST: Carrinhoes/Delete/5
-        [Authorize(Roles = "Administrador")]
+        [Authorize(Roles = "SuperAdmin")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id) {
@@ -237,12 +238,12 @@ namespace ViveirosID.Controllers {
 
                 // Determina o valor do trasporte
                 //
-                if (utilizadorcorrente.pais == "Portugal")
+                if (utilizadorcorrente.Pais == "Portugal")
                 {
-                    utilizadorcorrente.preco_transporte = 6.0;
+                    utilizadorcorrente.Preco_transporte = 6.0;
                 }
                 else {
-                    utilizadorcorrente.preco_transporte = 15.0;
+                    utilizadorcorrente.Preco_transporte = 15.0;
                 }
 
                 db.SaveChanges();
@@ -255,7 +256,7 @@ namespace ViveirosID.Controllers {
                 
 
                 // determina a lista de artigos que estão no carrinho até ao presente momento
-                // no momento de declaracao do lista_carrinho_artigos o metodo ToList
+                // no momento de declaracao do lista_carrinho_artigos o Metodo ToList
                 // evita uma exececao no comando a baixo por o DataReader estar aberto
                 //
                 var lista_carrinho_artigos = (from car_art in db.Carrinho_Artigos
@@ -284,9 +285,9 @@ namespace ViveirosID.Controllers {
                 // Cria uma nova compra para o presente carrinho que ira ser encerrado
                 //
                 Compras compra = new Compras();
-                compra.data = DateTime.Now;
-                compra.estado = "Tranferencia a ser confirmada";
-                compra.metodoentrega = "A Definir";
+                compra.Data = DateTime.Now;
+                compra.Estado = "Tranferencia a ser confirmada";
+                compra.Metodoentrega = "A Definir";
                 compra.UtilizadorFK = userID;
                 compra.CompraID = comprasID;
                 db.Compra.Add(compra);
@@ -294,7 +295,7 @@ namespace ViveirosID.Controllers {
                 //
                 db.SaveChanges();
 
-                double precototal = 0;
+                double Precototal = 0;
 
                 foreach (Artigos artigo in lista_carrinho_artigos) {
 
@@ -304,7 +305,7 @@ namespace ViveirosID.Controllers {
 
                     // Determina a tabela correspondente ao relacionamento Carrinho_Artigo
                     // usando o carID e artID
-                    // no momento de declaracao do lista_carrinho_artigos o metodo ToList
+                    // no momento de declaracao do lista_carrinho_artigos o Metodo ToList
                     // evita uma exececao no comando a baixo por o DataReader estar aberto
                     //
                     CarrinhoArtigo carrinho_artigo = (from umCarrinho_Artigo in db.Carrinho_Artigos
@@ -314,9 +315,9 @@ namespace ViveirosID.Controllers {
                     CompraArtigo compra_artigo = new CompraArtigo();
                     compra_artigo.ArtigoFK = artigo.ArtigoID;
                     compra_artigo.CompraFK = compra.CompraID;
-                    compra_artigo.preco = artigo.preco;
-                    compra_artigo.quantidade = carrinho_artigo.quantidade;
-                    precototal += (compra_artigo.preco * compra_artigo.quantidade);
+                    compra_artigo.Preco = artigo.Preco;
+                    compra_artigo.Quantidade = carrinho_artigo.Quantidade;
+                    Precototal += (compra_artigo.Preco * compra_artigo.Quantidade);
                     db.Compra_Artigos.Add(compra_artigo);
                     db.SaveChanges();
 
@@ -329,7 +330,7 @@ namespace ViveirosID.Controllers {
                     db.SaveChanges();
                 }
 
-                compra.precototal = precototal + utilizadorcorrente.preco_transporte;
+                compra.Precototal = Precototal + utilizadorcorrente.Preco_transporte;
 
                 db.SaveChanges();
             }

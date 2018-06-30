@@ -17,7 +17,7 @@ namespace ViveirosID.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Imagens
-        [Authorize]
+        [AllowAnonymous]
         public ActionResult Index()
         {
             var imagem = db.Imagem.Include(i => i.Artigo);
@@ -25,7 +25,7 @@ namespace ViveirosID.Controllers
         }
 
         // GET: Imagens/Details/5
-        [Authorize]
+        [AllowAnonymous]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -41,81 +41,81 @@ namespace ViveirosID.Controllers
         }
 
         // GET: Imagens/Create
-        [Authorize]
+        [Authorize(Roles = "Administrador,Profissonal")]
         public ActionResult Create()
         {
-            ViewBag.ArtigoFK = new SelectList(db.Artigo, "ArtigoID", "nome");
-            ViewData["ArtigoFK"] = new SelectList(db.Artigo.ToList(), "ArtigoID", "nome");
+            ViewBag.ArtigoFK = new SelectList(db.Artigo, "ArtigoID", "Nome");
+            ViewData["ArtigoFK"] = new SelectList(db.Artigo.ToList(), "ArtigoID", "Nome");
             return View();
         }
 
         // POST: Imagens/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [Authorize]
+        [Authorize(Roles = "Administrador,Profissonal")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "descricao,ArtigoFK")] Imagens imagens, HttpPostedFileBase file)
         {
-            // Aqui vejo se o modelo é válido, se a imagem é nula se tem conteudo e esse conteudo e inferior a 4 MB se o conteudo da imagem é do tipo jpeg, png ou gif 
+            // Aqui vejo se o modelo é válido, se a imagem é nula se tem conteudo e esse conteudo e inferior a 4 MB se o conteudo da imagem é do Tipo jpeg, png ou gif 
             //
             if (ModelState.IsValid && file != null && file.ContentLength > 0 && file.ContentLength <= 4194304 && (file.ContentType == "image/jpeg" || file.ContentType == "image/png" || file.ContentType == "image/gif" && file.ContentType == "image/bmp")) 
             {
                 // Se a imagem passou no filtro de cima significa que esta imagem é viavel
-                // A imagem vai agora ser guardada temporariamente sem o seu nome final
-                // por forma a ser guardada mais tarde com o nome definitivo
+                // A imagem vai agora ser guardada temporariamente sem o seu Nome final
+                // por forma a ser guardada mais tarde com o Nome definitivo
                 //
 
-                // Recolhe o nome do artigo sobre o qual se vai trabalhar
+                // Recolhe o Nome do artigo sobre o qual se vai trabalhar
                 //
                 var last_art = (from umaImg in db.Imagem
                                 where umaImg.ArtigoFK == imagens.ArtigoFK
                                 select umaImg);
 
-                var tipo_conteudo = file.ContentType.Split('/');
+                var Tipo_conteudo = file.ContentType.Split('/');
 
                 // Directorio que pretendo para guardar a imagem
                 //
-                string directorio = "~\\Images\\" + (last_art.FirstOrDefault().nome + "_" + (last_art.Count()+1) + "." + tipo_conteudo[1]);
+                string Directorio = "~\\Images\\" + (last_art.FirstOrDefault().Nome + "_" + (last_art.Count()+1) + "." + Tipo_conteudo[1]);
                 try {
-                    file.SaveAs(Server.MapPath(directorio));
+                    file.SaveAs(Server.MapPath(Directorio));
                     ViewBag.Message = "File uploaded successfully";
                 } catch (Exception ex) {
                     ViewBag.Message = "ERROR:" + ex.Message.ToString();
                     return View();
                 }
 
-                // Determina o tipo de imagem de que se trata
+                // Determina o Tipo de imagem de que se trata
                 //
-                Image img = System.Drawing.Image.FromFile(Server.MapPath(directorio));
+                Image img = System.Drawing.Image.FromFile(Server.MapPath(Directorio));
                 int largura = img.Width;
                 int altura = img.Height;
 
-                var tipo = "pequeno";
+                var Tipo = "pequeno";
 
                 if (largura >= 800 && altura >= 600) {
-                    tipo = "medio";
+                    Tipo = "medio";
                 } else if (largura >= 1024 && altura >= 768) {
-                    tipo = "grande";
+                    Tipo = "grande";
                 }
 
-                imagens.nome = last_art.FirstOrDefault().nome;
-                imagens.tipo = tipo;
-                imagens.directorio = last_art.FirstOrDefault().nome + "_" + (last_art.Count() + 1) + "." + tipo_conteudo[1];
+                imagens.Nome = last_art.FirstOrDefault().Nome;
+                imagens.Tipo = Tipo;
+                imagens.Directorio = last_art.FirstOrDefault().Nome + "_" + (last_art.Count() + 1) + "." + Tipo_conteudo[1];
                 db.Imagem.Add(imagens);
                 db.SaveChanges();
             }
 
 
-            //ViewBag.ArtigoFK = new SelectList(db.Artigo.ToList(), "ArtigoID", "nome");
+            //ViewBag.ArtigoFK = new SelectList(db.Artigo.ToList(), "ArtigoID", "Nome");
 
-            ViewData["ArtigoFK"] = new SelectList(db.Artigo.ToList(), "ArtigoID", "nome");
+            ViewData["ArtigoFK"] = new SelectList(db.Artigo.ToList(), "ArtigoID", "Nome");
 
             return RedirectToAction("Index");
         }
 
         // GET: Imagens/Edit/5
-        [Authorize]
+        [Authorize(Roles = "Administrador,Profissonal")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -127,17 +127,17 @@ namespace ViveirosID.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.ArtigoFK = new SelectList(db.Artigo, "ArtigoID", "nome", imagens.ArtigoFK);
+            ViewBag.ArtigoFK = new SelectList(db.Artigo, "ArtigoID", "Nome", imagens.ArtigoFK);
             return View(imagens);
         }
 
         // POST: Imagens/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [Authorize]
+        [Authorize(Roles = "Administrador,Profissonal")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ImagemID,nome,directorio,descricao,tipo,ArtigoFK")] Imagens imagens)
+        public ActionResult Edit([Bind(Include = "ImagemID,Nome,Directorio,descricao,Tipo,ArtigoFK")] Imagens imagens)
         {
             if (ModelState.IsValid)
             {
@@ -145,12 +145,12 @@ namespace ViveirosID.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.ArtigoFK = new SelectList(db.Artigo, "ArtigoID", "nome", imagens.ArtigoFK);
+            ViewBag.ArtigoFK = new SelectList(db.Artigo, "ArtigoID", "Nome", imagens.ArtigoFK);
             return View(imagens);
         }
 
         // GET: Imagens/Delete/5
-        [Authorize]
+        [Authorize(Roles = "Administrador")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -166,7 +166,7 @@ namespace ViveirosID.Controllers
         }
 
         // POST: Imagens/Delete/5
-        [Authorize]
+        [Authorize(Roles = "Administrador")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

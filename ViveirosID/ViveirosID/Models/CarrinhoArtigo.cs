@@ -18,7 +18,7 @@ namespace ViveirosID.Models {
         [Key]
         public int ID { get; set; }
 
-        public int quantidade { get; set; }
+        public int Quantidade { get; set; }
 
         // Chave Forasteira para Artigo
         [ForeignKey("Artigo")]

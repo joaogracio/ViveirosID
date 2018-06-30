@@ -16,7 +16,7 @@ namespace ViveirosID.Views
     {
         public int ID { get; set; }
         public int quantidade { get; set; }
-        public double preco { get; set; }
+        public double Preco { get; set; }
         public int IVA { get; set; }
         public int ArtigoFK { get; set; }
         public int CompraFK { get; set; }

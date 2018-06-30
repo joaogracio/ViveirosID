@@ -21,11 +21,11 @@ namespace ViveirosID.Views
         }
     
         public int CompraID { get; set; }
-        public string metodoentrega { get; set; }
-        public string metodopagamento { get; set; }
-        public string estado { get; set; }
+        public string MetodoentRega { get; set; }
+        public string Metodopagamento { get; set; }
+        public string Estado { get; set; }
         public System.DateTime data { get; set; }
-        public double precototal { get; set; }
+        public double Precototal { get; set; }
         public int UtilizadorFK { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

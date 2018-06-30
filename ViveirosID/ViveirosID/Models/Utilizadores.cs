@@ -20,10 +20,10 @@ namespace ViveirosID.Models {
         //public Boolean sexo { get; set; }
 
         [Required]
-        public string nome { get; set; }
+        public string Nome { get; set; }
 
         [Required]
-        public string apelido { get; set; }
+        public string Apelido { get; set; }
 
         [Required]
         public DateTime? DataDeNascimento { get; set; }
@@ -32,27 +32,27 @@ namespace ViveirosID.Models {
         public int? NIF { get; set; }
 
         [Required]
-        public string morada { get; set; }
+        public string Morada { get; set; }
 
         [Required]
-        public string local { get; set; }
+        public string Local { get; set; }
 
         [Required]
-        public string codigoposta { get; set; }
+        public string Codigopostal { get; set; }
 
         [Required]
-        public string cidade { get; set; }
+        public string Cidade { get; set; }
 
         [Required]
-        public string distrito { get; set; }
+        public string Distrito { get; set; }
 
         [Required]
-        public string pais { get; set; }
+        public string Pais { get; set; }
 
         [Required]
-        public string telefone { get; set; }
+        public string Telefone { get; set; }
 
-        public double preco_transporte { get; set; }
+        public double Preco_transporte { get; set; }
 
         // Cria uma Chave Forasteira para a Tabela Utilizador
         [ForeignKey("Carrinho")]

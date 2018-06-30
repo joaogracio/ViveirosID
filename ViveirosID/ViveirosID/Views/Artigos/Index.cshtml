@@ -35,11 +35,11 @@
         <div class="row">
             @foreach (var item in Model.Skip(i).Take(3))
             {
-                var nome = "/Images/" + item.nome + "_1.jpeg";
+                var Nome = "/Images/" + item.Nome + "_1.jpeg";
                 @*
                 <div class="col-md-4 portfolio-item">
-                    <img class="img-responsive" src="@nome" alt="">
-                    <b> @Html.DisplayFor(modelItem => item.nome)  </b>
+                    <img class="img-responsive" src="@Nome" alt="">
+                    <b> @Html.DisplayFor(modelItem => item.Nome)  </b>
                     @if (Request.IsAuthenticated && User.IsInRole("Administrador"))
                     {
                         @Html.ActionLink("Edit", "Edit", new { id = item.ArtigoID }) <b>  </b> 
@@ -54,10 +54,10 @@
                 *@
                 <div class="col-md-3 col-sm-6 hero-feature">
                     <div class="thumbnail">
-                        <img src="@nome" alt="@item.nome">
+                        <img src="@Nome" alt="@item.Nome">
                         <div class="caption">
-                            <h3>@Html.DisplayFor(modelItem => item.nome)</h3>
-                            <p>@Html.DisplayFor(modelItem => item.descricao)</p>
+                            <h3>@Html.DisplayFor(modelItem => item.Nome)</h3>
+                            <p>@Html.DisplayFor(modelItem => item.Descricao)</p>
                             <p>
                                 @if (Request.IsAuthenticated)
                                 {

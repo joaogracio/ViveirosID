@@ -23,17 +23,17 @@ namespace ViveirosID.Views
         }
     
         public int ArtigoID { get; set; }
-        public string nome { get; set; }
-        public string nometecnico { get; set; }
-        public bool disponibilidade { get; set; }
-        public string descricao { get; set; }
-        public string plantacaoComeca { get; set; }
-        public string plantacaoAcaba { get; set; }
-        public float peso { get; set; }
-        public float crescimento { get; set; }
-        public float luz { get; set; }
-        public float rega { get; set; }
-        public float preco { get; set; }
+        public string Nome { get; set; }
+        public string Nometecnico { get; set; }
+        public bool Disponibilidade { get; set; }
+        public string Descricao { get; set; }
+        public string PlantacaoComeca { get; set; }
+        public string PlantacaoAcaba { get; set; }
+        public float Peso { get; set; }
+        public float Crescimento { get; set; }
+        public float Luz { get; set; }
+        public float Rega { get; set; }
+        public float Preco { get; set; }
         public int CategoriaFK { get; set; }
     
         public virtual Categorias Categorias { get; set; }

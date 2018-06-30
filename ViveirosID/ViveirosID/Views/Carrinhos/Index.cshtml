@@ -2,21 +2,21 @@
 
 @{
     ViewBag.Title = "Index";
-    var preco_todos_pro = 0.0;
-    var preco_todos_total = 0.0;
-    var preco_transporte = 6.0;
+    var Preco_todos_pro = 0.0;
+    var Preco_todos_total = 0.0;
+    var Preco_transporte = 6.0;
 
     if (Model != null) {
         foreach (var item in Model) {
-            preco_todos_pro += item.preco_total_prd;
+            Preco_todos_pro += item.Preco_total_prd;
         }
     }
 
-    if (preco_todos_pro == 0.0) {
-        preco_transporte = 0.0;
+    if (Preco_todos_pro == 0.0) {
+        Preco_transporte = 0.0;
     }
 
-    preco_todos_total = preco_todos_pro + preco_transporte;
+    Preco_todos_total = Preco_todos_pro + Preco_transporte;
 
     var imagens = new ViveirosID.Models.Imagens();
 }
@@ -45,22 +45,22 @@
                     {
                         foreach (var item in Model)
                         {
-                            var img = "/Images/" + item.nome + "_1.jpeg";
+                            var img = "/Images/" + item.Nome + "_1.jpeg";
                             <tr>
                                 <td class="col-sm-8 col-md-6">
                                     <div class="media">
                                         <a class="thumbnail pull-left" href="~/Artigos/Details/@item.ArtigoID"> <img class="media-object" src="@img" style="width: 72px; height: 72px;"> </a>
                                         <div class="media-body">
-                                            <h4 class="media-heading"><a href="~/Artigos/Details/@item.ArtigoID">@item.nome</a></h4>
-                                            <h5 class="media-heading"> Categoria <a href="~/Artigos/Index">@item.tipo</a></h5>
+                                            <h4 class="media-heading"><a href="~/Artigos/Details/@item.ArtigoID">@item.Nome</a></h4>
+                                            <h5 class="media-heading"> Categoria <a href="~/Artigos/Index">@item.Tipo</a></h5>
                                         </div>
                                     </div>
                                 </td>
                                 <td class="col-sm-1 col-md-1" style="text-align: center">
-                                    <input type="text" class="form-control" name="id2" value="@item.quantidade">
+                                    <input type="text" class="form-control" name="id2" value="@item.Quantidade">
                                 </td>
-                                <td class="col-sm-1 col-md-1 text-center"><strong>@item.preco $</strong></td>
-                                <td class="col-sm-1 col-md-1 text-center"><strong>@item.preco_total_prd $</strong></td>
+                                <td class="col-sm-1 col-md-1 text-center"><strong>@item.Preco $</strong></td>
+                                <td class="col-sm-1 col-md-1 text-center"><strong>@item.Preco_total_prd $</strong></td>
                                 <td class="col-sm-1 col-md-1">
                                     <button type="submit" class="btn btn-success" href="/Carrinhos/Actualiza/@item.ArtigoID">
                                         <span class="glyphicon glyphicon-refresh"></span> Actualiza
@@ -85,7 +85,7 @@
                         <td>   </td>
                         <td>   </td>
                         <td><h5>Subtotal</h5></td>
-                        <td class="text-right"><h5><strong>@preco_todos_pro $</strong></h5></td>
+                        <td class="text-right"><h5><strong>@Preco_todos_pro $</strong></h5></td>
                     </tr>
                     <tr>
                         <td>   </td>
@@ -93,7 +93,7 @@
                         <td>   </td>
                         <td>   </td>
                         <td><h5>Preço Estimado para Transporte</h5></td>
-                        <td class="text-right"><h5><strong>@preco_transporte $</strong></h5></td>
+                        <td class="text-right"><h5><strong>@Preco_transporte $</strong></h5></td>
                     </tr>
                     <tr>
                         <td>   </td>
@@ -101,7 +101,7 @@
                         <td>   </td>
                         <td>   </td>
                         <td><h3>Total</h3></td>
-                        <td class="text-right"><h3><strong>@preco_todos_total $</strong></h3></td>
+                        <td class="text-right"><h3><strong>@Preco_todos_total $</strong></h3></td>
                     </tr>
                     <tr>
                         <td>   </td>

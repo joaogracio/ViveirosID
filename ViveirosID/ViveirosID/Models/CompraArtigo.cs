@@ -18,9 +18,9 @@ namespace ViveirosID.Models {
         [Key]
         public int ID { get; set; }
 
-        public int quantidade { get; set; }
+        public int Quantidade { get; set; }
 
-        public double preco { get; set; }
+        public double Preco { get; set; }
 
         public int IVA { get; set; }
 

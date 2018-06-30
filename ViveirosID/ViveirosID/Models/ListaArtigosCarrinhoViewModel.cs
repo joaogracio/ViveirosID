@@ -11,11 +11,11 @@ namespace Viveiros.Models {
             Imagens = new HashSet<Imagens>();
         }*/
         public int ArtigoID { get; set; }
-        public string nome { get; set; }
-        public float preco { get; set; }
-        public float preco_total_prd { get; set; }
-        public int quantidade { get; set; }
-        public string tipo { get; set; }
+        public string Nome { get; set; }
+        public float Preco { get; set; }
+        public float Preco_total_prd { get; set; }
+        public int Quantidade { get; set; }
+        public string Tipo { get; set; }
 
         /*public virtual ICollection<Imagens> Imagens { get; set; }*/
     }

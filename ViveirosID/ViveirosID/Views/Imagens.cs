@@ -15,10 +15,10 @@ namespace ViveirosID.Views
     public partial class Imagens
     {
         public int ImagemID { get; set; }
-        public string nome { get; set; }
-        public string directorio { get; set; }
-        public string descricao { get; set; }
-        public string tipo { get; set; }
+        public string Nome { get; set; }
+        public string Directorio { get; set; }
+        public string Descricao { get; set; }
+        public string Tipo { get; set; }
         public int ArtigoFK { get; set; }
     
         public virtual Artigos Artigos { get; set; }

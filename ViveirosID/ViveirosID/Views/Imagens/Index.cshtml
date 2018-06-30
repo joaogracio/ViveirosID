@@ -14,12 +14,12 @@
     <div class="row text-center text-lg-left">
         @foreach (var item in Model)
     {
-        var nome = "/Images/" + item.directorio;
+        var Nome = "/Images/" + item.Directorio;
         <!-- Page Content -->
 
         <div class="col-lg-3 col-md-4 col-xs-6">
             <a href="/Imagens/Details/@item.ImagemID/" class="d-block mb-4 h-100">
-                <img class="img-fluid img-thumbnail" src="@nome" height="300" width="300">
+                <img class="img-fluid img-thumbnail" src="@Nome" height="300" width="300">
             </a>
         </div>
 

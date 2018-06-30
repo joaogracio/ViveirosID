@@ -22,7 +22,7 @@ namespace ViveirosID.Views
         }
     
         public int UtilizadorID { get; set; }
-        public string nome { get; set; }
+        public string Nome { get; set; }
         public string apelido { get; set; }
         public System.DateTime DataDeNascimento { get; set; }
         public int NIF { get; set; }
@@ -33,7 +33,7 @@ namespace ViveirosID.Views
         public string distrito { get; set; }
         public string pais { get; set; }
         public string telefone { get; set; }
-        public double preco_transporte { get; set; }
+        public double Preco_transporte { get; set; }
         public int CarrinhoFK { get; set; }
         public string IDaspuser { get; set; }
     

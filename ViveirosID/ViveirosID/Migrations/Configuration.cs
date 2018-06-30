@@ -32,10 +32,10 @@ namespace ViveirosID.Migrations
 
             context.Categoria.AddOrUpdate(
                 c => c.CategoriaID,
-                new Categorias() { CategoriaID = 1, tipo = "Frutos" },
-                new Categorias() { CategoriaID = 2, tipo = "Aromáticas" },
-                new Categorias() { CategoriaID = 3, tipo = "Legumes" },
-                new Categorias() { CategoriaID = 4, tipo = "Flores" }
+                new Categorias() { CategoriaID = 1, Tipo = "Frutos" },
+                new Categorias() { CategoriaID = 2, Tipo = "Aromáticas" },
+                new Categorias() { CategoriaID = 3, Tipo = "Legumes" },
+                new Categorias() { CategoriaID = 4, Tipo = "Flores" }
                 );
 
             context.Artigo.AddOrUpdate(
@@ -44,185 +44,185 @@ namespace ViveirosID.Migrations
                 {
                     ArtigoID = 1,
                     CategoriaFK = 1,
-                    crescimento = 3,
-                    descricao = "Framboesa muito resistente. Deve ser colocada em terrenos de elevada alcalinidade.",
-                    disponibilidade = true,
-                    luz = 3,
-                    nome = "Framboesa",
-                    nometecnico = "Framboesis_radicali",
-                    peso = 15,
-                    preco = 1,
-                    rega = 2,
-                    plantacaoComeca = "Março",
-                    plantacaoAcaba = "Julho"
+                    Crescimento = 3,
+                    Descricao = "Framboesa muito resistente. Deve ser colocada em terrenos de elevada alcalinidade.",
+                    Disponibilidade = true,
+                    Luz = 3,
+                    Nome = "Framboesa",
+                    Nometecnico = "Framboesis_radicali",
+                    Peso = 15,
+                    Preco = 1,
+                    Rega = 2,
+                    PlantacaoComeca = "Março",
+                    PlantacaoAcaba = "Julho"
                 },
 
                 new Artigos()
                 {
                     ArtigoID = 2,
                     CategoriaFK = 1,
-                    crescimento = 2,
-                    descricao = "Groselha originária da peninsula Ibérica. Adapta-se bem a climas mediterrâneos",
-                    disponibilidade = true,
-                    luz = 2,
-                    nome = "Groselha",
-                    nometecnico = "Groselhis_iberica",
-                    peso = 10,
-                    preco = 2,
-                    rega = 3,
-                    plantacaoComeca = "Abril",
-                    plantacaoAcaba = "Junho"
+                    Crescimento = 2,
+                    Descricao = "Groselha originária da peninsula Ibérica. Adapta-se bem a climas mediterrâneos",
+                    Disponibilidade = true,
+                    Luz = 2,
+                    Nome = "Groselha",
+                    Nometecnico = "Groselhis_iberica",
+                    Peso = 10,
+                    Preco = 2,
+                    Rega = 3,
+                    PlantacaoComeca = "Abril",
+                    PlantacaoAcaba = "Junho"
                 },
 
                 new Artigos()
                 {
                     ArtigoID = 3,
                     CategoriaFK = 1,
-                    crescimento = 4,
-                    descricao = "Melancia é um fruto muito antigo natural dos paises do médio oriente.",
-                    disponibilidade = true,
-                    luz = 4,
-                    nome = "Melancia",
-                    nometecnico = "Melancia_redondis",
-                    peso = 10,
-                    preco = 1,
-                    rega = 4,
-                    plantacaoComeca = "Fevereiro",
-                    plantacaoAcaba = "Maio"
+                    Crescimento = 4,
+                    Descricao = "Melancia é um fruto muito antigo natural dos paises do médio oriente.",
+                    Disponibilidade = true,
+                    Luz = 4,
+                    Nome = "Melancia",
+                    Nometecnico = "Melancia_redondis",
+                    Peso = 10,
+                    Preco = 1,
+                    Rega = 4,
+                    PlantacaoComeca = "Fevereiro",
+                    PlantacaoAcaba = "Maio"
                 },
 
                 new Artigos()
                 {
                     ArtigoID = 4,
                     CategoriaFK = 4,
-                    crescimento = 2,
-                    descricao = "Flores com pé muito alto. Florescem entre a primavera e o verão.",
-                    disponibilidade = true,
-                    luz = 4,
-                    nome = "Candelula",
-                    nometecnico = "Candelula_candelulis",
-                    peso = 10,
-                    preco = 2,
-                    rega = 3,
-                    plantacaoAcaba = "Março",
-                    plantacaoComeca = "Abril"
+                    Crescimento = 2,
+                    Descricao = "Flores com pé muito alto. Florescem entre a primavera e o verão.",
+                    Disponibilidade = true,
+                    Luz = 4,
+                    Nome = "Candelula",
+                    Nometecnico = "Candelula_candelulis",
+                    Peso = 10,
+                    Preco = 2,
+                    Rega = 3,
+                    PlantacaoAcaba = "Março",
+                    PlantacaoComeca = "Abril"
                 },
 
                 new Artigos()
                 {
                     ArtigoID = 5,
                     CategoriaFK = 4,
-                    crescimento = 2,
-                    descricao = "Flor muito gentil. Com crescimento modesto.",
-                    disponibilidade = true,
-                    luz = 3,
-                    nome = "Cosmo",
-                    nometecnico = "Cosmo_cosmis",
-                    peso = 14,
-                    preco = 3,
-                    rega = 4,
-                    plantacaoComeca = "Janeiro",
-                    plantacaoAcaba = "Abril"
+                    Crescimento = 2,
+                    Descricao = "Flor muito gentil. Com Crescimento modesto.",
+                    Disponibilidade = true,
+                    Luz = 3,
+                    Nome = "Cosmo",
+                    Nometecnico = "Cosmo_cosmis",
+                    Peso = 14,
+                    Preco = 3,
+                    Rega = 4,
+                    PlantacaoComeca = "Janeiro",
+                    PlantacaoAcaba = "Abril"
                 },
 
                 new Artigos()
                 {
                     ArtigoID = 6,
                     CategoriaFK = 2,
-                    crescimento = 3,
-                    descricao = "Alecrim muito cheiroso, selvagem muito resistente ainda que necessite de água abundantemente.",
-                    disponibilidade = true,
-                    luz = 4,
-                    nome = "Alecrim",
-                    nometecnico = "Alecrinis_runderalis",
-                    peso = 16,
-                    preco = 1,
-                    rega = 4,
-                    plantacaoComeca = "Setembro",
-                    plantacaoAcaba = "Maio"
+                    Crescimento = 3,
+                    Descricao = "Alecrim muito cheiroso, selvagem muito resistente ainda que necessite de água abundantemente.",
+                    Disponibilidade = true,
+                    Luz = 4,
+                    Nome = "Alecrim",
+                    Nometecnico = "Alecrinis_runderalis",
+                    Peso = 16,
+                    Preco = 1,
+                    Rega = 4,
+                    PlantacaoComeca = "Setembro",
+                    PlantacaoAcaba = "Maio"
                 },
 
                 new Artigos()
                 {
                     ArtigoID = 7,
                     CategoriaFK = 2,
-                    crescimento = 4,
-                    descricao = "Erva Aromática muito procurada pelos gatos, devido ao seu aroma e propriadades medicinais.",
-                    disponibilidade = true,
-                    luz = 3,
-                    nome = "Erva_do_Gato",
-                    nometecnico = "Ervas_gatis",
-                    peso = 20,
-                    preco = 1,
-                    rega = 2,
-                    plantacaoComeca = "Janeiro",
-                    plantacaoAcaba = "Junho"
+                    Crescimento = 4,
+                    Descricao = "Erva Aromática muito procurada pelos gatos, devido ao seu aroma e propriadades medicinais.",
+                    Disponibilidade = true,
+                    Luz = 3,
+                    Nome = "Erva_do_Gato",
+                    Nometecnico = "Ervas_gatis",
+                    Peso = 20,
+                    Preco = 1,
+                    Rega = 2,
+                    PlantacaoComeca = "Janeiro",
+                    PlantacaoAcaba = "Junho"
                 },
 
                 new Artigos()
                 {
                     ArtigoID = 8,
                     CategoriaFK = 3,
-                    crescimento = 4,
-                    descricao = "Arruda muito resistente. Conhecida pela planta das bruxas.",
-                    disponibilidade = true,
-                    luz = 5,
-                    nome = "Arruda",
-                    nometecnico = "Arruda_arrudis",
-                    peso = 13,
-                    preco = 2,
-                    rega = 2,
-                    plantacaoComeca = "Outubro",
-                    plantacaoAcaba = "Março"
+                    Crescimento = 4,
+                    Descricao = "Arruda muito resistente. Conhecida pela planta das bruxas.",
+                    Disponibilidade = true,
+                    Luz = 5,
+                    Nome = "Arruda",
+                    Nometecnico = "Arruda_arrudis",
+                    Peso = 13,
+                    Preco = 2,
+                    Rega = 2,
+                    PlantacaoComeca = "Outubro",
+                    PlantacaoAcaba = "Março"
                 },
 
                 new Artigos()
                 {
                     ArtigoID = 9,
                     CategoriaFK = 3,
-                    crescimento = 2,
-                    descricao = "Cebola roxa com um crescimento um pouco lento. Mas com um paladar muito rico",
-                    disponibilidade = true,
-                    luz = 5,
-                    nome = "Cebola_Roxa",
-                    nometecnico = "Cebola_roxis",
-                    peso = 20,
-                    preco = 2,
-                    rega = 4,
-                    plantacaoComeca = "Novembro",
-                    plantacaoAcaba = "Abril"
+                    Crescimento = 2,
+                    Descricao = "Cebola roxa com um Crescimento um pouco lento. Mas com um paladar muito rico",
+                    Disponibilidade = true,
+                    Luz = 5,
+                    Nome = "Cebola_Roxa",
+                    Nometecnico = "Cebola_roxis",
+                    Peso = 20,
+                    Preco = 2,
+                    Rega = 4,
+                    PlantacaoComeca = "Novembro",
+                    PlantacaoAcaba = "Abril"
                 },
 
                 new Artigos()
                 {
                     ArtigoID = 10,
                     CategoriaFK = 4,
-                    crescimento = 3,
-                    descricao = "Cebola branca com um crescimento mais acelarado",
-                    disponibilidade = true,
-                    luz = 5,
-                    nome = "Cebola_Branca",
-                    nometecnico = "Cebolis_branquis",
-                    peso = 20,
-                    preco = 1,
-                    rega = 4,
-                    plantacaoComeca = "Novembro",
-                    plantacaoAcaba = "Abril"
+                    Crescimento = 3,
+                    Descricao = "Cebola branca com um Crescimento mais acelarado",
+                    Disponibilidade = true,
+                    Luz = 5,
+                    Nome = "Cebola_Branca",
+                    Nometecnico = "Cebolis_branquis",
+                    Peso = 20,
+                    Preco = 1,
+                    Rega = 4,
+                    PlantacaoComeca = "Novembro",
+                    PlantacaoAcaba = "Abril"
                 }
                 );
 
             context.Imagem.AddOrUpdate(
                 a => a.ImagemID,
-                    new Imagens() { ImagemID = 1, nome = "Alecrim", directorio = "Alecrim_1.jpeg", descricao = "", ArtigoFK = 4 },
-                    new Imagens() { ImagemID = 2, nome = "Arruda", directorio = "Arruda_1.jpeg", descricao = "", ArtigoFK = 6 },
-                    new Imagens() { ImagemID = 3, nome = "Candelula", directorio = "Candelula_1.jpeg", descricao = "Foto equivocada!...", ArtigoFK = 8 },
-                    new Imagens() { ImagemID = 4, nome = "Cebola_Branca", directorio = "Cebola_Branca_1.jpeg", descricao = "", ArtigoFK = 10 },
-                    new Imagens() { ImagemID = 5, nome = "Cebola_Roxa", directorio = "Cebola_Roxa_1.jpeg", descricao = "", ArtigoFK = 7 },
-                    new Imagens() { ImagemID = 6, nome = "Cosmo", directorio = "Cebola_Roxa_1.jpeg", descricao = "", ArtigoFK = 9 },
-                    new Imagens() { ImagemID = 7, nome = "Erva_do_Gato", directorio = "Erva_do_Gato_1.jpeg", descricao = "", ArtigoFK = 5 },
-                    new Imagens() { ImagemID = 8, nome = "Framboesa", directorio = "Framboesa_1.jpeg", descricao = "", ArtigoFK = 1 },
-                    new Imagens() { ImagemID = 9, nome = "Groselha", directorio = "Groselha_1.jpeg", descricao = "", ArtigoFK = 2 },
-                    new Imagens() { ImagemID = 10, nome = "Melancia", directorio = "Melancia_1.jpeg", descricao = "", ArtigoFK = 3 }
+                    new Imagens() { ImagemID = 1, Nome = "Alecrim", Directorio = "Alecrim_1.jpeg", Descricao = "", ArtigoFK = 4 },
+                    new Imagens() { ImagemID = 2, Nome = "Arruda", Directorio = "Arruda_1.jpeg", Descricao = "", ArtigoFK = 6 },
+                    new Imagens() { ImagemID = 3, Nome = "Candelula", Directorio = "Candelula_1.jpeg", Descricao = "Foto equivocada!...", ArtigoFK = 8 },
+                    new Imagens() { ImagemID = 4, Nome = "Cebola_Branca", Directorio = "Cebola_Branca_1.jpeg", Descricao = "", ArtigoFK = 10 },
+                    new Imagens() { ImagemID = 5, Nome = "Cebola_Roxa", Directorio = "Cebola_Roxa_1.jpeg", Descricao = "", ArtigoFK = 7 },
+                    new Imagens() { ImagemID = 6, Nome = "Cosmo", Directorio = "Cebola_Roxa_1.jpeg", Descricao = "", ArtigoFK = 9 },
+                    new Imagens() { ImagemID = 7, Nome = "Erva_do_Gato", Directorio = "Erva_do_Gato_1.jpeg", Descricao = "", ArtigoFK = 5 },
+                    new Imagens() { ImagemID = 8, Nome = "Framboesa", Directorio = "Framboesa_1.jpeg", Descricao = "", ArtigoFK = 1 },
+                    new Imagens() { ImagemID = 9, Nome = "Groselha", Directorio = "Groselha_1.jpeg", Descricao = "", ArtigoFK = 2 },
+                    new Imagens() { ImagemID = 10, Nome = "Melancia", Directorio = "Melancia_1.jpeg", Descricao = "", ArtigoFK = 3 }
             );
 
         }

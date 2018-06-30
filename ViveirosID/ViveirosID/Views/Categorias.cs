@@ -21,7 +21,7 @@ namespace ViveirosID.Views
         }
     
         public int CategoriaID { get; set; }
-        public string tipo { get; set; }
+        public string Tipo { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Artigos> Artigos { get; set; }

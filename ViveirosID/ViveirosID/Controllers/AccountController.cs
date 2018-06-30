@@ -226,25 +226,25 @@ namespace ViveirosID.Controllers {
                         //
                         Utilizadores utilizador = new Utilizadores();
                         //utilizador.sexo = sexo;
-                        utilizador.nome = nome;
-                        utilizador.apelido = apelido;
+                        utilizador.Nome = nome;
+                        utilizador.Apelido = apelido;
                         utilizador.DataDeNascimento = Convert.ToDateTime(DataDeNascimento);
                         utilizador.NIF = Convert.ToInt32(NIF);
-                        utilizador.morada = morada;
-                        utilizador.local = local;
-                        utilizador.codigoposta = codigoposta;
-                        utilizador.cidade = cidade;
-                        utilizador.distrito = distrito;
-                        utilizador.pais = pais;
-                        utilizador.telefone = telefone;
+                        utilizador.Morada = morada;
+                        utilizador.Local = local;
+                        utilizador.Codigopostal = codigoposta;
+                        utilizador.Cidade = cidade;
+                        utilizador.Distrito = distrito;
+                        utilizador.Pais = pais;
+                        utilizador.Telefone = telefone;
                         // Aqui calcula-se o preco do transporte
                         //
                         if (pais == "Portugal")
                         {
-                            utilizador.preco_transporte = 6.0;
+                            utilizador.Preco_transporte = 6.0;
                         }
                         else {
-                            utilizador.preco_transporte = 15.0;
+                            utilizador.Preco_transporte = 15.0;
                         }
                         // Aqui relaciona-se um AspUser a um Utilizador
                         //
@@ -257,9 +257,9 @@ namespace ViveirosID.Controllers {
                         // Este ira ser o Carrinho deste Utilizador (num relacionamento um para um)
                         //
                         Carrinhos carrinho = new Carrinhos();
-                        carrinho.peso = 0;
-                        carrinho.precototal = 0;
-                        carrinho.ultimaAlteracao = DateTime.Now;
+                        carrinho.Peso = 0;
+                        carrinho.Precototal = 0;
+                        carrinho.UltimaAlteracao = DateTime.Now;
                         carrinho.Utilizador = utilizador;
                         carrinho.UtilizadorFK = utilizador.UtilizadorID;
 

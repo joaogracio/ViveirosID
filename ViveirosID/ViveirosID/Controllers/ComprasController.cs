@@ -63,7 +63,7 @@ namespace Viveiros.Controllers {
         [Authorize (Roles = "Administrador")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "CompraID,metodoentrega,metodopagamento,estado,data,precototal")] Compras compra) {
+        public ActionResult Create([Bind(Include = "CompraID,MetodoentRega,Metodopagamento,Estado,data,Precototal")] Compras compra) {
             if (ModelState.IsValid) {
                 db.Compra.Add(compra);
                 db.SaveChanges();
@@ -92,7 +92,7 @@ namespace Viveiros.Controllers {
         [Authorize(Roles = "Administrador")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "CompraID,metodoentrega,metodopagamento,estado,data,precototal")] Compras compra) {
+        public ActionResult Edit([Bind(Include = "CompraID,MetodoentRega,Metodopagamento,Estado,data,Precototal")] Compras compra) {
             if (ModelState.IsValid) {
                 db.Entry(compra).State = EntityState.Modified;
                 db.SaveChanges();

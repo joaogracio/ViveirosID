@@ -19,11 +19,11 @@ namespace ViveirosID.Models {
         public int CarrinhoID { get; set; }
 
         //decimal
-        public float precototal { get; set; }
+        public float Precototal { get; set; }
 
-        public DateTime ultimaAlteracao { get; set; }
+        public DateTime UltimaAlteracao { get; set; }
 
-        public float peso { get; set; }
+        public float Peso { get; set; }
 
         [ForeignKey("Utilizador")]
         public int UtilizadorFK;

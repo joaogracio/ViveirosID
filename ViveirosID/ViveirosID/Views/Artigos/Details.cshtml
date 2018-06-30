@@ -3,7 +3,7 @@
 @{
     ViewBag.Title = "Detalhes";
     //Variavel auxiliar para determinar a directoria do ficheiro
-    var fonte_imagem = Model.Imagens.FirstOrDefault().directorio;
+    var fonte_imagem = Model.Imagens.FirstOrDefault().Directorio;
     //var compare = fonte_imagem.Compare();
 }
 
@@ -13,17 +13,17 @@
 <div class="container">
     <div class="row">
         <div class="col-md-3">
-            <p class="lead">@Model.Categoria.tipo</p>
+            <p class="lead">@Model.Categoria.Tipo</p>
             <div class="list-group">
                 @foreach (var item in Model.Artigos)
                 {
                     if (item.ArtigoID == Model.Artigo.ArtigoID)
                     {
-                        <a href="/Artigos/Details/@item.ArtigoID" class="list-group-item active">@item.nome</a>
+                        <a href="/Artigos/Details/@item.ArtigoID" class="list-group-item active">@item.Nome</a>
                     }
                     else
                     {
-                        <a href="/Artigos/Details/@item.ArtigoID" class="list-group-item">@item.nome</a>
+                        <a href="/Artigos/Details/@item.ArtigoID" class="list-group-item">@item.Nome</a>
                     }
                 }
             </div>
@@ -32,89 +32,89 @@
             <div class="thumbnail">
                 <img class="img-responsive" src="@fonte_imagem" alt="">
                 <div class="caption-full">
-                    <h4 class="pull-right">@Model.Artigo.preco $</h4>
+                    <h4 class="pull-right">@Model.Artigo.Preco $</h4>
                     <h4>
-                         @Model.Artigo.nome
+                         @Model.Artigo.Nome
                     </h4>
                     <dl class="dl-horizontal">
                         <dt>
-                            @Html.DisplayNameFor(model => model.Artigo.nometecnico)
+                            @Html.DisplayNameFor(model => model.Artigo.Nometecnico)
                         </dt>
 
                         <dd>
-                            @Html.DisplayFor(model => model.Artigo.nometecnico)
+                            @Html.DisplayFor(model => model.Artigo.Nometecnico)
                         </dd>
 
                         <dt>
-                            @Html.DisplayNameFor(model => model.Artigo.disponibilidade)
+                            @Html.DisplayNameFor(model => model.Artigo.Disponibilidade)
                         </dt>
 
                         <dd>
-                            @Html.DisplayFor(model => model.Artigo.disponibilidade)
+                            @Html.DisplayFor(model => model.Artigo.Disponibilidade)
                         </dd>
 
                         <dt>
-                            @Html.DisplayNameFor(model => model.Artigo.descricao)
+                            @Html.DisplayNameFor(model => model.Artigo.Descricao)
                         </dt>
 
                         <dd>
-                            @Html.DisplayFor(model => model.Artigo.descricao)
+                            @Html.DisplayFor(model => model.Artigo.Descricao)
                         </dd>
 
                         <dt>
-                            @Html.DisplayNameFor(model => model.Artigo.plantacaoComeca)
+                            @Html.DisplayNameFor(model => model.Artigo.PlantacaoComeca)
                         </dt>
 
                         <dd>
-                            @Html.DisplayFor(model => model.Artigo.plantacaoComeca)
+                            @Html.DisplayFor(model => model.Artigo.PlantacaoComeca)
                         </dd>
 
                         <dt>
-                            @Html.DisplayNameFor(model => model.Artigo.plantacaoAcaba)
+                            @Html.DisplayNameFor(model => model.Artigo.PlantacaoAcaba)
                         </dt>
 
                         <dd>
-                            @Html.DisplayFor(model => model.Artigo.plantacaoAcaba)
+                            @Html.DisplayFor(model => model.Artigo.PlantacaoAcaba)
                         </dd>
 
                         <dt>
-                            @Html.DisplayNameFor(model => model.Artigo.peso)
+                            @Html.DisplayNameFor(model => model.Artigo.Peso)
                         </dt>
 
                         <dd>
-                            @Html.DisplayFor(model => model.Artigo.peso)
+                            @Html.DisplayFor(model => model.Artigo.Peso)
                         </dd>
 
                         <dt>
-                            @Html.DisplayNameFor(model => model.Artigo.crescimento)
+                            @Html.DisplayNameFor(model => model.Artigo.Crescimento)
                         </dt>
 
                         <dd>
-                            @Html.DisplayFor(model => model.Artigo.crescimento)
+                            @Html.DisplayFor(model => model.Artigo.Crescimento)
                         </dd>
 
                         <dt>
-                            @Html.DisplayNameFor(model => model.Artigo.luz)
+                            @Html.DisplayNameFor(model => model.Artigo.Luz)
                         </dt>
 
                         <dd>
-                            @Html.DisplayFor(model => model.Artigo.luz)
+                            @Html.DisplayFor(model => model.Artigo.Luz)
                         </dd>
 
                         <dt>
-                            @Html.DisplayNameFor(model => model.Artigo.rega)
+                            @Html.DisplayNameFor(model => model.Artigo.Rega)
                         </dt>
 
                         <dd>
-                            @Html.DisplayFor(model => model.Artigo.rega)
+                            @Html.DisplayFor(model => model.Artigo.Rega)
                         </dd>
 
                         <dt>
-                            @Html.DisplayNameFor(model => model.Artigo.preco)
+                            @Html.DisplayNameFor(model => model.Artigo.Preco)
                         </dt>
 
                         <dd>
-                            @Html.DisplayFor(model => model.Artigo.preco) $
+                            @Html.DisplayFor(model => model.Artigo.Preco) $
                         </dd>
 
                     </dl>

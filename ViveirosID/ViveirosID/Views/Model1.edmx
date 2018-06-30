@@ -20,17 +20,17 @@
             <PropertyRef Name="ArtigoID" />
           </Key>
           <Property Name="ArtigoID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="nome" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="nometecnico" Type="nvarchar(max)" />
-          <Property Name="disponibilidade" Type="bit" Nullable="false" />
-          <Property Name="descricao" Type="nvarchar(max)" />
-          <Property Name="plantacaoComeca" Type="nvarchar(max)" />
-          <Property Name="plantacaoAcaba" Type="nvarchar(max)" />
-          <Property Name="peso" Type="real" Nullable="false" />
-          <Property Name="crescimento" Type="real" Nullable="false" />
-          <Property Name="luz" Type="real" Nullable="false" />
-          <Property Name="rega" Type="real" Nullable="false" />
-          <Property Name="preco" Type="real" Nullable="false" />
+          <Property Name="Nome" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Nometecnico" Type="nvarchar(max)" />
+          <Property Name="Disponibilidade" Type="bit" Nullable="false" />
+          <Property Name="Descricao" Type="nvarchar(max)" />
+          <Property Name="PlantacaoComeca" Type="nvarchar(max)" />
+          <Property Name="PlantacaoAcaba" Type="nvarchar(max)" />
+          <Property Name="Peso" Type="real" Nullable="false" />
+          <Property Name="Crescimento" Type="real" Nullable="false" />
+          <Property Name="Luz" Type="real" Nullable="false" />
+          <Property Name="Rega" Type="real" Nullable="false" />
+          <Property Name="Preco" Type="real" Nullable="false" />
           <Property Name="CategoriaFK" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="CarrinhoArtigoes">
@@ -47,9 +47,9 @@
             <PropertyRef Name="CarrinhoID" />
           </Key>
           <Property Name="CarrinhoID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="precototal" Type="real" Nullable="false" />
-          <Property Name="ultimaAlteracao" Type="datetime" Nullable="false" />
-          <Property Name="peso" Type="real" Nullable="false" />
+          <Property Name="Precototal" Type="real" Nullable="false" />
+          <Property Name="UltimaAlteracao" Type="datetime" Nullable="false" />
+          <Property Name="Peso" Type="real" Nullable="false" />
           <Property Name="Utilizador_UtilizadorID" Type="int" />
         </EntityType>
         <EntityType Name="Categorias">
@@ -57,7 +57,7 @@
             <PropertyRef Name="CategoriaID" />
           </Key>
           <Property Name="CategoriaID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="tipo" Type="nvarchar(max)" />
+          <Property Name="Tipo" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="CompraArtigoes">
           <Key>
@@ -65,7 +65,7 @@
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="quantidade" Type="int" Nullable="false" />
-          <Property Name="preco" Type="float" Nullable="false" />
+          <Property Name="Preco" Type="float" Nullable="false" />
           <Property Name="IVA" Type="int" Nullable="false" />
           <Property Name="ArtigoFK" Type="int" Nullable="false" />
           <Property Name="CompraFK" Type="int" Nullable="false" />
@@ -75,11 +75,11 @@
             <PropertyRef Name="CompraID" />
           </Key>
           <Property Name="CompraID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="metodoentrega" Type="nvarchar(max)" />
-          <Property Name="metodopagamento" Type="nvarchar(max)" />
-          <Property Name="estado" Type="nvarchar(max)" />
+          <Property Name="MetodoentRega" Type="nvarchar(max)" />
+          <Property Name="Metodopagamento" Type="nvarchar(max)" />
+          <Property Name="Estado" Type="nvarchar(max)" />
           <Property Name="data" Type="datetime" Nullable="false" />
-          <Property Name="precototal" Type="float" Nullable="false" />
+          <Property Name="Precototal" Type="float" Nullable="false" />
           <Property Name="UtilizadorFK" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="ContentViewModels">
@@ -97,10 +97,10 @@
             <PropertyRef Name="ImagemID" />
           </Key>
           <Property Name="ImagemID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="nome" Type="nvarchar(max)" />
-          <Property Name="directorio" Type="nvarchar(max)" />
-          <Property Name="descricao" Type="nvarchar(max)" />
-          <Property Name="tipo" Type="nvarchar(max)" />
+          <Property Name="Nome" Type="nvarchar(max)" />
+          <Property Name="Directorio" Type="nvarchar(max)" />
+          <Property Name="Descricao" Type="nvarchar(max)" />
+          <Property Name="Tipo" Type="nvarchar(max)" />
           <Property Name="ArtigoFK" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Utilizadores">
@@ -108,7 +108,7 @@
             <PropertyRef Name="UtilizadorID" />
           </Key>
           <Property Name="UtilizadorID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="nome" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Nome" Type="nvarchar(max)" Nullable="false" />
           <Property Name="apelido" Type="nvarchar(max)" Nullable="false" />
           <Property Name="datadenascimento" Type="datetime" Nullable="false" />
           <Property Name="NIF" Type="int" Nullable="false" />
@@ -119,7 +119,7 @@
           <Property Name="distrito" Type="nvarchar(max)" Nullable="false" />
           <Property Name="pais" Type="nvarchar(max)" Nullable="false" />
           <Property Name="telefone" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="preco_transporte" Type="float" Nullable="false" />
+          <Property Name="Preco_transporte" Type="float" Nullable="false" />
           <Property Name="CarrinhoFK" Type="int" Nullable="false" />
           <Property Name="IDaspuser" Type="nvarchar(max)" />
         </EntityType>
@@ -297,17 +297,17 @@
             <PropertyRef Name="ArtigoID" />
           </Key>
           <Property Name="ArtigoID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="nome" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="nometecnico" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="disponibilidade" Type="Boolean" Nullable="false" />
-          <Property Name="descricao" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="plantacaoComeca" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="plantacaoAcaba" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="peso" Type="Single" Nullable="false" />
-          <Property Name="crescimento" Type="Single" Nullable="false" />
-          <Property Name="luz" Type="Single" Nullable="false" />
-          <Property Name="rega" Type="Single" Nullable="false" />
-          <Property Name="preco" Type="Single" Nullable="false" />
+          <Property Name="Nome" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Nometecnico" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Disponibilidade" Type="Boolean" Nullable="false" />
+          <Property Name="Descricao" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PlantacaoComeca" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PlantacaoAcaba" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Peso" Type="Single" Nullable="false" />
+          <Property Name="Crescimento" Type="Single" Nullable="false" />
+          <Property Name="Luz" Type="Single" Nullable="false" />
+          <Property Name="Rega" Type="Single" Nullable="false" />
+          <Property Name="Preco" Type="Single" Nullable="false" />
           <Property Name="CategoriaFK" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Categorias" Relationship="Self.FK_dbo_Artigos_dbo_Categorias_CategoriaFK" FromRole="Artigos" ToRole="Categorias" />
           <NavigationProperty Name="CarrinhoArtigoes" Relationship="Self.FK_dbo_CarrinhoArtigoes_dbo_Artigos_ArtigoFK" FromRole="Artigos" ToRole="CarrinhoArtigoes" />
@@ -330,9 +330,9 @@
             <PropertyRef Name="CarrinhoID" />
           </Key>
           <Property Name="CarrinhoID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="precototal" Type="Single" Nullable="false" />
-          <Property Name="ultimaAlteracao" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="peso" Type="Single" Nullable="false" />
+          <Property Name="Precototal" Type="Single" Nullable="false" />
+          <Property Name="UltimaAlteracao" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Peso" Type="Single" Nullable="false" />
           <Property Name="Utilizador_UtilizadorID" Type="Int32" />
           <NavigationProperty Name="CarrinhoArtigoes" Relationship="Self.FK_dbo_CarrinhoArtigoes_dbo_Carrinhos_CarrinhoFK" FromRole="Carrinhos" ToRole="CarrinhoArtigoes" />
           <NavigationProperty Name="Utilizadores" Relationship="Self.FK_dbo_Carrinhos_dbo_Utilizadores_Utilizador_UtilizadorID" FromRole="Carrinhos" ToRole="Utilizadores" />
@@ -342,7 +342,7 @@
             <PropertyRef Name="CategoriaID" />
           </Key>
           <Property Name="CategoriaID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="tipo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Tipo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Artigos" Relationship="Self.FK_dbo_Artigos_dbo_Categorias_CategoriaFK" FromRole="Categorias" ToRole="Artigos" />
         </EntityType>
         <EntityType Name="CompraArtigoes">
@@ -351,7 +351,7 @@
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="quantidade" Type="Int32" Nullable="false" />
-          <Property Name="preco" Type="Double" Nullable="false" />
+          <Property Name="Preco" Type="Double" Nullable="false" />
           <Property Name="IVA" Type="Int32" Nullable="false" />
           <Property Name="ArtigoFK" Type="Int32" Nullable="false" />
           <Property Name="CompraFK" Type="Int32" Nullable="false" />
@@ -363,11 +363,11 @@
             <PropertyRef Name="CompraID" />
           </Key>
           <Property Name="CompraID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="metodoentrega" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="metodopagamento" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="estado" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MetodoentRega" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Metodopagamento" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Estado" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="data" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="precototal" Type="Double" Nullable="false" />
+          <Property Name="Precototal" Type="Double" Nullable="false" />
           <Property Name="UtilizadorFK" Type="Int32" Nullable="false" />
           <NavigationProperty Name="CompraArtigoes" Relationship="Self.FK_dbo_CompraArtigoes_dbo_Compras_CompraFK" FromRole="Compras" ToRole="CompraArtigoes" />
           <NavigationProperty Name="Utilizadores" Relationship="Self.FK_dbo_Compras_dbo_Utilizadores_UtilizadorFK" FromRole="Compras" ToRole="Utilizadores" />
@@ -387,10 +387,10 @@
             <PropertyRef Name="ImagemID" />
           </Key>
           <Property Name="ImagemID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="nome" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="directorio" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="descricao" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="tipo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Nome" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Directorio" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Descricao" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Tipo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="ArtigoFK" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Artigos" Relationship="Self.FK_dbo_Imagens_dbo_Artigos_ArtigoFK" FromRole="Imagens" ToRole="Artigos" />
         </EntityType>
@@ -399,7 +399,7 @@
             <PropertyRef Name="UtilizadorID" />
           </Key>
           <Property Name="UtilizadorID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="nome" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Nome" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="apelido" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="datadenascimento" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="NIF" Type="Int32" Nullable="false" />
@@ -410,7 +410,7 @@
           <Property Name="distrito" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="pais" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="telefone" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="preco_transporte" Type="Double" Nullable="false" />
+          <Property Name="Preco_transporte" Type="Double" Nullable="false" />
           <Property Name="CarrinhoFK" Type="Int32" Nullable="false" />
           <Property Name="IDaspuser" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Carrinhos" Relationship="Self.FK_dbo_Carrinhos_dbo_Utilizadores_Utilizador_UtilizadorID" FromRole="Utilizadores" ToRole="Carrinhos" />
@@ -590,17 +590,17 @@
             <EntityTypeMapping TypeName="Model.Artigos">
               <MappingFragment StoreEntitySet="Artigos">
                 <ScalarProperty Name="ArtigoID" ColumnName="ArtigoID" />
-                <ScalarProperty Name="nome" ColumnName="nome" />
-                <ScalarProperty Name="nometecnico" ColumnName="nometecnico" />
-                <ScalarProperty Name="disponibilidade" ColumnName="disponibilidade" />
-                <ScalarProperty Name="descricao" ColumnName="descricao" />
-                <ScalarProperty Name="plantacaoComeca" ColumnName="plantacaoComeca" />
-                <ScalarProperty Name="plantacaoAcaba" ColumnName="plantacaoAcaba" />
-                <ScalarProperty Name="peso" ColumnName="peso" />
-                <ScalarProperty Name="crescimento" ColumnName="crescimento" />
-                <ScalarProperty Name="luz" ColumnName="luz" />
-                <ScalarProperty Name="rega" ColumnName="rega" />
-                <ScalarProperty Name="preco" ColumnName="preco" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="Nometecnico" ColumnName="Nometecnico" />
+                <ScalarProperty Name="Disponibilidade" ColumnName="Disponibilidade" />
+                <ScalarProperty Name="Descricao" ColumnName="Descricao" />
+                <ScalarProperty Name="PlantacaoComeca" ColumnName="PlantacaoComeca" />
+                <ScalarProperty Name="PlantacaoAcaba" ColumnName="PlantacaoAcaba" />
+                <ScalarProperty Name="Peso" ColumnName="Peso" />
+                <ScalarProperty Name="Crescimento" ColumnName="Crescimento" />
+                <ScalarProperty Name="Luz" ColumnName="Luz" />
+                <ScalarProperty Name="Rega" ColumnName="Rega" />
+                <ScalarProperty Name="Preco" ColumnName="Preco" />
                 <ScalarProperty Name="CategoriaFK" ColumnName="CategoriaFK" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -619,9 +619,9 @@
             <EntityTypeMapping TypeName="Model.Carrinhos">
               <MappingFragment StoreEntitySet="Carrinhos">
                 <ScalarProperty Name="CarrinhoID" ColumnName="CarrinhoID" />
-                <ScalarProperty Name="precototal" ColumnName="precototal" />
-                <ScalarProperty Name="ultimaAlteracao" ColumnName="ultimaAlteracao" />
-                <ScalarProperty Name="peso" ColumnName="peso" />
+                <ScalarProperty Name="Precototal" ColumnName="Precototal" />
+                <ScalarProperty Name="UltimaAlteracao" ColumnName="UltimaAlteracao" />
+                <ScalarProperty Name="Peso" ColumnName="Peso" />
                 <ScalarProperty Name="Utilizador_UtilizadorID" ColumnName="Utilizador_UtilizadorID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -630,7 +630,7 @@
             <EntityTypeMapping TypeName="Model.Categorias">
               <MappingFragment StoreEntitySet="Categorias">
                 <ScalarProperty Name="CategoriaID" ColumnName="CategoriaID" />
-                <ScalarProperty Name="tipo" ColumnName="tipo" />
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -639,7 +639,7 @@
               <MappingFragment StoreEntitySet="CompraArtigoes">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="quantidade" ColumnName="quantidade" />
-                <ScalarProperty Name="preco" ColumnName="preco" />
+                <ScalarProperty Name="Preco" ColumnName="Preco" />
                 <ScalarProperty Name="IVA" ColumnName="IVA" />
                 <ScalarProperty Name="ArtigoFK" ColumnName="ArtigoFK" />
                 <ScalarProperty Name="CompraFK" ColumnName="CompraFK" />
@@ -650,11 +650,11 @@
             <EntityTypeMapping TypeName="Model.Compras">
               <MappingFragment StoreEntitySet="Compras">
                 <ScalarProperty Name="CompraID" ColumnName="CompraID" />
-                <ScalarProperty Name="metodoentrega" ColumnName="metodoentrega" />
-                <ScalarProperty Name="metodopagamento" ColumnName="metodopagamento" />
-                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="MetodoentRega" ColumnName="MetodoentRega" />
+                <ScalarProperty Name="Metodopagamento" ColumnName="Metodopagamento" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
                 <ScalarProperty Name="data" ColumnName="data" />
-                <ScalarProperty Name="precototal" ColumnName="precototal" />
+                <ScalarProperty Name="Precototal" ColumnName="Precototal" />
                 <ScalarProperty Name="UtilizadorFK" ColumnName="UtilizadorFK" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -674,10 +674,10 @@
             <EntityTypeMapping TypeName="Model.Imagens">
               <MappingFragment StoreEntitySet="Imagens">
                 <ScalarProperty Name="ImagemID" ColumnName="ImagemID" />
-                <ScalarProperty Name="nome" ColumnName="nome" />
-                <ScalarProperty Name="directorio" ColumnName="directorio" />
-                <ScalarProperty Name="descricao" ColumnName="descricao" />
-                <ScalarProperty Name="tipo" ColumnName="tipo" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="Directorio" ColumnName="Directorio" />
+                <ScalarProperty Name="Descricao" ColumnName="Descricao" />
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
                 <ScalarProperty Name="ArtigoFK" ColumnName="ArtigoFK" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -686,7 +686,7 @@
             <EntityTypeMapping TypeName="Model.Utilizadores">
               <MappingFragment StoreEntitySet="Utilizadores">
                 <ScalarProperty Name="UtilizadorID" ColumnName="UtilizadorID" />
-                <ScalarProperty Name="nome" ColumnName="nome" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
                 <ScalarProperty Name="apelido" ColumnName="apelido" />
                 <ScalarProperty Name="datadenascimento" ColumnName="datadenascimento" />
                 <ScalarProperty Name="NIF" ColumnName="NIF" />
@@ -697,7 +697,7 @@
                 <ScalarProperty Name="distrito" ColumnName="distrito" />
                 <ScalarProperty Name="pais" ColumnName="pais" />
                 <ScalarProperty Name="telefone" ColumnName="telefone" />
-                <ScalarProperty Name="preco_transporte" ColumnName="preco_transporte" />
+                <ScalarProperty Name="Preco_transporte" ColumnName="Preco_transporte" />
                 <ScalarProperty Name="CarrinhoFK" ColumnName="CarrinhoFK" />
                 <ScalarProperty Name="IDaspuser" ColumnName="IDaspuser" />
               </MappingFragment>

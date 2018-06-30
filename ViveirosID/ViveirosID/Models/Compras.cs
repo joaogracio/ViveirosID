@@ -24,15 +24,15 @@ namespace ViveirosID.Models {
         [Key]
         public int CompraID { get; set; }
 
-        public string metodoentrega { get; set; }
+        public string Metodoentrega { get; set; }
 
-        public string metodopagamento { get; set; }
+        public string Metodopagamento { get; set; }
 
-        public string estado { get; set; }
+        public string Estado { get; set; }
 
-        public DateTime data { get; set; }
+        public DateTime Data { get; set; }
 
-        public double precototal { get; set; }
+        public double Precototal { get; set; }
 
         // Para cada Compra existe um Utilizador
         // Chave forasteira para Utilizador

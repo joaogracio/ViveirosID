@@ -68,15 +68,19 @@ namespace ViveirosID.Controllers
 
                 // Recolhe o Nome do artigo sobre o qual se vai trabalhar
                 //
-                var last_art = (from umaImg in db.Imagem
+                var last_art = (from umArt in db.Artigo
+                                where umArt.ArtigoID == imagens.ArtigoFK
+                                select umArt);
+
+                var last_img = (from umaImg in db.Imagem
                                 where umaImg.ArtigoFK == imagens.ArtigoFK
-                                select umaImg);
+                                select umaImg).Count();
 
                 var Tipo_conteudo = file.ContentType.Split('/');
 
                 // Directorio que pretendo para guardar a imagem
                 //
-                string Directorio = "~\\Images\\" + (last_art.FirstOrDefault().Nome + "_" + (last_art.Count()+1) + "." + Tipo_conteudo[1]);
+                string Directorio = "~\\Images\\" + (last_art.FirstOrDefault().Nome + "_" + (last_img + 1) + "." + Tipo_conteudo[1]);
                 try {
                     file.SaveAs(Server.MapPath(Directorio));
                     ViewBag.Message = "File uploaded successfully";
@@ -101,7 +105,7 @@ namespace ViveirosID.Controllers
 
                 imagens.Nome = last_art.FirstOrDefault().Nome;
                 imagens.Tipo = Tipo;
-                imagens.Directorio = last_art.FirstOrDefault().Nome + "_" + (last_art.Count() + 1) + "." + Tipo_conteudo[1];
+                imagens.Directorio = (last_art.FirstOrDefault().Nome + "_" + (last_img + 1) + "." + Tipo_conteudo[1]);
                 db.Imagem.Add(imagens);
                 db.SaveChanges();
             }
